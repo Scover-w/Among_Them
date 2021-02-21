@@ -125,6 +125,6 @@ public class NavMeshAgentManager : MonoBehaviour
 
     public void POICreated(Vector3 origin)
     {
-        for
+        
     }
 }
