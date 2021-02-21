@@ -32,6 +32,7 @@ public class NavMeshAgentManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1f;
         navMeshList = new List<NavMeshAgent>();
         fieldViewMeshColliderList = new List<MeshCollider>();
         fieldViewPositionList = new List<Transform>();
@@ -49,7 +50,7 @@ public class NavMeshAgentManager : MonoBehaviour
         
         ToKillAgent = Instantiate(toKillAgent);
         NavMeshAgent navMeshAgent2 = ToKillAgent.GetComponent<NavMeshAgent>();
-        navMeshAgent2.Warp(new Vector3(0f,1.2f,0f));
+        navMeshAgent2.Warp(GetRandomPositionOnNavMesh());
         navMeshAgent2.SetDestination(GetRandomPositionOnNavMesh());
         navMeshList.Add(navMeshAgent2);
 

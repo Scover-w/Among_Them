@@ -15,6 +15,15 @@ public class PlayerLook : MonoBehaviour
     Camera cam;
 
     [SerializeField] 
+    private PlayerMove playerMove;
+
+    [SerializeField] 
+    private GameObject Win;
+    
+    [SerializeField] 
+    private GameObject Lose;
+
+    [SerializeField] 
     private NavMeshAgentManager navMeshAgentManager;
 
     private float yRotation;
@@ -37,14 +46,19 @@ public class PlayerLook : MonoBehaviour
                     {
                         if (hit.distance < 2.0f)
                         {
+                            
                             if (IsSomeoneWatching())
                             {
-                                Debug.Log("Lose");
+                                Win.SetActive(false);
+                                Lose.SetActive(true);
                             }
                             else
                             {
-                                Debug.Log("Win");
+                                Win.SetActive(true);
+                                Lose.SetActive(false);
                             }
+                            Time.timeScale = 0f;
+                            Cursor.lockState = CursorLockMode.None;
                         }
                     }
                     else
