@@ -8,15 +8,13 @@ public class PlayerDetection : MonoBehaviour
 {
 
     public Image eyeVisionOpen;
-    public Image eyeVisionClose;
     private int isVisible;
 
     private void Start()
     {
         isVisible = 0;
         eyeVisionOpen.gameObject.SetActive(false);
-        eyeVisionClose.gameObject.SetActive(true);
-        
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -25,7 +23,6 @@ public class PlayerDetection : MonoBehaviour
         {
             isVisible++;
             eyeVisionOpen.gameObject.SetActive(true);
-            eyeVisionClose.gameObject.SetActive(false);
         }
     }
 
@@ -39,7 +36,6 @@ public class PlayerDetection : MonoBehaviour
         if (isVisible == 0)
         {
             eyeVisionOpen.gameObject.SetActive(false);
-            eyeVisionClose.gameObject.SetActive(true);
         }
     }
 

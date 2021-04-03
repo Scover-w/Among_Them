@@ -26,6 +26,7 @@ public class AndroidController : MonoBehaviour
     void Start()
     {
         touchIntentMove = false;
+        Debug.Log(Camera.main.pixelWidth / 2);
     }
 
     // Update is called once per frame
@@ -33,9 +34,6 @@ public class AndroidController : MonoBehaviour
     {
         GetMove();
         GetLook();
-        
-        mouseX = Input.GetAxis("Mouse X");
-        playerLook.SetRotationX(mouseX);
     }
 
     private void FixedUpdate()
@@ -43,7 +41,8 @@ public class AndroidController : MonoBehaviour
         if (touchIntentMove)
         {
             Vector3 offsetMove = touchMove - touchOriginMove;
-            Vector3 direction = Vector3.ClampMagnitude(offsetMove, 1.0f);
+            Vector3 direction = offsetMove.normalized;
+            //Debug.Log($"{Input.mousePosition} - {touchMove} - {touchOriginMove} - {direction}");
             playerMove.SetDirection(direction);
         }
         else
@@ -54,9 +53,14 @@ public class AndroidController : MonoBehaviour
         if (touchIntentLook)
         {
             Vector3 offsetLook = touchLook - touchOriginLook;
-            Vector3 look = Vector3.ClampMagnitude(offsetLook, 1.0f);
-            playerLook.SetRotationX(look.x);
-            playerLook.SetRotationY(look.y);
+            Vector3 look = offsetLook;//Vector3.ClampMagnitude(offsetLook, 1.0f);
+            //Debug.Log($"{Input.mousePosition} - {touchLook} - {touchOriginLook} - {look}");
+            playerLook.SetRotationY(Mathf.Clamp(look.x, -1f, 1f));
+            playerLook.SetRotationX(Mathf.Clamp(-look.y, -90f, 90f));
+        }
+        else
+        {
+            playerLook.SetRotationY(0);
         }
     }
 
@@ -64,18 +68,19 @@ public class AndroidController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && Input.mousePosition.x < Camera.main.pixelWidth / 2)
         {
-            touchOriginMove = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,0, Input.mousePosition.y));
+            touchOriginMove = new Vector3(Input.mousePosition.x,0, Input.mousePosition.y);
         }
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && touchOriginMove != Vector3.zero && touchOriginMove.x < Camera.main.pixelWidth / 2)
         {
             touchIntentMove = true;
-            touchMove = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,0, Input.mousePosition.y
-            ));
+            touchMove = new Vector3(Input.mousePosition.x,0, Input.mousePosition.y);
         }
         else
         {
             touchIntentMove = false;
+            touchMove = Vector3.zero;
+            touchOriginMove = Vector3.zero;
         }
     }
     
@@ -83,17 +88,20 @@ public class AndroidController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && Input.mousePosition.x > Camera.main.pixelWidth / 2)
         {
-            touchOriginLook = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
+            Debug.Log("oui");
+            touchOriginLook = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
         }
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && touchOriginLook != Vector3.zero && touchOriginLook.x > Camera.main.pixelWidth / 2)
         {
             touchIntentLook = true;
-            touchLook = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
+            touchLook = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
         }
         else
         {
             touchIntentLook = false;
+            touchLook = Vector3.zero;
+            touchOriginLook = Vector3.zero;
         }
     }
 }
