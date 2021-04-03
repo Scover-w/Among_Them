@@ -101,6 +101,10 @@ public class NavMeshAgentManager : MonoBehaviour
 
     public bool IsSomeoneWatching()
     {
+        PlayerDetection playerDetection = player.GetComponent<PlayerDetection>();
+        return playerDetection.IsPlayerVisible();
+
+        /*
         List<int> indexList = new List<int>();
         int i = 0;
         foreach (var fieldViewMeshCollider in fieldViewMeshColliderList)
@@ -122,6 +126,7 @@ public class NavMeshAgentManager : MonoBehaviour
             i++;
         }
         return false;
+        */
     }
 
     public void POICreated(Vector3 origin)
