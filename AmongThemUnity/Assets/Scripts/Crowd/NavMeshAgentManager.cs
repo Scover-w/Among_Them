@@ -7,6 +7,9 @@ using Random = UnityEngine.Random;
 
 public class NavMeshAgentManager : MonoBehaviour
 {
+    public static NavMeshAgentManager Instance() { return _singleton; }
+    private static NavMeshAgentManager _singleton;
+    
     [SerializeField] 
     private int nombreAgent = 1;
 
@@ -32,6 +35,7 @@ public class NavMeshAgentManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _singleton = this;
         Time.timeScale = 1f;
         navMeshList = new List<NavMeshAgent>();
         fieldViewMeshColliderList = new List<MeshCollider>();
@@ -78,7 +82,19 @@ public class NavMeshAgentManager : MonoBehaviour
         }
     }
 
-    private Vector3 GetRandomPositionOnNavMesh()
+    public IEnumerator ChangeDestinationAfterEvents(List<NavMeshAgent> agentsAffected)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(5f);
+            foreach (var navMeshAgent in agentsAffected)
+            {
+                navMeshAgent.SetDestination(GetRandomPositionOnNavMesh());
+            }
+        }
+    }
+
+    public Vector3 GetRandomPositionOnNavMesh()
     {
         int areaPosition = Random.Range(0, 100);
         
@@ -132,5 +148,10 @@ public class NavMeshAgentManager : MonoBehaviour
     public void POICreated(Vector3 origin)
     {
         
+    }
+
+    public List<NavMeshAgent> GetCrowdAgent()
+    {
+        return navMeshList;
     }
 }

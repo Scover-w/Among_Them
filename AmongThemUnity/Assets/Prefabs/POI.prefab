@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6465975628290371028}
   - component: {fileID: 7489670108260619668}
   - component: {fileID: 582268006829741937}
+  - component: {fileID: -7838372785696340636}
   m_Layer: 0
   m_Name: POI
   m_TagString: InteractiveElement
@@ -93,3 +94,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-7838372785696340636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6447492076913320080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d06bce95baa41d64686f32d2cd569832, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 500
