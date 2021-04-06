@@ -71,7 +71,7 @@ public class AndroidController : MonoBehaviour
             touchOriginMove = new Vector3(Input.mousePosition.x,0, Input.mousePosition.y);
         }
 
-        if (Input.GetMouseButton(0) && touchOriginMove != Vector3.zero && touchOriginMove.x < Camera.main.pixelWidth / 2)
+        if (Input.GetMouseButton(0) && touchOriginMove != Vector3.zero && Input.mousePosition.x < Camera.main.pixelWidth / 2)
         {
             touchIntentMove = true;
             touchMove = new Vector3(Input.mousePosition.x,0, Input.mousePosition.y);
@@ -92,7 +92,7 @@ public class AndroidController : MonoBehaviour
             touchOriginLook = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
         }
 
-        if (Input.GetMouseButton(0) && touchOriginLook != Vector3.zero && touchOriginLook.x > Camera.main.pixelWidth / 2)
+        if (Input.GetMouseButton(0) && touchOriginLook != Vector3.zero && Input.mousePosition.x > Camera.main.pixelWidth / 2)
         {
             touchIntentLook = true;
             touchLook = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
