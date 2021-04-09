@@ -111,4 +111,14 @@ public class PlayerLook : MonoBehaviour
     {
         return navMeshAgentManager.IsSomeoneWatching();
     }
+
+    public float GetSensitivity()
+    {
+        return lookSensitivity;
+    }
+
+    public void SetSensitivity(float sensitivity)
+    {
+        lookSensitivity = sensitivity;
+    }
 }

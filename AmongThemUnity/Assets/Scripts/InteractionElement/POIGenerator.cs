@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using InteractionElement;
 using UnityEngine;
 using UnityEngine.AI;
 public class POIGenerator : MonoBehaviour
@@ -13,6 +14,8 @@ public class POIGenerator : MonoBehaviour
     private GameObject poi;
     
     private Vector3 randomPosition;
+    
+    public List<EventScriptInterface> eventScriptList = new List<EventScriptInterface>();
     void Start()
     {
         for (int i = 0; i < nbPOI; i++)

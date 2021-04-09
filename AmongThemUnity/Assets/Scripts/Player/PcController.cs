@@ -48,23 +48,23 @@ public class PcController : MonoBehaviour
     public void SendMovementValues()
     {
         directionMove = Vector3.zero;
-        
-        if (Input.GetKey(KeyCode.D))
+
+        if (GameInputManager.GetKey("Right"))
         {
             directionMove += Vector3.right;
         }
 
-        if (Input.GetKey(KeyCode.Q))
+        if (GameInputManager.GetKey("Left"))
         {
             directionMove -= Vector3.right;
         }
 
-        if (Input.GetKey(KeyCode.Z))
+        if (GameInputManager.GetKey("Forward"))
         {
             directionMove += Vector3.forward;
         }
 
-        if (Input.GetKey(KeyCode.S))
+        if (GameInputManager.GetKey("Backward"))
         {
             directionMove -= Vector3.forward;
         }

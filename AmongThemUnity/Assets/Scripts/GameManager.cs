@@ -15,17 +15,20 @@ public class GameManager : MonoBehaviour
     private bool isGamePaused;
     [SerializeField]
     private GameObject pauseMenu;
+    [SerializeField]
+    private GameObject fpsCanvas;
     
     void Start()
     {
         _singleton = this;
         isGamePaused = false;
         pauseMenu.SetActive(false);
+        fpsCanvas.SetActive(true);
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             PauseGame();
         }
@@ -40,12 +43,14 @@ public class GameManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Time.timeScale = 1.0f;
             pauseMenu.SetActive(false);
+            fpsCanvas.SetActive(true);
             return isGamePaused = false;
         }
         Time.timeScale = 0;
         pauseMenu.SetActive(true);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        fpsCanvas.SetActive(false);
         return isGamePaused = true;
     }
 }
