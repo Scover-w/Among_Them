@@ -24,14 +24,25 @@ public class ProceduralElevator : MonoBehaviour
     
     [SerializeField] private List<GameObject> SquaredBorder;
 
+    [Header("Gate")]
     [SerializeField] private GameObject RoundedGate;
 
     [SerializeField] private GameObject SquaredGate;
 
+    [Header("Bottom")]
     [SerializeField] private GameObject RoundedBottom;
     
     [SerializeField] private GameObject SquaredBottom;
-
+    
+    [Header("Ceiling")]
+    [SerializeField] private GameObject[] MiddleCeiling;
+    
+    [SerializeField] private GameObject[] ShortCeiling;
+    
+    [SerializeField] private GameObject[] LongCeiling;
+    
+    [Header("Ceiling")]
+    [SerializeField] private GameObject[] Levels;
     
     [Header("Wealth Obstructed Location Value")]
     [Range(0.0f, 1.0f)] public float MiddleValueProb = 0.0f;
@@ -59,8 +70,8 @@ public class ProceduralElevator : MonoBehaviour
         };
 
         obstructedLocation.Add(profile.Location);
-        
 
+        LoadCeilingAndLevel(profile);
         LoadElevatorProfile(profile);
 
         return obstructedLocation;
@@ -178,7 +189,38 @@ public class ProceduralElevator : MonoBehaviour
         else
             return RoundedGate;
     }
-    
+
+    private void LoadCeilingAndLevel(ElevatorProfile profile)
+    {
+        switch (profile.Location)
+        {
+            case ObstructedLocation.Middle:
+                GameObject ceil = Instantiate(MiddleCeiling[ (profile.NbElevator == 1)? 0 : 1 ]);
+                ceil.transform.position = Vector3.zero;
+                
+                GameObject level = Instantiate(Levels[0]);
+                level.transform.position = Vector3.zero;
+                
+                break;
+            
+            case ObstructedLocation.Short:
+                GameObject ceil2 = Instantiate(ShortCeiling[ (profile.NbElevator == 1)? 0 : 1 ]);
+                ceil2.transform.position = Vector3.zero;
+                
+                GameObject level2 = Instantiate(Levels[1]);
+                level2.transform.position = Vector3.zero;
+                break;
+            
+            case ObstructedLocation.Long:
+                GameObject ceil3 = Instantiate(LongCeiling[ (profile.NbElevator == 1)? 0 : 1 ]);
+                ceil3.transform.position = Vector3.zero;
+                
+                GameObject level3 = Instantiate(Levels[2]);
+                level3.transform.position = Vector3.zero;
+                break;
+        }
+        
+    }
     private void LoadElevatorProfile(ElevatorProfile profile)
     {
         float delta = 1.9f;
