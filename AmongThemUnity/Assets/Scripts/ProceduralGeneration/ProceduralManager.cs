@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum ObstructedLocation
@@ -21,18 +23,33 @@ public class ProceduralManager : MonoBehaviour
     
     [SerializeField]
     private ProceduralStorey proceduralStorey;
+
+    [Range(0f,1f)]
+    public float wealthValue = 0f;
+    
+    public bool Shuffle = true;
+    private bool tempShuffle = true;
     
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
-        LoadBuilding(1f);
+    }
+
+    private void Update()
+    {
+        if (Shuffle != tempShuffle)
+        {
+            LoadBuilding(wealthValue);
+            tempShuffle = Shuffle;
+        }
     }
 
     public void LoadBuilding(float wealthLevel)
     {
-        List<int> obstructedLocation = new List<int>();
-        
-        proceduralElevator.LoadElevators(wealthLevel);
+        var obstructedLocation = new List<ObstructedLocation>();
+            
+        obstructedLocation = obstructedLocation.Union(proceduralElevator.LoadElevators(wealthLevel)).ToList();
+
     }
 }

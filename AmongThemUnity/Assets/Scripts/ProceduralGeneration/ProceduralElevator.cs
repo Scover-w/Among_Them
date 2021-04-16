@@ -3,10 +3,16 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
 
-public enum ElevatorType
+public enum ElevatorGeoForm
 {
     Rounded,
     Squared
+}
+
+public enum ElevatorOpenness
+{
+    Closed,
+    Opened
 }
 public class ProceduralElevator : MonoBehaviour
 {
@@ -27,35 +33,39 @@ public class ProceduralElevator : MonoBehaviour
     [SerializeField] private GameObject SquaredBottom;
 
     
-    [Header("Wealth Obstructed Location")]
+    [Header("Wealth Obstructed Location Value")]
     [Range(0.0f, 1.0f)] public float MiddleValueProb = 0.0f;
 
     [Range(0.0f, 1.0f)] public float ShortValueProb = 0.0f;
 
     [Range(0.0f, 1.0f)] public float LongValueProb = 0.0f;
     
-    [Header("Wealth treshold")]
-    [Tooltip("To choose the type of elevator (round/square)")]
-    [Range(0.0f, 1.0f)] public float TresholdType = 0.0f;
-    
-    [Header("Wealth treshold ")]
-    [Tooltip("To choose the number of elevator (1 or 2)")]
-    [Range(0.0f, 1.0f)] public float TresholdNumber = 0.0f;
-
-
-    
-
     // Start is called before the first frame update
-    public void LoadElevators(float wealthLevel)
+    public List<ObstructedLocation> LoadElevators(float wealthLevel)
     {
-        ObstructedLocation locationElevator = GetLocationElevator(wealthLevel);
-        int nbElevator = GetNbElevator(wealthLevel);
-        ElevatorType elevatorType = GetElevatorType(wealthLevel);
+        var obstructedLocation = new List<ObstructedLocation>();
+        var tempGeoForm = ChooseElevatorForm(wealthLevel);
+        var tempOpenness = ChooseElevatorOpenness(wealthLevel);
+        var tempBorderId = ChooseBorder(tempGeoForm, tempOpenness, wealthLevel);
+        
+        var profile = new ElevatorProfile()
+        {
+            Location = GetLocationElevator(wealthLevel),
+            NbElevator = GetNbElevator(wealthLevel),
+            Elevator = GetElevator(tempGeoForm, tempOpenness),
+            Border = GetBorder(tempGeoForm, tempBorderId),
+            Bottom = GetBottom(tempGeoForm),
+            Gate = GetGate(tempGeoForm, tempOpenness)
+        };
 
-        Debug.Log("ObstructedLocation : " + locationElevator);
-        Debug.Log("nbElevator : " + nbElevator);
-        Debug.Log("ElevatorType : " + elevatorType);
+        obstructedLocation.Add(profile.Location);
+        
+
+        LoadElevatorProfile(profile);
+
+        return obstructedLocation;
     }
+    
 
     private ObstructedLocation GetLocationElevator(float wealthLevel)
     {
@@ -71,19 +81,235 @@ public class ProceduralElevator : MonoBehaviour
     {
         var numbers = new Dictionary<int, float>();
         
-        numbers.Add(1, 1 - TresholdNumber);
-        numbers.Add(2, TresholdNumber);
+        numbers.Add(1, 0);
+        numbers.Add(2, 1);
 
         return ProceduralCalculations.GetRandomTFromPool(numbers, wealthLevel);
     }
 
-    private ElevatorType GetElevatorType(float wealthLevel)
+    private ElevatorGeoForm ChooseElevatorForm(float wealthLevel)
     {
-        var types = new Dictionary<ElevatorType, float>();
+        var types = new Dictionary<ElevatorGeoForm, float>();
         
-        types.Add(ElevatorType.Squared, 1 - TresholdType);
-        types.Add(ElevatorType.Rounded, TresholdType);
+        types.Add(ElevatorGeoForm.Squared, 0);
+        types.Add(ElevatorGeoForm.Rounded, 1);
 
         return ProceduralCalculations.GetRandomTFromPool(types, wealthLevel);
+    }
+
+    private ElevatorOpenness ChooseElevatorOpenness(float wealthLevel)
+    {
+        var openness = new Dictionary<ElevatorOpenness, float>();
+
+        openness.Add(ElevatorOpenness.Closed, 0);
+        openness.Add(ElevatorOpenness.Opened, 1);
+
+        return ProceduralCalculations.GetRandomTFromPool(openness, wealthLevel);
+    }
+
+    private int ChooseBorder(ElevatorGeoForm form, ElevatorOpenness openness, float wealthLevel)
+    {
+        var border = new Dictionary<int, float>();
+
+        int beginIndex = 0;
+        
+        if (openness == ElevatorOpenness.Opened)
+            beginIndex = 1;
+        
+        if (form == ElevatorGeoForm.Squared)
+        {
+            for (int i = beginIndex; i < 4; i++)
+            {
+                border.Add(i, SquaredBorder[i].GetComponent<ProceduralEntity>().wealthValue);
+            }
+        }
+        else
+        {
+            for (int i = beginIndex; i < 4; i++)
+            {
+                border.Add(i, RoundedBorder[i].GetComponent<ProceduralEntity>().wealthValue);
+            }
+        }
+
+        return ProceduralCalculations.GetRandomTFromPool(border, wealthLevel);
+    }
+
+    private GameObject GetElevator(ElevatorGeoForm form, ElevatorOpenness openness)
+    {
+        if (form == ElevatorGeoForm.Squared)
+        {
+            if (openness == ElevatorOpenness.Closed)
+                return SquaredElevators[0];
+            else
+                return SquaredElevators[1];
+        }
+        else
+        {
+            if (openness == ElevatorOpenness.Closed)
+                return RoundedElevators[0];
+            else
+                return RoundedElevators[1];
+        }
+    }
+    
+    private GameObject GetBorder(ElevatorGeoForm form, int borderId)
+    {
+        if (form == ElevatorGeoForm.Squared)
+            return SquaredBorder[borderId];
+        else
+            return RoundedBorder[borderId];
+    }
+
+    private GameObject GetBottom(ElevatorGeoForm form)
+    {
+        if (form == ElevatorGeoForm.Squared)
+            return SquaredBottom;
+        else
+            return RoundedBottom;
+    }
+
+    private GameObject GetGate(ElevatorGeoForm form, ElevatorOpenness openness)
+    {
+        if (openness == ElevatorOpenness.Closed)
+            return null;
+
+        if (form == ElevatorGeoForm.Squared)
+            return SquaredGate;
+        else
+            return RoundedGate;
+    }
+    
+    private void LoadElevatorProfile(ElevatorProfile profile)
+    {
+        float delta = 1.9f;
+
+        switch (profile.Location)
+        {
+            case ObstructedLocation.Middle:
+                if (profile.NbElevator == 1)
+                {
+                    LoadElevator(profile, Vector3.zero);
+                }
+                else
+                {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        float xdirection = (i % 2 == 0) ? 1f : -1f;
+                        float zdirection = (i < 2) ? 1f : -1f;
+                        Vector3 position = new Vector3(xdirection * delta, 0, zdirection * delta);
+                        LoadElevator(profile, position);
+                    }
+                }
+
+                break;
+
+            case ObstructedLocation.Short:
+                var zCoord = 68.7f;
+                if (profile.NbElevator == 1)
+                {
+                    for (int i = 0; i < 2; i++)
+                    {
+                        float zdirection = (i % 2 == 0) ? 1f : -1f;
+                        Vector3 position = new Vector3(0, 0, zdirection * zCoord);
+                        LoadElevator(profile, position);
+                    }
+
+                }
+                else
+                {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        float xdirection = (i % 2 == 0) ? 1f : -1f;
+                        float zdirection = (i < 2) ? 1f : -1f;
+                        Vector3 position = new Vector3(xdirection * delta, 0, zdirection * zCoord);
+                        LoadElevator(profile, position);
+                    }
+                }
+
+                break;
+
+            case ObstructedLocation.Long:
+                var xCoord = 98.7f;
+                if (profile.NbElevator == 1)
+                {
+                    for (int i = 0; i < 2; i++)
+                    {
+                        float xdirection = (i % 2 == 0) ? 1f : -1f;
+                        Vector3 position = new Vector3(xdirection * xCoord, 0, 0);
+                        LoadElevator(profile, position);
+                    }
+
+                }
+                else
+                {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        float xdirection = (i % 2 == 0) ? 1f : -1f;
+                        float zdirection = (i < 2) ? 1f : -1f;
+                        Vector3 position = new Vector3(xdirection * xCoord, 0, zdirection * delta);
+                        LoadElevator(profile, position);
+                    }
+                }
+
+                break;
+        }
+    }
+
+    private int GetRotationElevator(Vector3 position, ObstructedLocation obstructedLocation)
+    {
+        int rotationToApply = 0;
+
+        if (obstructedLocation == ObstructedLocation.Long)
+            rotationToApply += 90;
+
+
+        bool xAxis = position.x > 0;
+        bool zAxis = position.z > 0;
+
+        switch (obstructedLocation)
+        {
+            case ObstructedLocation.Middle:
+
+                if (zAxis)
+                    rotationToApply += 180;
+                break;
+
+            case ObstructedLocation.Short:
+                if (!zAxis)
+                    rotationToApply += 180;
+                break;
+
+            case ObstructedLocation.Long:
+                if (!xAxis)
+                    rotationToApply += 180;
+                break;
+        }
+
+        return rotationToApply % 360;
+    }
+
+    private void LoadElevator(ElevatorProfile profile, Vector3 position)
+    {
+        GameObject elevator = Instantiate(profile.Elevator);
+        int rotation = GetRotationElevator(position, profile.Location);
+        elevator.transform.position = position;
+        elevator.transform.Rotate(0, rotation, 0);
+        
+        GameObject border = Instantiate(profile.Border);
+        border.transform.position = position;
+        border.transform.Rotate(0, rotation, 0);
+        
+        GameObject bottom = Instantiate(profile.Bottom);
+        bottom.transform.position = position;
+        bottom.transform.Rotate(0, rotation, 0);
+
+        if (profile.Gate != null)
+        {
+            GameObject gate = Instantiate(profile.Gate);
+            gate.transform.position = position;
+            gate.transform.Rotate(0, rotation, 0);
+        }
+
+        
     }
 }
