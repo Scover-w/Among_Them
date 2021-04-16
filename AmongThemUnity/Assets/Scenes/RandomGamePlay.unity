@@ -328,6 +328,61 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 966fdb6f1c5e50b459ba8d7a6fa2a66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  places:
+  - place: {fileID: 6826015713267603403, guid: 0c465b08976742c478487b5a9f830ab5, type: 3}
+    crossRoad:
+    - {fileID: 1624570655926356669, guid: f54e30df994fd664e9fa1a96a4acdc0f, type: 3}
+    - {fileID: 1447195715122964139, guid: d2abd35432f60264a9bb0557be73a32b, type: 3}
+    - {fileID: 3225357416222116542, guid: 7c28f7e38d5ca8b47bd7bb7ae07a0de5, type: 3}
+    straightRoad:
+    - {fileID: 2350055981690883984, guid: bf145940210d29743859deb10fd77574, type: 3}
+    - {fileID: 8633431332777206372, guid: ce1b08c957a16ca438b6f06df3adfd0e, type: 3}
+    - {fileID: 3612000824831675402, guid: 3f1fdca0259d8514bb0deb1444c2a9a7, type: 3}
+  - place: {fileID: 1762534407100669802, guid: 95dd5b28438c51343aced9329af0d437, type: 3}
+    crossRoad:
+    - {fileID: 1117586079249983988, guid: 02e5eeed3510b97449ef41b46b93fc7b, type: 3}
+    - {fileID: 7525939872076975542, guid: 2b82405c9f295c743bac51f08ea7f080, type: 3}
+    - {fileID: 6455476072774616059, guid: ac08ffb4a2270ee4a8816e9002846368, type: 3}
+    straightRoad:
+    - {fileID: 4142779049059184736, guid: 42cc5f36fe53b254983b5449589888e0, type: 3}
+    - {fileID: 8606976901884031267, guid: f768b5984c746924cbb434cd2a195e07, type: 3}
+    - {fileID: 7031662710014208053, guid: 8b5a42ff6a67ea24bbd94729c3d299cd, type: 3}
+  - place: {fileID: 2601251074681158932, guid: 56a4fbf025fe25441b58dda690273933, type: 3}
+    crossRoad:
+    - {fileID: 8453468682652769968, guid: a43cccb46d512b444b6ec9e7cd7b00db, type: 3}
+    - {fileID: 3645762148926637853, guid: 1a1a0f0d542df054bbee923ee067987b, type: 3}
+    - {fileID: 7246315650060580948, guid: 53ba1bf1e9697eb4c8b955438df83dd4, type: 3}
+    straightRoad:
+    - {fileID: 712088443072682642, guid: f3d6945bfb7a0f04887ab20816b52fb1, type: 3}
+    - {fileID: 1873139535604737051, guid: 957d52a89f2a07e4eaf3b7176309ca4d, type: 3}
+    - {fileID: 2111044896518707748, guid: 622a48094fefa8941bb47e2a72310084, type: 3}
+  - place: {fileID: 5437279928308735154, guid: 5950296004d09484c9a1d5052a82ba14, type: 3}
+    crossRoad:
+    - {fileID: 5426262842207499083, guid: 2abc37e3c9ddeac41b1ef67275c359a6, type: 3}
+    - {fileID: 4480069970415780537, guid: d683cc2e61afddd41988730718a3a609, type: 3}
+    - {fileID: 829314992492187971, guid: eb954bcfa95455242a5121824a056e91, type: 3}
+    straightRoad:
+    - {fileID: 4638150897531227727, guid: 12e28a74b0f3e2044b9d4a51e162c5c8, type: 3}
+    - {fileID: 3921162679499457687, guid: ff40fdedff865e143afcc12f35fdfba6, type: 3}
+    - {fileID: 2358317795243969715, guid: 39a83ef68f63bce45a9b8d973ab25a39, type: 3}
+  - place: {fileID: 442970922562556116, guid: 142d896d46010494db3b9b57068ab7b1, type: 3}
+    crossRoad:
+    - {fileID: 323879929594558839, guid: 14690f7532886d34e9a767223df3976a, type: 3}
+    - {fileID: 7956550982430435989, guid: 95713eea93247b4409a7c326fcdc2b20, type: 3}
+    - {fileID: 419454515472132173, guid: b1004403bfd85a645a1d76b696c90204, type: 3}
+    straightRoad:
+    - {fileID: 689823384594025708, guid: 83e0f5c59edaaaf48866303533abf5e7, type: 3}
+    - {fileID: 4578108941300761519, guid: 1f25131f0b9866a46a3185b5417cdd2d, type: 3}
+    - {fileID: 743799509928839809, guid: bad177ad914245d4491894724b47e2a7, type: 3}
+  - place: {fileID: 6063140821695448127, guid: 3437af853aa9d174c8b99f41507a6fe7, type: 3}
+    crossRoad:
+    - {fileID: 4191969686020661138, guid: e1183b0718acfef46b60952373c7a81a, type: 3}
+    - {fileID: 2713352414958178240, guid: b58f7cf99527b6b43b994f6a3f4da806, type: 3}
+    - {fileID: 9074212714328821339, guid: c0bf40d346f275b4cb34d4a76e8bda23, type: 3}
+    straightRoad:
+    - {fileID: 7769747841577747267, guid: 24767672812ee0a4b8e13e6972b3ea3c, type: 3}
+    - {fileID: 4197251594981914000, guid: 376835e1891462947a93a170d694b460, type: 3}
+    - {fileID: 3718779952032824441, guid: 17083ecabdf35d14386c7c2c888aebad, type: 3}
 --- !u!114 &1190144628
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -50,6 +50,8 @@ public class ProceduralManager : MonoBehaviour
         var obstructedLocation = new List<ObstructedLocation>();
             
         obstructedLocation = obstructedLocation.Union(proceduralElevator.LoadElevators(wealthLevel)).ToList();
+        
+        obstructedLocation = obstructedLocation.Union(proceduralStorey.LoadStoreys(obstructedLocation, wealthLevel)).ToList();
 
     }
 }
