@@ -34,11 +34,16 @@ public class ProceduralStorey : MonoBehaviour
     {
         StoreyPlace choosenPlace = ChooseStoreyPlace(obstructedLocations, wealthLevel);
         RoadType choosenRoad = ChooseRoadType(wealthLevel);
-        
-        obstructedLocations = obstructedLocations.Union(choosenPlace.place.GetComponent<ProceduralEntity>().obstructedLocation).ToList();
 
+        var lcoations = "";
+        foreach (var location in obstructedLocations)
+        {
+            lcoations += location + ",";
+        }
+        
         GameObject pfChoosenRoad = ChooseRoad((choosenRoad == RoadType.Cross)? choosenPlace.crossRoad : choosenPlace.straightRoad, obstructedLocations, wealthLevel);
         
+        obstructedLocations = obstructedLocations.Union(choosenPlace.place.GetComponent<ProceduralEntity>().obstructedLocation).ToList();
         obstructedLocations = obstructedLocations.Union(pfChoosenRoad.GetComponent<ProceduralEntity>().obstructedLocation).ToList();
 
 
@@ -49,12 +54,9 @@ public class ProceduralStorey : MonoBehaviour
 
     private StoreyPlace ChooseStoreyPlace(List<ObstructedLocation> obstructedLocations, float wealthLevel)
     {
-        Debug.Log("Hope1");
         var placesAvailable = (from placeAvailable in places
             where placeAvailable.place.GetComponent<ProceduralEntity>().obstructedLocation.Intersect(obstructedLocations).Count() == 0
             select placeAvailable).ToList();
-
-        Debug.Log("Hope2");
         
         var placesToPick = new Dictionary<StoreyPlace, float>();
 
@@ -90,8 +92,7 @@ public class ProceduralStorey : MonoBehaviour
             road.Add(roadAvailable, roadAvailable.GetComponent<ProceduralEntity>().wealthValue);
         }
 
-
-        return ProceduralCalculations.GetRandomTFromPool(road, wealthLevel);
+        return ProceduralCalculations.GetRandomTFromPool(road, wealthLevel); //-----------
     }
 
     private void LoadStorey(GameObject pfPlace, GameObject pfRoad)
