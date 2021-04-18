@@ -8,7 +8,8 @@ public enum ObstructedLocation
 {
     Middle,
     Short,
-    Long
+    Long,
+    Corner
 }
 
 public class ProceduralManager : MonoBehaviour
@@ -27,8 +28,8 @@ public class ProceduralManager : MonoBehaviour
     [Range(0f,1f)]
     public float wealthValue = 0f;
     
-    public bool Shuffle = true;
-    private bool tempShuffle = true;
+    
+    public List<ObstructedLocation> obstructedLocation;
     
     // Start is called before the first frame update
     void Start()
@@ -36,22 +37,20 @@ public class ProceduralManager : MonoBehaviour
         instance = this;
     }
 
-    private void Update()
+    public void Shuffle()
     {
-        if (Shuffle != tempShuffle)
-        {
-            LoadBuilding(wealthValue);
-            tempShuffle = Shuffle;
-        }
+        LoadBuilding(wealthValue);
     }
 
     public void LoadBuilding(float wealthLevel)
     {
-        var obstructedLocation = new List<ObstructedLocation>();
+        obstructedLocation = new List<ObstructedLocation>();
             
         obstructedLocation = obstructedLocation.Union(proceduralElevator.LoadElevators(wealthLevel)).ToList();
         
         obstructedLocation = obstructedLocation.Union(proceduralStorey.LoadStoreys(obstructedLocation, wealthLevel)).ToList();
+        
+        obstructedLocation = obstructedLocation.Union(proceduralStair.LoadStairs(obstructedLocation, wealthLevel)).ToList();
 
     }
 }

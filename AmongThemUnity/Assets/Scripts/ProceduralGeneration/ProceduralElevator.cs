@@ -203,7 +203,7 @@ public class ProceduralElevator : MonoBehaviour
                 
                 break;
             
-            case ObstructedLocation.Short:
+            case ObstructedLocation.Long:
                 GameObject ceil2 = Instantiate(ShortCeiling[ (profile.NbElevator == 1)? 0 : 1 ]);
                 ceil2.transform.position = Vector3.zero;
                 
@@ -211,7 +211,7 @@ public class ProceduralElevator : MonoBehaviour
                 level2.transform.position = Vector3.zero;
                 break;
             
-            case ObstructedLocation.Long:
+            case ObstructedLocation.Short:
                 GameObject ceil3 = Instantiate(LongCeiling[ (profile.NbElevator == 1)? 0 : 1 ]);
                 ceil3.transform.position = Vector3.zero;
                 
@@ -245,7 +245,7 @@ public class ProceduralElevator : MonoBehaviour
 
                 break;
 
-            case ObstructedLocation.Short:
+            case ObstructedLocation.Long:
                 var zCoord = 68.7f;
                 if (profile.NbElevator == 1)
                 {
@@ -270,7 +270,7 @@ public class ProceduralElevator : MonoBehaviour
 
                 break;
 
-            case ObstructedLocation.Long:
+            case ObstructedLocation.Short:
                 var xCoord = 98.7f;
                 if (profile.NbElevator == 1)
                 {

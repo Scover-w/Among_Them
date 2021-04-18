@@ -149,7 +149,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -307,12 +307,13 @@ GameObject:
   - component: {fileID: 1190144631}
   - component: {fileID: 1190144630}
   - component: {fileID: 1190144629}
-  - component: {fileID: 1190144628}
   - component: {fileID: 1190144627}
+  - component: {fileID: 1190144628}
+  - component: {fileID: 1190144632}
   m_Layer: 0
   m_Name: Procedurals
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -395,6 +396,78 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0f3104f198952d49b89a956ea2428b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SimpleWealthValue: 0.3
+  DoubleWealthValue: 1
+  lengthStairs:
+  - simpleStairs:
+    - {fileID: 1170750753793613656, guid: 67aecd46dd6d07f42b2f7f192281753d, type: 3}
+    - {fileID: 2102264228781174359, guid: a251c7bc45aa88a4d8500ac08dc1f265, type: 3}
+    doubleStairs:
+    - {fileID: 545860768287800547, guid: 48740991eae2cf84ebe4ee64c4e9516c, type: 3}
+    - {fileID: 6487927171250318082, guid: 4c44644690fa1c946bfaaf64a9bebab8, type: 3}
+    ObstructedPatterns:
+    - positionStair: 0
+      numberStairs: 1
+      wealthValue: 0
+      obstructedLocations: 0100000003000000
+    - positionStair: 1
+      numberStairs: 1
+      wealthValue: 0
+      obstructedLocations: 02000000
+  - simpleStairs:
+    - {fileID: 4073159171980846480, guid: 600346dcb36591a4d8c4870b252a7434, type: 3}
+    - {fileID: 977130916720445556, guid: ce1859c633fba1946b779b3852c2c04e, type: 3}
+    doubleStairs:
+    - {fileID: 8429308525091085304, guid: 37be3650c0994a34f83821296009d752, type: 3}
+    - {fileID: 6758375532657582562, guid: 42a1e633da5db664cb88be0fdf3ea62c, type: 3}
+    ObstructedPatterns:
+    - positionStair: 0
+      numberStairs: 1
+      wealthValue: 0
+      obstructedLocations: 01000000
+    - positionStair: 1
+      numberStairs: 1
+      wealthValue: 0
+      obstructedLocations: 02000000
+    - positionStair: 1
+      numberStairs: 2
+      wealthValue: 0
+      obstructedLocations: 
+    - positionStair: 2
+      numberStairs: 1
+      wealthValue: 0
+      obstructedLocations: 03000000
+  - simpleStairs:
+    - {fileID: 1170455951181441174, guid: 0173b03a8f2cd7840a864d9957b4b55a, type: 3}
+    - {fileID: 3385911719771179910, guid: 68c7a7cf36bf5b549a0315ab190b26ab, type: 3}
+    doubleStairs:
+    - {fileID: 7863025278148014283, guid: 32866cbc65ccef644b6bc79549bd8390, type: 3}
+    - {fileID: 883730455499735985, guid: fa98879a80c605b4bbe99a9b737aaf9d, type: 3}
+    ObstructedPatterns:
+    - positionStair: 0
+      numberStairs: 1
+      wealthValue: 0
+      obstructedLocations: 01000000
+    - positionStair: 0
+      numberStairs: 2
+      wealthValue: 0
+      obstructedLocations: 
+    - positionStair: 1
+      numberStairs: 1
+      wealthValue: 0
+      obstructedLocations: 02000000
+    - positionStair: 1
+      numberStairs: 2
+      wealthValue: 0
+      obstructedLocations: 
+    - positionStair: 1
+      numberStairs: 3
+      wealthValue: 0
+      obstructedLocations: 02000000
+    - positionStair: 2
+      numberStairs: 1
+      wealthValue: 0
+      obstructedLocations: 03000000
 --- !u!114 &1190144629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -463,7 +536,7 @@ MonoBehaviour:
   proceduralStair: {fileID: 1190144628}
   proceduralStorey: {fileID: 1190144627}
   wealthValue: 0
-  Shuffle: 1
+  obstructedLocation: 
 --- !u!4 &1190144631
 Transform:
   m_ObjectHideFlags: 0
@@ -472,9 +545,26 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1190144626}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.218408, y: 50.5, z: 127}
+  m_LocalPosition: {x: 1, y: 1, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1190144632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1190144626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1e4e5a2b46a19a428a3df9c7fa61e92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectsToKeep:
+  - {fileID: 743595912}
+  - {fileID: 140268869}
+  - {fileID: 1190144626}
+  destroyObj: 1

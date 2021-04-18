@@ -22,16 +22,20 @@ public static class ProceduralCalculations
         
         float actualProb = 0f;
         float pickedProb = GetRandomValue();
-        
+
         foreach (var obj in pool)
         {
             float objectProb = (1 - GetAbsoluteDistance(wealthLevel, obj.Value)) / totalProb;
-            //Debug.Log("Key : " + obj.Key + ", Value : " + objectProb);
-            //Debug.Log("Actual Prop : " + actualProb + objectProb + ", pickedProb : " + pickedProb);
+
             if (actualProb + objectProb >= pickedProb)
                 return obj.Key;
 
             actualProb += objectProb;
+        }
+
+        if (pool.Count == 2)
+        {
+            Debug.LogError("ActualProb : " + actualProb + " ,pickedProb : " + pickedProb);
         }
 
         // Will always return in the foreach
@@ -47,5 +51,10 @@ public static class ProceduralCalculations
     public static float GetRandomValue()
     {
         return Random.Range(0f, 1f);
+    }
+
+    public static bool GetRandomBool()
+    {
+        return Random.Range(0f, 1f) > 0.5f;
     }
 }

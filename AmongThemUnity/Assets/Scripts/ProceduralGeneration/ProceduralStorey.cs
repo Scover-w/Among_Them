@@ -26,8 +26,8 @@ public struct StoreyPlace
 
 public class ProceduralStorey : MonoBehaviour
 {
-    [SerializeField] 
-    public List<StoreyPlace> places;
+    [SerializeField]
+    private List<StoreyPlace> places;
     
     
     public List<ObstructedLocation> LoadStoreys(List<ObstructedLocation> obstructedLocations, float wealthLevel)
