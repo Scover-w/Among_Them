@@ -14,9 +14,12 @@ public static class ProceduralCalculations
     {
         float totalProb = 0f;
         
+        var normalizedPool = new Dictionary<T, float>();
+        
         foreach (var obj in pool)
         {
-            totalProb += obj.Value;
+            normalizedPool.Add(obj.Key, 1 - GetAbsoluteDistance(wealthLevel, pool[obj.Key]));
+            totalProb += normalizedPool[obj.Key];
         }
         
         if(totalProb == 0.0f)
@@ -25,11 +28,9 @@ public static class ProceduralCalculations
         float actualProb = 0f;
         float pickedProb = GetRandomValue();
         
-        
-
-        foreach (var obj in pool)
+        foreach (var obj in normalizedPool)
         {
-            float objectProb = (1 - GetAbsoluteDistance(wealthLevel, obj.Value)) / totalProb;
+            float objectProb = obj.Value / totalProb;
 
             if (actualProb + objectProb >= pickedProb)
                 return obj.Key;
@@ -37,7 +38,8 @@ public static class ProceduralCalculations
             actualProb += objectProb;
         }
         
-        return pool.First().Key;
+        Debug.LogError("Outside of the bound");
+        return normalizedPool.First().Key;
     }
 
     public static T GetRandomFrom2Value<T>(KeyValuePair<T, float> firstProb, KeyValuePair<T, float> secondProb, float wealthLevel) // Order : False True

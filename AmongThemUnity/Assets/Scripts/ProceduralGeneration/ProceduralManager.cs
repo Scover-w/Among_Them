@@ -34,9 +34,7 @@ public class ProceduralManager : MonoBehaviour
     
     [Range(0f,1f)]
     public float maxTresholdValue = 0.9f;
-    
-    public List<ObstructedLocation> obstructedLocation;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,7 +48,7 @@ public class ProceduralManager : MonoBehaviour
 
     public void LoadBuilding(float wealthLevel)
     {
-        obstructedLocation = new List<ObstructedLocation>();
+        var obstructedLocation = new List<ObstructedLocation>();
             
         obstructedLocation = obstructedLocation.Union(proceduralElevator.LoadElevators(wealthLevel)).ToList();
         

@@ -71,9 +71,15 @@ public class ProceduralStair : MonoBehaviour
     public List<ObstructedLocation> LoadStairs(List<ObstructedLocation> obstructedLocations, float wealthLevel)
     {
         WidthStair choosenWidth = ChooseWidthStair(wealthLevel);
-        bool isLongCanBeIntegrated = !(obstructedLocations.Contains(ObstructedLocation.Short) &&
-                                     obstructedLocations.Contains(ObstructedLocation.Long));
+        
+        // EdgeCase
+        bool isLongCanBeIntegrated = !((obstructedLocations.Contains(ObstructedLocation.Short) &&
+                                     obstructedLocations.Contains(ObstructedLocation.Long)) || obstructedLocations.Contains(ObstructedLocation.Corner) );
+        
+        
         LengthStair choosenLength = ChooseLengthStair(wealthLevel, isLongCanBeIntegrated);
+        
+        
         WealthStair choosenWealth = ChooseWealthStair(wealthLevel);
         
         
@@ -82,6 +88,7 @@ public class ProceduralStair : MonoBehaviour
 
         var choosenObstructedStair = lengthStairs[idLength];
         var choosenStair = (choosenWidth == WidthStair.Simple) ? choosenObstructedStair.simpleStairs[idWealth] : choosenObstructedStair.doubleStairs[idWealth];
+
         var choosenObstructedPattern = ChooseObstructedPattern(obstructedLocations, choosenObstructedStair, wealthLevel);
 
         bool isHub = false;
@@ -106,7 +113,7 @@ public class ProceduralStair : MonoBehaviour
         LoadStair(profile);
         
         
-        //obstructedLocations = obstructedLocations.Union(choosenObstructedPattern.obstructedLocations).ToList();
+        obstructedLocations = obstructedLocations.Union(choosenObstructedPattern.obstructedLocations).ToList();
         
         return obstructedLocations;
     }

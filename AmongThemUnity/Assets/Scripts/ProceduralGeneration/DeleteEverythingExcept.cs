@@ -18,7 +18,7 @@ public class DeleteEverythingExcept : MonoBehaviour
     {
         if (destroyObj != tempDestroyObj)
         {
-            GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>() ;
+            GameObject[] allObjects = FindObjectsOfType<GameObject>() ;
             foreach (var gObject in allObjects)
             {
                 if (!objectsToKeep.Contains(gObject))
@@ -29,8 +29,9 @@ public class DeleteEverythingExcept : MonoBehaviour
                     
             }
             ProceduralManager.instance.Shuffle();
-            //Test();
             tempDestroyObj = destroyObj;
+            
+            //Test();
         }
     }
 

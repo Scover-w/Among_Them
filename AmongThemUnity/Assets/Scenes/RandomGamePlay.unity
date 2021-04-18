@@ -408,11 +408,11 @@ MonoBehaviour:
     ObstructedPatterns:
     - positionStair: 0
       numberStairs: 1
-      wealthValue: 0
+      wealthValue: 0.3
       obstructedLocations: 0100000003000000
     - positionStair: 1
       numberStairs: 1
-      wealthValue: 0
+      wealthValue: 0.4
       obstructedLocations: 02000000
   - simpleStairs:
     - {fileID: 4073159171980846480, guid: 600346dcb36591a4d8c4870b252a7434, type: 3}
@@ -423,19 +423,19 @@ MonoBehaviour:
     ObstructedPatterns:
     - positionStair: 0
       numberStairs: 1
-      wealthValue: 0
+      wealthValue: 0.2
       obstructedLocations: 01000000
     - positionStair: 1
       numberStairs: 1
-      wealthValue: 0
+      wealthValue: 0.25
       obstructedLocations: 02000000
     - positionStair: 1
       numberStairs: 2
-      wealthValue: 0
+      wealthValue: 0.9
       obstructedLocations: 
     - positionStair: 2
       numberStairs: 1
-      wealthValue: 0
+      wealthValue: 0.7
       obstructedLocations: 03000000
   - simpleStairs:
     - {fileID: 1170455951181441174, guid: 0173b03a8f2cd7840a864d9957b4b55a, type: 3}
@@ -446,27 +446,27 @@ MonoBehaviour:
     ObstructedPatterns:
     - positionStair: 0
       numberStairs: 1
-      wealthValue: 0
+      wealthValue: 0.1
       obstructedLocations: 01000000
     - positionStair: 0
       numberStairs: 2
-      wealthValue: 0
+      wealthValue: 0.6
       obstructedLocations: 
     - positionStair: 1
       numberStairs: 1
-      wealthValue: 0
+      wealthValue: 0.2
       obstructedLocations: 02000000
     - positionStair: 1
       numberStairs: 2
-      wealthValue: 0
+      wealthValue: 0.65
       obstructedLocations: 
     - positionStair: 1
       numberStairs: 3
-      wealthValue: 0
+      wealthValue: 0.8
       obstructedLocations: 02000000
     - positionStair: 2
       numberStairs: 1
-      wealthValue: 0
+      wealthValue: 0.65
       obstructedLocations: 03000000
 --- !u!114 &1190144629
 MonoBehaviour:
@@ -536,7 +536,8 @@ MonoBehaviour:
   proceduralStair: {fileID: 1190144628}
   proceduralStorey: {fileID: 1190144627}
   wealthValue: 0
-  obstructedLocation: 
+  minThresholdValue: 0.3
+  maxTresholdValue: 0.9
 --- !u!4 &1190144631
 Transform:
   m_ObjectHideFlags: 0
@@ -568,3 +569,4 @@ MonoBehaviour:
   - {fileID: 140268869}
   - {fileID: 1190144626}
   destroyObj: 1
+  wealthValue: 0
