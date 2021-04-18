@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public static class ProceduralCalculations
 {
@@ -22,6 +24,8 @@ public static class ProceduralCalculations
         
         float actualProb = 0f;
         float pickedProb = GetRandomValue();
+        
+        
 
         foreach (var obj in pool)
         {
@@ -32,15 +36,39 @@ public static class ProceduralCalculations
 
             actualProb += objectProb;
         }
-
-        if (pool.Count == 2)
-        {
-            Debug.LogError("ActualProb : " + actualProb + " ,pickedProb : " + pickedProb);
-        }
-
-        // Will always return in the foreach
-        Debug.LogError("Outside the bound");
+        
         return pool.First().Key;
+    }
+
+    public static T GetRandomFrom2Value<T>(KeyValuePair<T, float> firstProb, KeyValuePair<T, float> secondProb, float wealthLevel) // Order : False True
+    {
+        if (Math.Abs(firstProb.Value - secondProb.Value) < 0.001f)
+            return GetRandomBool() ? firstProb.Key : secondProb.Key;
+
+        var maxPair = (firstProb.Value > secondProb.Value) ? firstProb : secondProb;
+        var minPair = (firstProb.Value < secondProb.Value) ? firstProb : secondProb;
+
+        if (wealthLevel < minPair.Value)
+            return minPair.Key;
+
+        if (wealthLevel > maxPair.Value)
+            return maxPair.Key;
+
+        float firstNonNorm = wealthLevel - minPair.Value;
+        float secondNonNorm = maxPair.Value - wealthLevel;
+
+        float divider = firstNonNorm + secondNonNorm;
+
+        // Switch : the closest has the best chance of being drawn
+        var maxNormalizedPair = new KeyValuePair<T, float>(maxPair.Key, (firstNonNorm) / divider);
+        var minNormalizedPair = new KeyValuePair<T, float>(minPair.Key, (secondNonNorm) / divider);
+
+        float pickedProb = GetRandomValue();
+        
+        if (pickedProb < maxNormalizedPair.Value)
+            return maxNormalizedPair.Key;
+
+        return minNormalizedPair.Key;
     }
 
     public static float GetAbsoluteDistance(float nb1, float nb2)

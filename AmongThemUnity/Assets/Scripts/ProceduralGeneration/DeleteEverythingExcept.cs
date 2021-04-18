@@ -11,6 +11,9 @@ public class DeleteEverythingExcept : MonoBehaviour
     public bool destroyObj = true;
     private bool tempDestroyObj = true;
 
+    [Range(0f, 1f)] [Header("Is used when Test function activated")] 
+    public float wealthValue = 0f;
+
     private void Update()
     {
         if (destroyObj != tempDestroyObj)
@@ -26,7 +29,14 @@ public class DeleteEverythingExcept : MonoBehaviour
                     
             }
             ProceduralManager.instance.Shuffle();
+            //Test();
             tempDestroyObj = destroyObj;
         }
+    }
+
+    public void Test()
+    {
+        /*Debug.Log(ProceduralCalculations.GetRandomFrom2Value(new KeyValuePair<WidthStair, float>(WidthStair.Simple, .3f),
+            new KeyValuePair<WidthStair, float>(WidthStair.Double, .7f), wealthValue));*/
     }
 }

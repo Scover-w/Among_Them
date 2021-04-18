@@ -113,35 +113,41 @@ public class ProceduralStair : MonoBehaviour
 
     public WidthStair ChooseWidthStair(float wealthLevel)
     {
-        var widths = new Dictionary<WidthStair, float>();
-        
-        widths.Add(WidthStair.Simple, SimpleWealthValue);
-        widths.Add(WidthStair.Double, DoubleWealthValue);
+        var firstWidth = new KeyValuePair<WidthStair, float>(WidthStair.Simple, ProceduralManager.instance.minThresholdValue);
+        var secondWidth = new KeyValuePair<WidthStair, float>(WidthStair.Double, ProceduralManager.instance.maxTresholdValue);
 
-        return ProceduralCalculations.GetRandomTFromPool(widths, wealthLevel);
+        return ProceduralCalculations.GetRandomFrom2Value(firstWidth, secondWidth, wealthLevel);
     }
 
     public LengthStair ChooseLengthStair(float wealthLevel, bool isLongIntegrated)
     {
         var lengths = new Dictionary<LengthStair, float>();
 
-        if(isLongIntegrated)
+        if (isLongIntegrated)
+        {
             lengths.Add(LengthStair.Long, 1f);
-        lengths.Add(LengthStair.Medium, .5f);
-        lengths.Add(LengthStair.Short, 0f);
+            lengths.Add(LengthStair.Medium, .5f);
+            lengths.Add(LengthStair.Short, 0f);
+            return ProceduralCalculations.GetRandomTFromPool(lengths, wealthLevel);
+        }
+        else
+        {
+            var firstLength = new KeyValuePair<LengthStair, float>(LengthStair.Medium, 1f);
+            var secondLength = new KeyValuePair<LengthStair, float>(LengthStair.Short, 0f);
 
-        return ProceduralCalculations.GetRandomTFromPool(lengths, wealthLevel);
+            return ProceduralCalculations.GetRandomFrom2Value(firstLength, secondLength, wealthLevel);
+        }
+        
 
     }
 
     public WealthStair ChooseWealthStair(float wealthLevel)
     {
-        var wealthLevels = new Dictionary<WealthStair, float>();
-        
-        wealthLevels.Add(WealthStair.Poor, 0);
-        wealthLevels.Add(WealthStair.Rich, 1);
+        var firstWealthStair = new KeyValuePair<WealthStair, float>(WealthStair.Poor, ProceduralManager.instance.minThresholdValue);
+        var secondWealthStair = new KeyValuePair<WealthStair, float>(WealthStair.Rich, ProceduralManager.instance.maxTresholdValue);
 
-        return ProceduralCalculations.GetRandomTFromPool(wealthLevels, wealthLevel);
+        return ProceduralCalculations.GetRandomFrom2Value(firstWealthStair, secondWealthStair, wealthLevel);
+        
     }
     
     
@@ -165,12 +171,10 @@ public class ProceduralStair : MonoBehaviour
 
     public bool ChooseIfHub(float wealthLevel)
     {
-        var yesorNo = new Dictionary<bool, float>();
-        
-        yesorNo.Add(true, 1f);
-        yesorNo.Add(false, .3f);
+        var firstYesorNo = new KeyValuePair<bool, float>(true, ProceduralManager.instance.minThresholdValue);
+        var secondYesorNo = new KeyValuePair<bool, float>(false, ProceduralManager.instance.maxTresholdValue);
 
-        return ProceduralCalculations.GetRandomTFromPool(yesorNo, wealthLevel);
+        return ProceduralCalculations.GetRandomFrom2Value(firstYesorNo, secondYesorNo, wealthLevel);
     }
 
     public DirectionHub ChooseDirectionHub(bool isHub, float wealthLevel)
@@ -178,12 +182,10 @@ public class ProceduralStair : MonoBehaviour
         if (!isHub)
             return DirectionHub.Null;
         
-        var directions = new Dictionary<DirectionHub, float>();
+        var firstDirection = new KeyValuePair<DirectionHub, float>(DirectionHub.Inside, ProceduralManager.instance.minThresholdValue);
+        var secondDirection = new KeyValuePair<DirectionHub, float>(DirectionHub.Outside, ProceduralManager.instance.maxTresholdValue);
 
-        directions.Add(DirectionHub.Inside, .5f);
-        directions.Add(DirectionHub.Outside, .5f);
-
-        return ProceduralCalculations.GetRandomTFromPool(directions, wealthLevel);
+        return ProceduralCalculations.GetRandomFrom2Value(firstDirection, secondDirection, wealthLevel);
 
     }
 
@@ -237,13 +239,11 @@ public class ProceduralStair : MonoBehaviour
 
             if (stairProfile.Direction == DirectionHub.Inside)
             {
-                Debug.Log("Inside");
                 secondStair.transform.Rotate(0, 180, 0);
                 secondStair.transform.position = new Vector3(0, 0, GetWidth(stairProfile.WidthStair));
             }
             else
             {
-                Debug.Log("Outside");
                 firstStair.transform.Rotate(0, 180, 0);
                 firstStair.transform.position = new Vector3(GetLength(stairProfile.LengthStair), 0, GetWidth(stairProfile.WidthStair));
                 
@@ -253,7 +253,6 @@ public class ProceduralStair : MonoBehaviour
         }
         else
         {
-            Debug.Log("Solo");
             GameObject soloStair = Instantiate(stairProfile.Stair, hub.transform);
             soloStair.transform.position = new Vector3(-GetLength(stairProfile.LengthStair) / 2f, 0, 0);
         }

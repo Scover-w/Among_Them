@@ -29,6 +29,12 @@ public class ProceduralManager : MonoBehaviour
     public float wealthValue = 0f;
     
     
+    [Range(0f,1f)][Header("Threshold and probability default for each value with two random choices")] 
+    public float minThresholdValue = 0.1f;
+    
+    [Range(0f,1f)]
+    public float maxTresholdValue = 0.9f;
+    
     public List<ObstructedLocation> obstructedLocation;
     
     // Start is called before the first frame update

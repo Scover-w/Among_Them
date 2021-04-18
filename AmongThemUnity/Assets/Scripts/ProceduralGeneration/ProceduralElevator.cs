@@ -90,32 +90,26 @@ public class ProceduralElevator : MonoBehaviour
 
     private int GetNbElevator(float wealthLevel)
     {
-        var numbers = new Dictionary<int, float>();
-        
-        numbers.Add(1, 0);
-        numbers.Add(2, 1);
+        var firstNumber = new KeyValuePair<int, float>(1, ProceduralManager.instance.minThresholdValue);
+        var secondNumber = new KeyValuePair<int, float>(2, ProceduralManager.instance.maxTresholdValue);
 
-        return ProceduralCalculations.GetRandomTFromPool(numbers, wealthLevel);
+        return ProceduralCalculations.GetRandomFrom2Value(firstNumber, secondNumber, wealthLevel);
     }
 
     private ElevatorGeoForm ChooseElevatorForm(float wealthLevel)
     {
-        var types = new Dictionary<ElevatorGeoForm, float>();
-        
-        types.Add(ElevatorGeoForm.Squared, 0);
-        types.Add(ElevatorGeoForm.Rounded, 1);
+        var firstForm = new KeyValuePair<ElevatorGeoForm, float>(ElevatorGeoForm.Squared, ProceduralManager.instance.minThresholdValue);
+        var secondForm = new KeyValuePair<ElevatorGeoForm, float>(ElevatorGeoForm.Rounded, ProceduralManager.instance.maxTresholdValue);
 
-        return ProceduralCalculations.GetRandomTFromPool(types, wealthLevel);
+        return ProceduralCalculations.GetRandomFrom2Value(firstForm, secondForm, wealthLevel);
     }
 
     private ElevatorOpenness ChooseElevatorOpenness(float wealthLevel)
     {
-        var openness = new Dictionary<ElevatorOpenness, float>();
+        var firstOpenness = new KeyValuePair<ElevatorOpenness, float>(ElevatorOpenness.Closed, ProceduralManager.instance.minThresholdValue);
+        var secondOpenness = new KeyValuePair<ElevatorOpenness, float>(ElevatorOpenness.Opened, ProceduralManager.instance.maxTresholdValue);
 
-        openness.Add(ElevatorOpenness.Closed, 0);
-        openness.Add(ElevatorOpenness.Opened, 1);
-
-        return ProceduralCalculations.GetRandomTFromPool(openness, wealthLevel);
+        return ProceduralCalculations.GetRandomFrom2Value(firstOpenness, secondOpenness, wealthLevel);
     }
 
     private int ChooseBorder(ElevatorGeoForm form, ElevatorOpenness openness, float wealthLevel)

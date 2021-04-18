@@ -70,12 +70,10 @@ public class ProceduralStorey : MonoBehaviour
 
     private RoadType ChooseRoadType(float wealthLevel)
     {
-        var roadType = new Dictionary<RoadType, float>();
-        
-        roadType.Add(RoadType.Cross, 0.4f);
-        roadType.Add(RoadType.Straight, 0.6f);
+        var firstRoadType = new KeyValuePair<RoadType, float>(RoadType.Cross, ProceduralManager.instance.minThresholdValue);
+        var secondRoadType = new KeyValuePair<RoadType, float>(RoadType.Straight, ProceduralManager.instance.maxTresholdValue);
 
-        return ProceduralCalculations.GetRandomTFromPool(roadType, wealthLevel);
+        return ProceduralCalculations.GetRandomFrom2Value(firstRoadType, secondRoadType, wealthLevel);
     }
 
     private GameObject ChooseRoad(List<GameObject> roads, List<ObstructedLocation> obstructedLocations, float wealthLevel)
