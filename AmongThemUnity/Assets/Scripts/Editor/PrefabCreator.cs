@@ -34,12 +34,19 @@ public class PrefabCreator : UnityEditor.Editor
 
                 PrefabUtility.SaveAsPrefabAssetAndConnect(objectToPrefab, prefabFile, InteractionMode.UserAction);
                 DestroyImmediate(objectToPrefab);
-                Debug.Log(prefabFile + " created.");
+                Debug.Log(prefabFile + " created. (prefab)");
             }
         }
 
         foreach (var directory in directories)
         {
+            string prefabDirectory = directory.Replace(blenderObjectPath, prefabPath);
+            if (!Directory.Exists(prefabDirectory))
+            {
+                Debug.Log(prefabDirectory + " created. (directory)");
+                Directory.CreateDirectory(prefabDirectory);
+            }
+                
             RecursivePrefabCreator(directory);
         }
         
