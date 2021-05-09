@@ -1,61 +1,119 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Resources;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using Object = System.Object;
 
-public class PrefabCreator : UnityEditor.Editor
+
+[ExecuteInEditMode]
+public class PrefabCreator : EditorWindow
 {
-    private static string prefabPath = $@"\Prefabs\ProceduralEntities\";
-    private static string blenderObjectPath = $@"\BlenderImport\";
+    private GameObject prefabParent;
+    private int nbOldObjects = 1;
+    private int nbChildren = 0;
     
-    [MenuItem("Prefabs/Create")]
-    public static void CreatePrefab()
+    [MenuItem("Tools/Prefab Creator")]
+    static void Init()
     {
-        RecursivePrefabCreator("Assets" + blenderObjectPath);
+        PrefabCreator window = (PrefabCreator)GetWindow(typeof(PrefabCreator));
+        window.Show();
     }
 
-
-    static void RecursivePrefabCreator(string path)
+    // Called two times when drag&drop a prefab :
+    // first with selection = false, then with selection = true on the drop
+    private void OnHierarchyChange()
     {
-        string[] files = Directory.GetFiles(path);
-        string[] directories = Directory.GetDirectories(path);
+        Debug.Log("-------------------------------");
+        Debug.Log("isPrefabparent setted ? : " + (prefabParent != null));
 
-        foreach (var file in files)
-        {
-            if (file.Contains(".meta"))
-                continue;
-            
-            var prefabFile = file.Replace(blenderObjectPath, prefabPath).Replace(".fbx", ".prefab");
-            if (!File.Exists(prefabFile))
-            {
-                var objectToPrefab = (GameObject)AssetDatabase.LoadAssetAtPath(file, typeof(GameObject));
-                objectToPrefab = Instantiate(objectToPrefab);
-                objectToPrefab.AddComponent<ProceduralEntity>();
-                objectToPrefab.transform.position = Vector3.zero;
+        var actualObjects = FindObjectsOfType(typeof(GameObject));
+        var nbActualObjects = actualObjects.Length;
 
-                PrefabUtility.SaveAsPrefabAssetAndConnect(objectToPrefab, prefabFile, InteractionMode.UserAction);
-                DestroyImmediate(objectToPrefab);
-                Debug.Log(prefabFile + " created. (prefab)");
-            }
-        }
-
-        foreach (var directory in directories)
-        {
-            string prefabDirectory = directory.Replace(blenderObjectPath, prefabPath);
-            if (!Directory.Exists(prefabDirectory))
-            {
-                Debug.Log(prefabDirectory + " created. (directory)");
-                Directory.CreateDirectory(prefabDirectory);
-            }
-                
-            RecursivePrefabCreator(directory);
-        }
         
+        if (Selection.activeTransform == null) // Change in hierarchy or prefab has been removed
+        {
+            if (nbActualObjects < nbOldObjects) // Prefab has been removed
+            {
+                Debug.Log("removed prefab");
+
+                if (prefabParent == null)
+                {
+                    Debug.Log("Prefab Parent has been removed.");
+                    nbOldObjects = 1;
+                }
+            }
+            else // Change in hierarchy
+            {
+                Debug.Log("Maybe change in hierachy");
+                /*foreach (var acObj in actualObjects)
+                {
+                    GameObject CameOutChild = GameObjectCameOutParentPrefab((GameObject) acObj);
+                    if(CameOutChild)
+                }*/
+            }
+            
+            
+            return;
+        }
+
+        
+        if (nbActualObjects != nbOldObjects) // Prefab added
+        {
+            if (nbOldObjects == 1 && nbActualObjects > 1) // prefabParentAdded
+            {
+                PrefabParentAdded(Selection.activeTransform.gameObject);
+            }
+            else if(nbActualObjects > nbOldObjects) // prefabChildAdded
+            {
+                SetParent(prefabParent.transform, Selection.activeTransform);
+            }
+            nbOldObjects = nbActualObjects;
+        }
+    }
+
+    private void PrefabParentAdded(GameObject activeGameObject)
+    {
+        Light light;
+
+        if (activeGameObject != null && !IsLightOfScene(activeGameObject))
+        {
+            prefabParent = activeGameObject;
+            prefabParent.transform.position = Vector3.zero;
+        }
+    }
+
+    
+
+    private GameObject GameObjectCameOutParentPrefab(GameObject gameObject)
+    {
+        return GetParentGameObject(gameObject) != prefabParent ? gameObject : null;
+    }
+
+    private bool IsLightOfScene(GameObject gameObject)
+    {
+        Light light;
+        return gameObject.TryGetComponent(out light);
     }
     
-    // https://docs.unity3d.com/ScriptReference/EditorUtility.html
-    
-    // https://docs.unity3d.com/ScriptReference/PrefabUtility.html
-    
-    // https://docs.unity3d.com/ScriptReference/AssetDatabase.html
-    
+    private GameObject GetParentGameObject(GameObject gameObject)
+    {
+        Transform transformChild = gameObject.transform;
+        while (transformChild.parent != null)
+        {
+            transformChild = transformChild.parent;
+        }
+
+        return transformChild.gameObject;
+    }
+
+    private void SetParent(Transform parent, Transform children)
+    {
+        children.SetParent(parent);
+        children.position = Vector3.zero;
+    }
+
 }
