@@ -8,18 +8,43 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
+public enum WealthLevelShop
+{
+    Poor,
+    Normal,
+    Rich
+}
+
+
+
+public enum SizeShop
+{
+    Small,
+    Big
+}
+
+public enum SizeApartment
+{
+    Tiny,
+    Small,
+    Medium,
+    Big
+}
+
 public class NestedPrefabCategoryEditorWindow : EditorWindow
 {
     private const string pathToSetting = "Assets/Scripts/Editor/NestedPrefabCategorySettings.asset";
     private NestedPrefabCategorySettings settings;
     private NestedPrefabCategory selectedNestedPrefabCategory;
-    private bool isNestedPrefabCategoryChoosen = false;
-    private bool[] exclusiveToggle = new[] {false, false, false};
-    
+
     private GameObject prefabParent;
     private List<GameObject> objectsInScene = new List<GameObject>();
     private int nbOldObjects = 1;
     private GameObject obstructionModel;
+
+    private WealthLevelShop selectedWealthLevelShop = WealthLevelShop.Poor;
+    private SizeShop selectedSizeShop = SizeShop.Small;
+    private SizeApartment seletectedSizeApartment = SizeApartment.Tiny;
     
 
     [MenuItem("Tools/Open Prefab  Window")]
@@ -91,49 +116,33 @@ public class NestedPrefabCategoryEditorWindow : EditorWindow
             }
         }
         
-        if (isNestedPrefabCategoryChoosen)
-        {
-            exclusiveToggle[0] = selectedNestedPrefabCategory.categoryNameNested == NestedPrefabCategoryName.Shop;
-            exclusiveToggle[1] = selectedNestedPrefabCategory.categoryNameNested == NestedPrefabCategoryName.Mall;
-            exclusiveToggle[2] = selectedNestedPrefabCategory.categoryNameNested == NestedPrefabCategoryName.Apartment;
-        }
-        else
-        {
-            exclusiveToggle[0] = false;
-            exclusiveToggle[1] = false;
-            exclusiveToggle[2] = false;
-        }
-        
 
         EditorGUILayout.BeginVertical();
         EditorGUILayout.Space();
         GUILayout.Label("Catégorie :");
         EditorGUI.indentLevel++;
-        if (EditorGUILayout.Toggle("Shop", exclusiveToggle[0]))
+        if (EditorGUILayout.Toggle("Shop", selectedNestedPrefabCategory.categoryNameNested == NestedPrefabCategoryName.Shop))
         {
-            if (exclusiveToggle[0] == false)
+            if (selectedNestedPrefabCategory.categoryNameNested != NestedPrefabCategoryName.Shop)
             {
-                isNestedPrefabCategoryChoosen = true;
                 selectedNestedPrefabCategory = settings.shopNestPrefab;
                 InstantiateObstructionModel();
             }
         }
 
-        if (EditorGUILayout.Toggle("Mall", exclusiveToggle[1]))
+        if (EditorGUILayout.Toggle("Mall", selectedNestedPrefabCategory.categoryNameNested == NestedPrefabCategoryName.Mall))
         {
-            if (exclusiveToggle[1] == false)
+            if (selectedNestedPrefabCategory.categoryNameNested != NestedPrefabCategoryName.Mall)
             {
-                isNestedPrefabCategoryChoosen = true;
                 selectedNestedPrefabCategory = settings.mallNestPrefab;
                 InstantiateObstructionModel();
             }
         }
 
-        if (EditorGUILayout.Toggle("Apartment", exclusiveToggle[2]))
+        if (EditorGUILayout.Toggle("Apartment", selectedNestedPrefabCategory.categoryNameNested == NestedPrefabCategoryName.Apartment))
         {
-            if (exclusiveToggle[2] == false)
+            if (selectedNestedPrefabCategory.categoryNameNested != NestedPrefabCategoryName.Apartment)
             {
-                isNestedPrefabCategoryChoosen = true;
                 selectedNestedPrefabCategory = settings.apartmentNestPrefab;
                 InstantiateObstructionModel();
             }
@@ -145,6 +154,50 @@ public class NestedPrefabCategoryEditorWindow : EditorWindow
         EditorGUILayout.Space();
         EditorGUILayout.EndVertical();
 
+        if (selectedNestedPrefabCategory.categoryNameNested == NestedPrefabCategoryName.Shop)
+        {
+            GUILayout.Label("Wealth :");
+            EditorGUI.indentLevel++;
+            if (EditorGUILayout.Toggle("Poor", selectedWealthLevelShop == WealthLevelShop.Poor))
+                selectedWealthLevelShop = WealthLevelShop.Poor;
+            
+            if (EditorGUILayout.Toggle("Normal", selectedWealthLevelShop == WealthLevelShop.Normal))
+                selectedWealthLevelShop = WealthLevelShop.Normal;
+            if (EditorGUILayout.Toggle("Rich", selectedWealthLevelShop == WealthLevelShop.Rich))
+                selectedWealthLevelShop = WealthLevelShop.Rich;
+            EditorGUI.indentLevel--;
+
+            EditorGUILayout.Space();
+            
+            GUILayout.Label("Size :");
+            EditorGUI.indentLevel++;
+            if (EditorGUILayout.Toggle("Small", selectedSizeShop == SizeShop.Small))
+                selectedSizeShop = SizeShop.Small;
+            
+            if (EditorGUILayout.Toggle("Big", selectedSizeShop == SizeShop.Big))
+                selectedSizeShop = SizeShop.Big;
+            EditorGUI.indentLevel--;
+            EditorGUILayout.Space();
+            EditorGUILayout.Space();
+            EditorGUILayout.Space();
+        }
+        else if(selectedNestedPrefabCategory.categoryNameNested == NestedPrefabCategoryName.Apartment)
+        {
+            GUILayout.Label("Size :");
+            EditorGUI.indentLevel++;
+            if (EditorGUILayout.Toggle("Tiny", seletectedSizeApartment == SizeApartment.Tiny))
+                seletectedSizeApartment = SizeApartment.Tiny;
+            if (EditorGUILayout.Toggle("Normal", seletectedSizeApartment == SizeApartment.Small))
+                seletectedSizeApartment = SizeApartment.Small;
+            if (EditorGUILayout.Toggle("Rich", seletectedSizeApartment == SizeApartment.Medium))
+                seletectedSizeApartment = SizeApartment.Medium;
+            if (EditorGUILayout.Toggle("Big", seletectedSizeApartment == SizeApartment.Big))
+                seletectedSizeApartment = SizeApartment.Big;
+            EditorGUI.indentLevel--;
+
+            EditorGUILayout.Space();
+        }
+
         if (settings.shopNestPrefab.categoryNameNested == settings.mallNestPrefab.categoryNameNested &&
             settings.mallNestPrefab.categoryNameNested == settings.apartmentNestPrefab.categoryNameNested &&
             settings.apartmentNestPrefab.categoryNameNested == settings.shopNestPrefab.categoryNameNested)
@@ -153,24 +206,43 @@ public class NestedPrefabCategoryEditorWindow : EditorWindow
         {
             if (GUILayout.Button("Create prefab") && AskCreatePrefab())
             {
-                Debug.Log("Create Nested prefab");
-                
                 if(obstructionModel != null)
                     DestroyImmediate(obstructionModel);
 
                 foreach (Transform child in prefabParent.transform)
                 {
+                    // TODO : Delete on object directly
                     RecursivelyRemoveProceduralEntitiesChildren(child.gameObject);
                 }
 
-                string localPath = selectedNestedPrefabCategory.pathFolder + prefabParent.name + ".prefab";
+                string localPath = selectedNestedPrefabCategory.pathFolder;
 
+                if (selectedNestedPrefabCategory.categoryNameNested == NestedPrefabCategoryName.Shop)
+                {
+                    localPath += selectedWealthLevelShop + "/" + selectedSizeShop + "/";
+                }
+                else if (selectedNestedPrefabCategory.categoryNameNested == NestedPrefabCategoryName.Apartment)
+                {
+                    localPath += seletectedSizeApartment + "/";
+                }
+                
+                
+
+                if (!Directory.Exists(localPath))
+                {
+                    Directory.CreateDirectory(localPath);
+                }
+                
+                localPath += prefabParent.name + ".prefab";
+                
                 localPath = AssetDatabase.GenerateUniqueAssetPath(localPath);
                 
                 PrefabUtility.SaveAsPrefabAssetAndConnect(prefabParent, localPath,
                     InteractionMode.UserAction);
                 
                 DestroyImmediate(prefabParent);
+                
+                Debug.Log("Nested prefab created");
             }
         }
 
@@ -209,12 +281,6 @@ public class NestedPrefabCategoryEditorWindow : EditorWindow
 
     public bool AskCreatePrefab()
     {
-        if (!(exclusiveToggle[0] || exclusiveToggle[1] || exclusiveToggle[2]))
-        {
-            Debug.LogError("Please select one category");
-            return false;
-        }
-
         if (prefabParent == null) // Does prefabParentExist
         {
             Debug.LogError("No prefab in the scene");
@@ -225,13 +291,6 @@ public class NestedPrefabCategoryEditorWindow : EditorWindow
         {
             Debug.LogError("Path not filled");
             return false;
-        }
-        else
-        {
-            if (!Directory.Exists(selectedNestedPrefabCategory.pathFolder))
-            {
-                Directory.CreateDirectory(selectedNestedPrefabCategory.pathFolder);
-            }
         }
 
         return true;

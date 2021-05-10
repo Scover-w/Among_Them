@@ -309,6 +309,7 @@ GameObject:
   - component: {fileID: 1190144629}
   - component: {fileID: 1190144627}
   - component: {fileID: 1190144628}
+  - component: {fileID: 1190144633}
   - component: {fileID: 1190144632}
   m_Layer: 0
   m_Name: Procedurals
@@ -539,9 +540,9 @@ MonoBehaviour:
   proceduralShop: {fileID: 0}
   proceduralStair: {fileID: 1190144628}
   proceduralStorey: {fileID: 1190144627}
-  wealthValue: 0
   minThresholdValue: 0.3
   maxTresholdValue: 0.9
+  step: 0.05
 --- !u!4 &1190144631
 Transform:
   m_ObjectHideFlags: 0
@@ -574,3 +575,18 @@ MonoBehaviour:
   - {fileID: 1190144626}
   destroyObj: 1
   wealthValue: 0
+--- !u!114 &1190144633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1190144626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e706d6ac4798ca646a8bfc51f0a813f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poorShop: []
+  normalShop: []
+  richShop: []

@@ -29,7 +29,7 @@ public class ProceduralManager : MonoBehaviour
     private ProceduralStorey proceduralStorey;
 
     [Range(0f,1f)]
-    public float wealthValue = 0f;
+    private float wealthValue = 0f;
     
     
     [Range(0f,1f)][Header("Threshold and probability default for each value with two random choices")] 
@@ -37,6 +37,10 @@ public class ProceduralManager : MonoBehaviour
     
     [Range(0f,1f)]
     public float maxTresholdValue = 0.9f;
+    
+    
+    [SerializeField] [Range(0f,1f)][Header("Step")] 
+    private float step = .05f;
 
     // Start is called before the first frame update
     void Start()
@@ -51,14 +55,22 @@ public class ProceduralManager : MonoBehaviour
 
     public void LoadBuilding(float wealthLevel)
     {
-        var obstructedLocation = new List<ObstructedLocation>();
-            
-        obstructedLocation = obstructedLocation.Union(proceduralElevator.LoadElevators(wealthLevel)).ToList();
+        var obstructedLocation = proceduralElevator.LoadElevators(wealthLevel);
 
-        proceduralShop.LoadShops(wealthLevel);
+        proceduralShop.LoadShops(obstructedLocation, wealthLevel);
         
         obstructedLocation = obstructedLocation.Union(proceduralStorey.LoadStoreys(obstructedLocation, wealthLevel)).ToList();
         
         obstructedLocation = obstructedLocation.Union(proceduralStair.LoadStairs(obstructedLocation, wealthLevel)).ToList();
+    }
+
+    public float GetWealthValue()
+    {
+        return wealthValue;
+    }
+
+    public void NextStep()
+    {
+        
     }
 }
