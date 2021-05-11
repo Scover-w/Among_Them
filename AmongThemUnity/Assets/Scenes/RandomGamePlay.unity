@@ -537,9 +537,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   proceduralElevator: {fileID: 1190144629}
-  proceduralShop: {fileID: 0}
+  proceduralShop: {fileID: 1190144633}
   proceduralStair: {fileID: 1190144628}
   proceduralStorey: {fileID: 1190144627}
+  wealthValue: 0
   minThresholdValue: 0.3
   maxTresholdValue: 0.9
   step: 0.05
@@ -587,6 +588,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e706d6ac4798ca646a8bfc51f0a813f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poorShop: []
-  normalShop: []
-  richShop: []
+  noShops:
+  - {fileID: 5271967408399971547, guid: 65bb3bad840528241bfaa876aa56b8be, type: 3}
+  - {fileID: 6110355356175450435, guid: 1d01c7add903d9b40879bdf3f77cc82f, type: 3}
+  poorShops:
+  - {fileID: 8740563655385010427, guid: 2b2adb89e9ea4d44f8ab7471e871bf03, type: 3}
+  - {fileID: 6647569351635455286, guid: db503627bfe351b4bafcf2b4edf1bc2d, type: 3}
+  normalShops:
+  - {fileID: 5947433467048841338, guid: 86c37fc379b0e074082a49016d41709b, type: 3}
+  - {fileID: 2631671120667996169, guid: 28b1eef91dadbd1438645aa35908333b, type: 3}
+  richShops:
+  - {fileID: 6218288892939868770, guid: c85026227b341544cb4f56595de4af5b, type: 3}
+  - {fileID: 5657238098644594508, guid: 8bf9349c151d104418872136fa86c782, type: 3}
+  tresholdPoorNormal: 0.3
+  tresholdNormalRich: 0.9

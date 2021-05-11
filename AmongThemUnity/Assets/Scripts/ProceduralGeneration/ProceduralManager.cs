@@ -28,7 +28,7 @@ public class ProceduralManager : MonoBehaviour
     [SerializeField]
     private ProceduralStorey proceduralStorey;
 
-    [Range(0f,1f)]
+    [SerializeField][Range(0f,1f)]
     private float wealthValue = 0f;
     
     
