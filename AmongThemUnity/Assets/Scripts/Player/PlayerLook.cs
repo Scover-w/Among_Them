@@ -31,6 +31,14 @@ public class PlayerLook : MonoBehaviour
 
     private bool canRotate = true;
 
+    private void Start()
+    {
+        if (PlayerPrefs.HasKey("lookSensity"))
+        {
+            lookSensitivity = PlayerPrefs.GetFloat("lookSensity");
+        }
+    }
+
 
     public void RaycastInteractiveElement()
     {
