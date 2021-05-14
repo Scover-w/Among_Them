@@ -12,16 +12,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a1212c3505e9814a98c1519cc232523, type: 3}
   m_Name: NestedPrefabCategorySettings
   m_EditorClassIdentifier: 
-  shopNestPrefab:
-    categoryNameNested: 0
-    pathFolder: Assets/Prefabs/NestedPrefabs/Shop/
-    obstructionModel: {fileID: 0}
   mallNestPrefab:
     categoryNameNested: 1
     pathFolder: Assets/Prefabs/NestedPrefabs/Mall/
-    obstructionModel: {fileID: 919132149155446097, guid: 148b86da78198f14e9b13f91cfd06d97,
-      type: 3}
+    modelTypes:
+    - modelName: 0
+      modelGO: {fileID: 919132149155446097, guid: 148b86da78198f14e9b13f91cfd06d97,
+        type: 3}
+  shopNestPrefab:
+    categoryNameNested: 0
+    pathFolder: Assets/Prefabs/NestedPrefabs/Shop/
+    modelTypes:
+    - modelName: 1
+      modelGO: {fileID: 8740563655385010427, guid: 2b2adb89e9ea4d44f8ab7471e871bf03,
+        type: 3}
+    - modelName: 2
+      modelGO: {fileID: 5947433467048841338, guid: 86c37fc379b0e074082a49016d41709b,
+        type: 3}
+    - modelName: 3
+      modelGO: {fileID: 6218288892939868770, guid: c85026227b341544cb4f56595de4af5b,
+        type: 3}
+    - modelName: 4
+      modelGO: {fileID: 6647569351635455286, guid: db503627bfe351b4bafcf2b4edf1bc2d,
+        type: 3}
+    - modelName: 5
+      modelGO: {fileID: 2631671120667996169, guid: 28b1eef91dadbd1438645aa35908333b,
+        type: 3}
+    - modelName: 6
+      modelGO: {fileID: 5657238098644594508, guid: 8bf9349c151d104418872136fa86c782,
+        type: 3}
   apartmentNestPrefab:
     categoryNameNested: 2
     pathFolder: Assets/Prefabs/NestedPrefabs/Apartment/
-    obstructionModel: {fileID: 0}
+    modelTypes:
+    - modelName: 7
+      modelGO: {fileID: 8337477990577258170, guid: 22908ce7ef7c47a49832286374385f58,
+        type: 3}
+    - modelName: 8
+      modelGO: {fileID: 3635517658178680689, guid: 4a6d47d4e547be54d8091b6ddb88998c,
+        type: 3}
+    - modelName: 9
+      modelGO: {fileID: 2681651682573849461, guid: e49707ecf84e51c408453827a4381e3f,
+        type: 3}
+    - modelName: 10
+      modelGO: {fileID: 4935984553660781774, guid: d7eff1a7e71c85a428d91a2235e5770e,
+        type: 3}

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using NUnit.Framework.Constraints;
 using UnityEditor;
 using UnityEngine;
@@ -40,17 +41,28 @@ public class NestedPrefabCategoryEditorWindow : EditorWindow
     private GameObject prefabParent;
     private List<GameObject> objectsInScene = new List<GameObject>();
     private int nbOldObjects = 1;
-    private GameObject obstructionModel;
+    private GameObject roomModel;
 
     private WealthLevelShop selectedWealthLevelShop = WealthLevelShop.Poor;
     private SizeShop selectedSizeShop = SizeShop.Small;
     private SizeApartment seletectedSizeApartment = SizeApartment.Tiny;
-    
 
+    private ModelType selectedModelType;
+
+    private int nbObjectsBeforeNoParentPrefab;
+
+    private bool onFirstOnGUI = true;
+    
     [MenuItem("Tools/Open Prefab  Window")]
     static void Init()
     {
-        GetWindow(typeof(NestedPrefabCategoryEditorWindow)).Show();;
+        var wd = GetWindow(typeof(NestedPrefabCategoryEditorWindow));
+        wd.Show();
+    }
+
+    private void OnDestroy()
+    {
+        ClearObjects();
     }
 
     // /!\ Called two times when drag&drop a prefab :
@@ -86,7 +98,7 @@ public class NestedPrefabCategoryEditorWindow : EditorWindow
         
         if (nbActualObjects != nbOldObjects) // Prefab added
         {
-            if (nbOldObjects == 1 && nbActualObjects > 1) // prefabParentAdded
+            if (nbOldObjects == nbObjectsBeforeNoParentPrefab && nbActualObjects > nbObjectsBeforeNoParentPrefab) // prefabParentAdded
             {
                 PrefabParentAdded(Selection.activeTransform.gameObject);
                 nbOldObjects = nbActualObjects;
@@ -115,7 +127,12 @@ public class NestedPrefabCategoryEditorWindow : EditorWindow
                 AssetDatabase.SaveAssets();
             }
         }
-        
+
+        if (onFirstOnGUI)
+        {
+            GetModelType();
+            onFirstOnGUI = false;
+        }
 
         EditorGUILayout.BeginVertical();
         EditorGUILayout.Space();
@@ -126,7 +143,7 @@ public class NestedPrefabCategoryEditorWindow : EditorWindow
             if (selectedNestedPrefabCategory.categoryNameNested != NestedPrefabCategoryName.Shop)
             {
                 selectedNestedPrefabCategory = settings.shopNestPrefab;
-                InstantiateObstructionModel();
+                GetModelType();
             }
         }
 
@@ -135,7 +152,7 @@ public class NestedPrefabCategoryEditorWindow : EditorWindow
             if (selectedNestedPrefabCategory.categoryNameNested != NestedPrefabCategoryName.Mall)
             {
                 selectedNestedPrefabCategory = settings.mallNestPrefab;
-                InstantiateObstructionModel();
+                GetModelType();
             }
         }
 
@@ -144,7 +161,7 @@ public class NestedPrefabCategoryEditorWindow : EditorWindow
             if (selectedNestedPrefabCategory.categoryNameNested != NestedPrefabCategoryName.Apartment)
             {
                 selectedNestedPrefabCategory = settings.apartmentNestPrefab;
-                InstantiateObstructionModel();
+                GetModelType();
             }
         }
 
@@ -159,12 +176,30 @@ public class NestedPrefabCategoryEditorWindow : EditorWindow
             GUILayout.Label("Wealth :");
             EditorGUI.indentLevel++;
             if (EditorGUILayout.Toggle("Poor", selectedWealthLevelShop == WealthLevelShop.Poor))
-                selectedWealthLevelShop = WealthLevelShop.Poor;
-            
+            {
+                if (selectedWealthLevelShop != WealthLevelShop.Poor)
+                {
+                    selectedWealthLevelShop = WealthLevelShop.Poor;
+                    GetModelType();
+                }
+            }
+
             if (EditorGUILayout.Toggle("Normal", selectedWealthLevelShop == WealthLevelShop.Normal))
-                selectedWealthLevelShop = WealthLevelShop.Normal;
+            {
+                if (selectedWealthLevelShop != WealthLevelShop.Normal)
+                {
+                    selectedWealthLevelShop = WealthLevelShop.Normal;
+                    GetModelType();
+                }
+            }
             if (EditorGUILayout.Toggle("Rich", selectedWealthLevelShop == WealthLevelShop.Rich))
-                selectedWealthLevelShop = WealthLevelShop.Rich;
+            {
+                if (selectedWealthLevelShop != WealthLevelShop.Rich)
+                {
+                    selectedWealthLevelShop = WealthLevelShop.Rich;
+                    GetModelType();
+                }
+            }
             EditorGUI.indentLevel--;
 
             EditorGUILayout.Space();
@@ -172,10 +207,21 @@ public class NestedPrefabCategoryEditorWindow : EditorWindow
             GUILayout.Label("Size :");
             EditorGUI.indentLevel++;
             if (EditorGUILayout.Toggle("Small", selectedSizeShop == SizeShop.Small))
-                selectedSizeShop = SizeShop.Small;
-            
+            {
+                if (selectedSizeShop != SizeShop.Small)
+                {
+                    selectedSizeShop = SizeShop.Small;
+                    GetModelType();
+                }
+            }
             if (EditorGUILayout.Toggle("Big", selectedSizeShop == SizeShop.Big))
-                selectedSizeShop = SizeShop.Big;
+            {
+                if (selectedSizeShop != SizeShop.Big)
+                {
+                    selectedSizeShop = SizeShop.Big;
+                    GetModelType();
+                }
+            }
             EditorGUI.indentLevel--;
             EditorGUILayout.Space();
             EditorGUILayout.Space();
@@ -186,13 +232,37 @@ public class NestedPrefabCategoryEditorWindow : EditorWindow
             GUILayout.Label("Size :");
             EditorGUI.indentLevel++;
             if (EditorGUILayout.Toggle("Tiny", seletectedSizeApartment == SizeApartment.Tiny))
-                seletectedSizeApartment = SizeApartment.Tiny;
-            if (EditorGUILayout.Toggle("Normal", seletectedSizeApartment == SizeApartment.Small))
-                seletectedSizeApartment = SizeApartment.Small;
-            if (EditorGUILayout.Toggle("Rich", seletectedSizeApartment == SizeApartment.Medium))
-                seletectedSizeApartment = SizeApartment.Medium;
+            {
+                if (seletectedSizeApartment != SizeApartment.Tiny)
+                {
+                    seletectedSizeApartment = SizeApartment.Tiny;
+                    GetModelType();
+                }
+            }
+            if (EditorGUILayout.Toggle("Small", seletectedSizeApartment == SizeApartment.Small))
+            {
+                if (seletectedSizeApartment != SizeApartment.Small)
+                {
+                    seletectedSizeApartment = SizeApartment.Small;
+                    GetModelType();
+                }
+            }
+            if (EditorGUILayout.Toggle("Normal", seletectedSizeApartment == SizeApartment.Medium))
+            {
+                if (seletectedSizeApartment != SizeApartment.Medium)
+                {
+                    seletectedSizeApartment = SizeApartment.Medium;
+                    GetModelType();
+                }
+            }
             if (EditorGUILayout.Toggle("Big", seletectedSizeApartment == SizeApartment.Big))
-                seletectedSizeApartment = SizeApartment.Big;
+            {
+                if (seletectedSizeApartment != SizeApartment.Big)
+                {
+                    seletectedSizeApartment = SizeApartment.Big;
+                    GetModelType();
+                }
+            }
             EditorGUI.indentLevel--;
 
             EditorGUILayout.Space();
@@ -206,9 +276,6 @@ public class NestedPrefabCategoryEditorWindow : EditorWindow
         {
             if (GUILayout.Button("Create prefab") && AskCreatePrefab())
             {
-                if(obstructionModel != null)
-                    DestroyImmediate(obstructionModel);
-
                 foreach (Transform child in prefabParent.transform)
                 {
                     // TODO : Delete on object directly
@@ -296,16 +363,15 @@ public class NestedPrefabCategoryEditorWindow : EditorWindow
         return true;
     }
 
-    public void InstantiateObstructionModel()
+    public void InstantiateRoomModel()
     {
-        if(obstructionModel != null)
-            DestroyImmediate(obstructionModel);
+        ClearObjects();
 
-        if (selectedNestedPrefabCategory.obstructionModel != null)
-        {
-            obstructionModel = Instantiate(selectedNestedPrefabCategory.obstructionModel);
-            obstructionModel.transform.position = Vector3.zero;
-        }
+        roomModel = Instantiate(selectedModelType.modelGO);
+        roomModel.transform.position = Vector3.zero;
+
+        nbOldObjects = FindObjectsOfType(typeof(GameObject)).Length;
+        nbObjectsBeforeNoParentPrefab = nbOldObjects;
     }
 
     public void RecursivelyRemoveProceduralEntitiesChildren(GameObject parent)
@@ -316,6 +382,83 @@ public class NestedPrefabCategoryEditorWindow : EditorWindow
         {
             RecursivelyRemoveProceduralEntitiesChildren(child.gameObject);
         }
+    }
+
+    public void GetModelType()
+    {
+        switch (selectedNestedPrefabCategory.categoryNameNested)
+        {
+            case NestedPrefabCategoryName.Shop:
+                selectedModelType = GetModelTypeShop();
+                break;
+            case NestedPrefabCategoryName.Mall:
+                selectedModelType = GetModelTypeMall();
+                break;
+            case NestedPrefabCategoryName.Apartment:
+                selectedModelType = GetModelTypeApartment();
+                break;
+        }
+
+        InstantiateRoomModel();
+    }
+
+    private ModelType GetModelTypeShop()
+    {
+        if (selectedSizeShop == SizeShop.Small)
+        {
+            switch (selectedWealthLevelShop)
+            {
+                case WealthLevelShop.Poor:
+                    return settings.shopNestPrefab.modelTypes.First(x => x.modelName == ModelName.PoorSmallShop);
+                case WealthLevelShop.Normal:
+                    return settings.shopNestPrefab.modelTypes.First(x => x.modelName == ModelName.NormalSmallShop);
+                default: // WealthLevelShop.Rich:
+                    return settings.shopNestPrefab.modelTypes.First(x => x.modelName == ModelName.RichSmallShop);
+            }
+        }
+        else
+        {
+            switch (selectedWealthLevelShop)
+            {
+                case WealthLevelShop.Poor:
+                    return settings.shopNestPrefab.modelTypes.First(x => x.modelName == ModelName.PoorBigShop);
+                case WealthLevelShop.Normal:
+                    return settings.shopNestPrefab.modelTypes.First(x => x.modelName == ModelName.NormalBigShop);
+                default: // WealthLevelShop.Rich:
+                    return settings.shopNestPrefab.modelTypes.First(x => x.modelName == ModelName.RichBigShop);
+
+            }
+        }
+        
+    }
+
+    private ModelType GetModelTypeMall()
+    {
+        return settings.mallNestPrefab.modelTypes.First(x => x.modelName == ModelName.Mall);
+    }
+
+    private ModelType GetModelTypeApartment()
+    {
+        switch (seletectedSizeApartment)
+        {
+            case SizeApartment.Tiny:
+                return settings.apartmentNestPrefab.modelTypes.First(x => x.modelName == ModelName.TinyApartment);
+            case SizeApartment.Small:
+                return settings.apartmentNestPrefab.modelTypes.First(x => x.modelName == ModelName.SmallApartment);
+            case SizeApartment.Medium:
+                return settings.apartmentNestPrefab.modelTypes.First(x => x.modelName == ModelName.NormalApartment);
+            default: // SizeApartment.Big:
+                return settings.apartmentNestPrefab.modelTypes.First(x => x.modelName == ModelName.BigApartment);
+        }
+    }
+
+    private void ClearObjects()
+    {
+        if(roomModel != null)
+            DestroyImmediate(roomModel);
+        
+        if(prefabParent != null)
+            DestroyImmediate(prefabParent);
     }
     
 }
