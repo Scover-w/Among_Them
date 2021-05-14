@@ -43,10 +43,7 @@ public class ProceduralElevator : MonoBehaviour
     
     [Header("Ceiling")]
     [SerializeField] private GameObject[] Levels;
-    
-    [Header("Wall Side")]
-    [SerializeField] private GameObject[] WallSides;
-    
+
     [Header("Wealth Obstructed Location Value")]
     [Range(0.0f, 1.0f)] public float MiddleValueProb = 0.0f;
 
@@ -206,8 +203,6 @@ public class ProceduralElevator : MonoBehaviour
                 
                 GameObject level2 = Instantiate(Levels[1]);
                 level2.transform.position = Vector3.zero;
-
-                Instantiate(WallSides[0]);
                 break;
             
             case ObstructedLocation.Short:
@@ -217,7 +212,6 @@ public class ProceduralElevator : MonoBehaviour
                 GameObject level3 = Instantiate(Levels[2]);
                 level3.transform.position = Vector3.zero;
                 
-                Instantiate(WallSides[1]);
                 break;
         }
         
