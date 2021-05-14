@@ -22,6 +22,9 @@ public class ProceduralManager : MonoBehaviour
     [SerializeField] 
     private ProceduralShop proceduralShop;
     
+    [SerializeField] 
+    private ProceduralRoom proceduralRoom;
+    
     [SerializeField]
     private ProceduralStair proceduralStair;
     
@@ -58,6 +61,8 @@ public class ProceduralManager : MonoBehaviour
         var obstructedLocation = proceduralElevator.LoadElevators(wealthLevel);
 
         proceduralShop.LoadShops(obstructedLocation, wealthLevel);
+
+        proceduralRoom.LoadRoom(obstructedLocation, wealthLevel);
         
         obstructedLocation = obstructedLocation.Union(proceduralStorey.LoadStoreys(obstructedLocation, wealthLevel)).ToList();
         
