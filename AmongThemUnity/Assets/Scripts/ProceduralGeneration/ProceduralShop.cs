@@ -1,7 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
+
+public enum WealthLevelShop
+{
+    Poor,
+    Normal,
+    Rich
+}
+
+
+
+public enum SizeShop
+{
+    Small,
+    Big,
+    Null
+}
 public class ProceduralShop : MonoBehaviour
 {
 
@@ -31,19 +48,25 @@ public class ProceduralShop : MonoBehaviour
         int longSide = 10;
         int shortSide = 7;
 
-
-        GameObject[] choosenShops = (wealthLevel < tresholdPoorNormal)? poorShops : 
-            ((wealthLevel < tresholdNormalRich)? normalShops : richShops);
+        WealthLevelShop choosenWealthLevelShop = (wealthLevel < tresholdPoorNormal)? WealthLevelShop.Poor : 
+            ((wealthLevel < tresholdNormalRich)? WealthLevelShop.Normal : WealthLevelShop.Rich);
+        
+        GameObject[] choosenShops = (choosenWealthLevelShop == WealthLevelShop.Poor)? poorShops : 
+            ((choosenWealthLevelShop == WealthLevelShop.Normal)? normalShops : richShops);
 
 
         GameObject shopToPut;
 
+        // TODO : Simplify this
+        
         bool isShopObstructed = obstructedLocations.Contains(ObstructedLocation.Long);
         // Long Sides
         for (int i = 0; i < 2; i++)
         {
             int j = 0;
             int add = 0;
+            SizeShop choosenSizeShop = SizeShop.Null;
+            GameObject apartment;
             while(j < longSide)
             {
                 if (j == 5 && isShopObstructed)
@@ -55,6 +78,7 @@ public class ProceduralShop : MonoBehaviour
                 {
                     add = 1;
                     shopToPut = choosenShops[0];
+                    choosenSizeShop = SizeShop.Small;
                 }
                 else
                 {
@@ -62,11 +86,13 @@ public class ProceduralShop : MonoBehaviour
                     {
                         add = 2;
                         shopToPut = choosenShops[1];
+                        choosenSizeShop = SizeShop.Big;
                     }
                     else
                     {
                         add = 1;
                         shopToPut = choosenShops[0];
+                        choosenSizeShop = SizeShop.Small;
                     }
                 }
 
@@ -87,6 +113,13 @@ public class ProceduralShop : MonoBehaviour
                 shopToPut = Instantiate(shopToPut);
                 shopToPut.transform.position = new Vector3(x, 0, z);
                 shopToPut.transform.Rotate(0, yRotation, 0);
+
+                apartment = LoadInsideShop(choosenWealthLevelShop, choosenSizeShop, wealthLevel);
+                if (apartment != null)
+                {
+                    apartment.transform.position = new Vector3(x, 0, z);
+                    apartment.transform.Rotate(0, yRotation, 0);
+                }
             }
         }
         
@@ -96,6 +129,10 @@ public class ProceduralShop : MonoBehaviour
         {
             int j = 0;
             int add = 0;
+            SizeShop choosenSizeShop = SizeShop.Null;
+            GameObject apartment;
+            
+            
             while(j < shortSide)
             {
                 if (j == 3 && isShopObstructed)
@@ -107,6 +144,7 @@ public class ProceduralShop : MonoBehaviour
                 {
                     add = 1;
                     shopToPut = choosenShops[0];
+                    choosenSizeShop = SizeShop.Small;
                 }
                 else
                 {
@@ -114,11 +152,13 @@ public class ProceduralShop : MonoBehaviour
                     {
                         add = 2;
                         shopToPut = choosenShops[1];
+                        choosenSizeShop = SizeShop.Big;
                     }
                     else
                     {
                         add = 1;
                         shopToPut = choosenShops[0];
+                        choosenSizeShop = SizeShop.Small;
                     }
                 }
 
@@ -139,10 +179,42 @@ public class ProceduralShop : MonoBehaviour
                 shopToPut = Instantiate(shopToPut);
                 shopToPut.transform.position = new Vector3(x, 0, z);
                 shopToPut.transform.Rotate(0, yRotation, 0);
+                
+                apartment = LoadInsideShop(choosenWealthLevelShop, choosenSizeShop, wealthLevel);
+                if (apartment != null)
+                {
+                    apartment.transform.position = new Vector3(x, 0, z);
+                    apartment.transform.Rotate(0, yRotation, 0);
+                }
+                
+                
             }
         }
         
         // 10 long 
         // 7 short
+    }
+
+    private GameObject LoadInsideShop(WealthLevelShop wealthLevelShop, SizeShop sizeShop, float wealthValue)
+    {
+        if (sizeShop == SizeShop.Null)
+        {
+            return null;
+        }
+        
+        var objects = AssetDatabase.LoadAllAssetsAtPath("AAssets/Prefabs/NestedPrefabs/Shop/" + wealthLevelShop + "/" + sizeShop + "/");
+
+        List<GameObject> apartments = new List<GameObject>();
+        
+        var apartmentDict = new Dictionary<GameObject, float>();
+
+        GameObject temp;
+        foreach (var obj in objects)
+        {
+            temp = (GameObject) obj;
+            apartmentDict.Add(temp, temp.GetComponent<ProceduralEntity>().wealthValue);
+        }
+
+        return Instantiate(ProceduralCalculations.GetRandomTFromPool(apartmentDict, wealthValue));
     }
 }

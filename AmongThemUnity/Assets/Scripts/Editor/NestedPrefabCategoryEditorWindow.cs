@@ -292,6 +292,10 @@ public class NestedPrefabCategoryEditorWindow : EditorWindow
                 {
                     localPath += seletectedSizeApartment + "/";
                 }
+                else if(selectedNestedPrefabCategory.categoryNameNested == NestedPrefabCategoryName.Mall)
+                {
+                    localPath += "Mall/";
+                }
                 
                 
 

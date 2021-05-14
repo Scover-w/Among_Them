@@ -1,7 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
+public enum SizeApartment
+{
+    Tiny,
+    Small,
+    Medium,
+    Big
+}
 public class ProceduralRoom : MonoBehaviour
 {
     [Header("Outside Walls")] [SerializeField]
@@ -23,7 +31,9 @@ public class ProceduralRoom : MonoBehaviour
         
         GameObject door = GetDoor(wealthLevel);
 
-        GameObject room = GetRoom(wealthLevel);
+        int indexRoom = GetRoom(wealthLevel);
+        GameObject room = rooms[indexRoom];
+        SizeApartment sizeRoom = GetSizeByIndex(indexRoom);
 
 
         int nbDoors = wall.transform.childCount * 4;
@@ -47,8 +57,8 @@ public class ProceduralRoom : MonoBehaviour
                 if (nbInstalledDoor == choosenDoor)
                 {
                     LoadRoom(child, room);
-                    
-                    // Set Door interactable
+                    LoadApartment(wealthLevel, child.position, sizeRoom);
+                    // TODO : Set Door interactable
                 }
 
                 nbInstalledDoor++;
@@ -93,15 +103,30 @@ public class ProceduralRoom : MonoBehaviour
         return ProceduralCalculations.GetRandomTFromPool(doorDictionary, wealthLevel);
     }
     
-    private GameObject GetRoom(float wealthLevel)
+    private int GetRoom(float wealthLevel)
     {
         for (int i = 3; i > 0; i--)
         {
             if (rooms[i].GetComponent<ProceduralEntity>().wealthValue < wealthLevel)
-                return rooms[i];
+                return i;
         }
 
-        return rooms[0];
+        return 0;
+    }
+
+    private SizeApartment GetSizeByIndex(int index)
+    {
+        switch (index)
+        {
+            case 0:
+                return SizeApartment.Tiny;
+            case 1:
+                return SizeApartment.Small;
+            case 2:
+                return SizeApartment.Medium;
+            default:
+                return SizeApartment.Big;
+        }
     }
 
     private void RotateDoorTowardCenter(Transform door, Transform location)
@@ -118,8 +143,26 @@ public class ProceduralRoom : MonoBehaviour
 
     private void LoadRoom(Transform tr, GameObject room)
     {
-        Debug.Log("Room Instantiated");
         GameObject instantiatedRoom = Instantiate(room);
         instantiatedRoom.transform.position = tr.position;
+    }
+
+    private void LoadApartment(float wealthValue, Vector3 position, SizeApartment sizeApartment)
+    {
+        var objects = AssetDatabase.LoadAllAssetsAtPath("Assets/Prefabs/NestedPrefabs/Apartment/" + sizeApartment + "/");
+
+        List<GameObject> apartments = new List<GameObject>();
+        
+        var apartmentDict = new Dictionary<GameObject, float>();
+
+        GameObject temp;
+        foreach (var obj in objects)
+        {
+            temp = (GameObject) obj;
+            apartmentDict.Add(temp, temp.GetComponent<ProceduralEntity>().wealthValue);
+        }
+
+        temp = Instantiate(ProceduralCalculations.GetRandomTFromPool(apartmentDict, wealthValue));
+        temp.transform.position = position;
     }
 }
