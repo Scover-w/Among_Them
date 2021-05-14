@@ -39,10 +39,11 @@ public class PlayerLook : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 200f))
         {
+            Debug.Log(hit.transform.gameObject.name);
             switch (hit.transform.gameObject.tag)
             {
                 case "ToKillAgent":
-                    if (hit.transform.gameObject.name.Contains("ToKillAgent"))
+                    if (hit.transform.gameObject.tag.Contains("ToKillAgent"))
                     {
                         if (hit.distance < 2.0f)
                         {

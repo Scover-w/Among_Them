@@ -49,7 +49,7 @@ public class NavMeshAgentManager : MonoBehaviour
             navMeshAgent.SetDestination(GetRandomPositionOnNavMesh());
             navMeshList.Add(navMeshAgent);
             fieldViewMeshColliderList.Add(agent.GetComponentInChildren<MeshCollider>());
-            fieldViewPositionList.Add(agent.transform.GetChild(2));
+            fieldViewPositionList.Add(agent.transform.GetChild(0));
         }
         
         ToKillAgent = Instantiate(toKillAgent);
