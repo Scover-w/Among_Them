@@ -78,7 +78,7 @@ public class NestedPrefabCategoryEditorWindow : EditorWindow
                 Selection.activeGameObject = prefabParent;
                 if (prefabParent == null)
                 {
-                    nbOldObjects = 1;
+                    nbOldObjects = nbObjectsBeforeNoParentPrefab;
                 }
                 else
                 {
@@ -96,21 +96,13 @@ public class NestedPrefabCategoryEditorWindow : EditorWindow
         }
         
         
-        if (nbActualObjects != nbOldObjects) // Prefab added
+        if (nbActualObjects != nbOldObjects && nbActualObjects > nbOldObjects && !objectsInScene.Contains(Selection.activeGameObject)) // Prefab added
         {
-            if (nbOldObjects == nbObjectsBeforeNoParentPrefab && nbActualObjects > nbObjectsBeforeNoParentPrefab) // prefabParentAdded
-            {
-                PrefabParentAdded(Selection.activeTransform.gameObject);
-                nbOldObjects = nbActualObjects;
-            }
-            else if(nbActualObjects > nbOldObjects && !objectsInScene.Contains(Selection.activeGameObject)) // prefabChildAdded
-            {
-                Undo.RecordObject(Selection.activeGameObject, "Object ObjectChangementParentPrefab");
-                Selection.activeTransform.parent = prefabParent.transform;
-                Selection.activeTransform.position = Vector3.zero;
-                AddChildRecursively(Selection.activeGameObject);
-                nbOldObjects = nbActualObjects;
-            }
+            Undo.RecordObject(Selection.activeGameObject, "Object ObjectChangementParentPrefab");
+            Selection.activeTransform.parent = prefabParent.transform;
+            Selection.activeTransform.position = Vector3.zero;
+            AddChildRecursively(Selection.activeGameObject);
+            nbOldObjects = nbActualObjects;
         }
     }
 
@@ -278,7 +270,6 @@ public class NestedPrefabCategoryEditorWindow : EditorWindow
             {
                 foreach (Transform child in prefabParent.transform)
                 {
-                    // TODO : Delete on object directly
                     RecursivelyRemoveProceduralEntitiesChildren(child.gameObject);
                 }
 
@@ -309,28 +300,12 @@ public class NestedPrefabCategoryEditorWindow : EditorWindow
                 localPath = AssetDatabase.GenerateUniqueAssetPath(localPath);
                 
                 PrefabUtility.SaveAsPrefabAssetAndConnect(prefabParent, localPath,
-                    InteractionMode.UserAction);
+                    InteractionMode.AutomatedAction);
                 
-                DestroyImmediate(prefabParent);
+                GetModelType();
                 
                 Debug.Log("Nested prefab created");
             }
-        }
-
-
-
-
-    }
-    
-    private void PrefabParentAdded(GameObject activeGameObject)
-    {
-        Light light;
-
-        if (activeGameObject != null && !IsLightOfScene(activeGameObject))
-        {
-            prefabParent = activeGameObject;
-            prefabParent.transform.position = Vector3.zero;
-            AddChildRecursively(prefabParent);
         }
     }
     
@@ -376,12 +351,20 @@ public class NestedPrefabCategoryEditorWindow : EditorWindow
 
         nbOldObjects = FindObjectsOfType(typeof(GameObject)).Length;
         nbObjectsBeforeNoParentPrefab = nbOldObjects;
+        
+        prefabParent = new GameObject("ContainerPrefab");
+        prefabParent.transform.position = Vector3.zero;
+        
     }
 
     public void RecursivelyRemoveProceduralEntitiesChildren(GameObject parent)
     {
-        DestroyImmediate(parent.GetComponent<ProceduralEntity>());
-        
+        Component proceduralEntity;
+        if (parent.TryGetComponent(out proceduralEntity))
+        {
+            DestroyImmediate(proceduralEntity);
+        }
+
         foreach (Transform child in parent.transform)
         {
             RecursivelyRemoveProceduralEntitiesChildren(child.gameObject);

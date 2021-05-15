@@ -29,7 +29,13 @@ public class BlenderImportToPrefab : UnityEditor.Editor
             {
                 var objectToPrefab = (GameObject)AssetDatabase.LoadAssetAtPath(file, typeof(GameObject));
                 objectToPrefab = Instantiate(objectToPrefab);
-                objectToPrefab.AddComponent<ProceduralEntity>();
+                
+                if(!prefabFile.Contains("Objects"))
+                {
+                    objectToPrefab.AddComponent<ProceduralEntity>(); 
+                }
+                
+                
                 objectToPrefab.transform.position = Vector3.zero;
 
                 PrefabUtility.SaveAsPrefabAssetAndConnect(objectToPrefab, prefabFile, InteractionMode.UserAction);
@@ -51,11 +57,4 @@ public class BlenderImportToPrefab : UnityEditor.Editor
         }
         
     }
-    
-    // https://docs.unity3d.com/ScriptReference/EditorUtility.html
-    
-    // https://docs.unity3d.com/ScriptReference/PrefabUtility.html
-    
-    // https://docs.unity3d.com/ScriptReference/AssetDatabase.html
-    
 }
