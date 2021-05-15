@@ -353,13 +353,14 @@ public class NestedPrefabCategoryEditorWindow : EditorWindow
         nbObjectsBeforeNoParentPrefab = nbOldObjects;
         
         prefabParent = new GameObject("ContainerPrefab");
+        prefabParent.AddComponent<ProceduralEntity>();
         prefabParent.transform.position = Vector3.zero;
         
     }
 
     public void RecursivelyRemoveProceduralEntitiesChildren(GameObject parent)
     {
-        Component proceduralEntity;
+        ProceduralEntity proceduralEntity;
         if (parent.TryGetComponent(out proceduralEntity))
         {
             DestroyImmediate(proceduralEntity);
