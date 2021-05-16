@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public enum SizeApartment
 {
@@ -24,6 +26,16 @@ public class ProceduralRoom : MonoBehaviour
     
     [Header("Rooms")] [SerializeField]
     private GameObject[] rooms;
+
+    [Header("Content Room")] 
+    [SerializeField]
+    private GameObject[] tinyContent;
+    [SerializeField]
+    private GameObject[] smallContent;
+    [SerializeField]
+    private GameObject[] mediumContent;
+    [SerializeField]
+    private GameObject[] bigContent;
 
     public void LoadRoom(List<ObstructedLocation> obstructedLocation, float wealthLevel)
     {
@@ -144,25 +156,58 @@ public class ProceduralRoom : MonoBehaviour
     private void LoadRoom(Transform tr, GameObject room)
     {
         GameObject instantiatedRoom = Instantiate(room);
-        instantiatedRoom.transform.position = tr.position;
+        var position = tr.position;
+        instantiatedRoom.transform.position = position;
+        RotateRoom(instantiatedRoom.transform, position);
     }
 
     private void LoadApartment(float wealthValue, Vector3 position, SizeApartment sizeApartment)
     {
-        var objects = AssetDatabase.LoadAllAssetsAtPath("Assets/Prefabs/NestedPrefabs/Apartment/" + sizeApartment + "/");
+        GameObject[] rooms;
 
-        List<GameObject> apartments = new List<GameObject>();
-        
-        var apartmentDict = new Dictionary<GameObject, float>();
-
-        GameObject temp;
-        foreach (var obj in objects)
+        switch (sizeApartment)
         {
-            temp = (GameObject) obj;
-            apartmentDict.Add(temp, temp.GetComponent<ProceduralEntity>().wealthValue);
+            
+            case SizeApartment.Small:
+                rooms = smallContent;
+                break;
+            case SizeApartment.Medium:
+                rooms = mediumContent;
+                break;
+            case SizeApartment.Big:
+                rooms = bigContent;
+                break;
+            default: 
+                rooms = tinyContent;
+                break;
+        }
+        
+        var roomDict = new Dictionary<GameObject, float>();
+        foreach (var room in rooms)
+        {
+            roomDict.Add(room, room.GetComponent<ProceduralEntity>().wealthValue);
         }
 
-        temp = Instantiate(ProceduralCalculations.GetRandomTFromPool(apartmentDict, wealthValue));
+        GameObject temp = Instantiate(ProceduralCalculations.GetRandomTFromPool(roomDict, wealthValue));
         temp.transform.position = position;
+
+        RotateRoom(temp.transform, position);
+
+    }
+
+    private void RotateRoom(Transform room, Vector3 position)
+    {
+        float yRot = 0f;
+
+        if (position.x < -100 || position.x > 100)
+        {
+            yRot = (position.x > 0) ? 90f : -90f;
+        }
+        else
+        {
+            yRot = (position.x > 0) ? 180f :0f;
+        }
+
+        room.transform.Rotate(0f, yRot, 0f);
     }
 }

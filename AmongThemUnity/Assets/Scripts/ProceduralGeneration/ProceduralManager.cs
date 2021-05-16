@@ -67,11 +67,11 @@ public class ProceduralManager : MonoBehaviour
 
         proceduralRoom.LoadRoom(obstructedLocation, wealthLevel);
         
-        proceduralMall.LoadMall(obstructedLocation, wealthLevel);
-        
         obstructedLocation = obstructedLocation.Union(proceduralStorey.LoadStoreys(obstructedLocation, wealthLevel)).ToList();
         
-        obstructedLocation = obstructedLocation.Union(proceduralStair.LoadStairs(obstructedLocation, wealthLevel)).ToList();
+        proceduralMall.LoadMall(obstructedLocation, wealthLevel);
+        
+        obstructedLocation.Union(proceduralStair.LoadStairs(obstructedLocation, wealthLevel)).ToList();
     }
 
     public float GetWealthValue()

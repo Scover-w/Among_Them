@@ -5,22 +5,19 @@ using UnityEngine;
 
 public class ProceduralMall : MonoBehaviour
 {
+    [SerializeField] 
+    private GameObject[] contentMall;
     public void LoadMall(List<ObstructedLocation> obstructedLocation, float wealthLevel)
     {
-        var objects = AssetDatabase.LoadAllAssetsAtPath("Assets/Prefabs/NestedPrefabs/Mall/");
-
-        List<GameObject> apartments = new List<GameObject>();
+        var mallDict = new Dictionary<GameObject, float>();
         
-        var apartmentDict = new Dictionary<GameObject, float>();
-
-        GameObject temp;
-        foreach (var obj in objects)
+        foreach (var obj in contentMall)
         {
-            temp = (GameObject) obj;
-            apartmentDict.Add(temp, temp.GetComponent<ProceduralEntity>().wealthValue);
+            if(!(obstructedLocation.Contains(ObstructedLocation.Middle) && obj.GetComponent<ProceduralEntity>().obstructedLocation.Contains(ObstructedLocation.Middle)))
+                mallDict.Add(obj, obj.GetComponent<ProceduralEntity>().wealthValue);
         }
 
-        temp = Instantiate(ProceduralCalculations.GetRandomTFromPool(apartmentDict, wealthLevel));
+        GameObject temp = Instantiate(ProceduralCalculations.GetRandomTFromPool(mallDict, wealthLevel));
         temp.transform.position = Vector3.zero;
     }
 }

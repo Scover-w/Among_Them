@@ -52,6 +52,7 @@ public class NestedPrefabCategoryEditorWindow : EditorWindow
     private int nbObjectsBeforeNoParentPrefab;
 
     private bool onFirstOnGUI = true;
+    private bool centerNewObject = true;
     
     [MenuItem("Tools/Open Prefab  Window")]
     static void Init()
@@ -100,7 +101,8 @@ public class NestedPrefabCategoryEditorWindow : EditorWindow
         {
             Undo.RecordObject(Selection.activeGameObject, "Object ObjectChangementParentPrefab");
             Selection.activeTransform.parent = prefabParent.transform;
-            Selection.activeTransform.position = Vector3.zero;
+            if(centerNewObject)
+                Selection.activeTransform.position = Vector3.zero;
             AddChildRecursively(Selection.activeGameObject);
             nbOldObjects = nbActualObjects;
         }
@@ -258,6 +260,17 @@ public class NestedPrefabCategoryEditorWindow : EditorWindow
             EditorGUI.indentLevel--;
 
             EditorGUILayout.Space();
+        }
+        
+        if (EditorGUILayout.Toggle("Center", centerNewObject))
+        {
+            if(!centerNewObject)
+                centerNewObject= !centerNewObject;
+        }
+        else
+        {
+            if(centerNewObject)
+            centerNewObject= !centerNewObject;
         }
 
         if (settings.shopNestPrefab.categoryNameNested == settings.mallNestPrefab.categoryNameNested &&
