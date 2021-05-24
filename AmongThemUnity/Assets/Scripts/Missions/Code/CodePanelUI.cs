@@ -7,28 +7,7 @@ public class CodePanelUI : MonoBehaviour
 {
     
     public InputField codeDisplay;
-    public string number;
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void AddToDisplay()
-    {
-        if (codeDisplay.text.Length < 4)
-        {
-            codeDisplay.text += number;
-        }
-    }
-
     public void RemoveFromDisplay()
     {
         if (codeDisplay.text.Length > 0)

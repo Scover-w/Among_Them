@@ -10,6 +10,8 @@ namespace InteractionElement
         private List<NavMeshAgent> crowdAgentsList;
         [SerializeField]
         private int radius;
+        [SerializeField]
+        private float waitingTime;
     
         // Start is called before the first frame update
         void Start()
@@ -37,7 +39,7 @@ namespace InteractionElement
                     }
                 }
 
-                StartCoroutine(NavMeshAgentManager.Instance().ChangeDestinationAfterEvents(agentsAffected));
+                StartCoroutine(NavMeshAgentManager.Instance().ChangeDestinationAfterEvents(agentsAffected, waitingTime));
             }
 
             if (other.gameObject.tag.Equals("CrowdAgent"))

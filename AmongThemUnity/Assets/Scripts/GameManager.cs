@@ -32,6 +32,11 @@ public class GameManager : MonoBehaviour
         {
             PauseGame();
         }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            Debug.Log(LanguageManager.Instance().GetSelectedLanguage());
+        }
     }
 
 

@@ -58,35 +58,14 @@ public class NavMeshAgentManager : MonoBehaviour
         navMeshAgent2.SetDestination(GetRandomPositionOnNavMesh());
         navMeshList.Add(navMeshAgent2);
 
-        StartCoroutine(CheckNavMeshArrived());
+        
     }
 
-    IEnumerator CheckNavMeshArrived()
+    public IEnumerator ChangeDestinationAfterEvents(List<NavMeshAgent> agentsAffected, float waitingTime)
     {
         while (true)
         {
-            yield return new WaitForSeconds(2f);
-            foreach (var navMeshAgent in navMeshList)
-            {
-                if (!navMeshAgent.pathPending)
-                {
-                    if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
-                    {
-                        if (!navMeshAgent.hasPath || navMeshAgent.velocity.sqrMagnitude == 0f)
-                        {
-                            navMeshAgent.SetDestination(GetRandomPositionOnNavMesh());
-                        }
-                    }
-                } 
-            } 
-        }
-    }
-
-    public IEnumerator ChangeDestinationAfterEvents(List<NavMeshAgent> agentsAffected)
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(waitingTime);
             foreach (var navMeshAgent in agentsAffected)
             {
                 navMeshAgent.SetDestination(GetRandomPositionOnNavMesh());
@@ -119,35 +98,6 @@ public class NavMeshAgentManager : MonoBehaviour
     {
         PlayerDetection playerDetection = player.GetComponent<PlayerDetection>();
         return playerDetection.IsPlayerVisible();
-
-        /*
-        List<int> indexList = new List<int>();
-        int i = 0;
-        foreach (var fieldViewMeshCollider in fieldViewMeshColliderList)
-        {
-            if (fieldViewMeshCollider.bounds.Contains(ToKillAgent.transform.position))
-            {
-                Ray ray = new Ray(fieldViewPositionList[i].position, player.transform.position - fieldViewPositionList[i].position);
-                RaycastHit hit;
-                
-                if (Physics.Raycast(ray, out hit, 200f, layerMask))
-                {
-                    if (hit.transform.gameObject.tag.Contains("Player") || hit.transform.gameObject.tag.Contains("ToKillAgent"))
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            i++;
-        }
-        return false;
-        */
-    }
-
-    public void POICreated(Vector3 origin)
-    {
-        
     }
 
     public List<NavMeshAgent> GetCrowdAgent()
