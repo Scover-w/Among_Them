@@ -14,20 +14,43 @@ public enum NestedPrefabCategoryName
     Apartment
 }
 
+public enum ModelName
+{
+    Mall,
+    PoorSmallShop,
+    NormalSmallShop,
+    RichSmallShop,
+    PoorBigShop,
+    NormalBigShop,
+    RichBigShop,
+    TinyApartment,
+    SmallApartment,
+    NormalApartment,
+    BigApartment
+}
+
+[Serializable]
+public struct ModelType
+{
+    public ModelName modelName;
+    public GameObject modelGO;
+}
+
 [Serializable]
 public struct NestedPrefabCategory
 {
     public NestedPrefabCategoryName categoryNameNested;
     public string pathFolder;
-    public GameObject obstructionModel;
+    public List<ModelType> modelTypes;
 
 }
+
 
 [CreateAssetMenu(menuName = "Prefab Creator/Create Nested Prefab Category Settings", fileName = "NestedPrefabCategory")]
 public class NestedPrefabCategorySettings : ScriptableObject
 {
-    public NestedPrefabCategory shopNestPrefab;
     public NestedPrefabCategory mallNestPrefab;
+    public NestedPrefabCategory shopNestPrefab;
     public NestedPrefabCategory apartmentNestPrefab;
 
 }

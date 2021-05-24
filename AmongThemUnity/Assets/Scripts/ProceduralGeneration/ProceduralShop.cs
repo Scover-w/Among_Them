@@ -1,7 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
+
+public enum WealthLevelShop
+{
+    Poor,
+    Normal,
+    Rich
+}
+
+
+
+public enum SizeShop
+{
+    Small,
+    Big,
+    Null
+}
 public class ProceduralShop : MonoBehaviour
 {
 
@@ -19,6 +36,21 @@ public class ProceduralShop : MonoBehaviour
     private GameObject[] richShops;
 
 
+    [Header("Content Shop")] 
+    [SerializeField]
+    private GameObject[] poorSmall;
+    [SerializeField]
+    private GameObject[] poorBig;
+    [SerializeField]
+    private GameObject[] normalSmall;
+    [SerializeField]
+    private GameObject[] normalBig;
+    [SerializeField]
+    private GameObject[] richSmall;
+    [SerializeField]
+    private GameObject[] richBig;
+
+
     [Header("Treshold Choice Shops")] 
     [SerializeField][Range(0f,1f)]
     private float tresholdPoorNormal = 0;
@@ -31,118 +63,122 @@ public class ProceduralShop : MonoBehaviour
         int longSide = 10;
         int shortSide = 7;
 
-
-        GameObject[] choosenShops = (wealthLevel < tresholdPoorNormal)? poorShops : 
-            ((wealthLevel < tresholdNormalRich)? normalShops : richShops);
+        WealthLevelShop choosenWealthLevelShop = (wealthLevel < tresholdPoorNormal)? WealthLevelShop.Poor : 
+            ((wealthLevel < tresholdNormalRich)? WealthLevelShop.Normal : WealthLevelShop.Rich);
+        
+        GameObject[] choosenShops = (choosenWealthLevelShop == WealthLevelShop.Poor)? poorShops : 
+            ((choosenWealthLevelShop == WealthLevelShop.Normal)? normalShops : richShops);
 
 
         GameObject shopToPut;
 
-        bool isShopObstructed = obstructedLocations.Contains(ObstructedLocation.Long);
-        // Long Sides
-        for (int i = 0; i < 2; i++)
+        // 10 units for long 
+        // 7 units for short
+        
+        bool isShopObstructed;
+        int sideValue;
+        int middleObsIdx;
+        
+        for(int h = 0; h < 2; h++)
         {
-            int j = 0;
-            int add = 0;
-            while(j < longSide)
+            bool isLong = (h == 0);
+            sideValue = (isLong) ? longSide : shortSide;
+            isShopObstructed = (isLong)
+                ? obstructedLocations.Contains(ObstructedLocation.Long)
+                : obstructedLocations.Contains(ObstructedLocation.Short);
+            middleObsIdx = (isLong) ? 4 : 2;
+            
+            for (int i = 0; i < 2; i++)
             {
-                if (j == 5 && isShopObstructed)
+                int j = 0;
+                int add = 0;
+                SizeShop choosenSizeShop;
+                GameObject apartment;
+
+                
+
+                while (j < sideValue)
                 {
-                    add = 1;
-                    shopToPut = noShops[0];
-                }
-                else if ((j == 4 && isShopObstructed) || (j == longSide - 1))
-                {
-                    add = 1;
-                    shopToPut = choosenShops[0];
-                }
-                else
-                {
-                    if (ProceduralCalculations.GetRandomValue() < wealthLevel)
+                    choosenSizeShop = SizeShop.Null;
+                    if (j == middleObsIdx + 1 && isShopObstructed)
                     {
-                        add = 2;
-                        shopToPut = choosenShops[1];
+                        add = 1;
+                        shopToPut = noShops[0];
                     }
-                    else
+                    else if ((j == middleObsIdx && isShopObstructed) || (j == sideValue - 1))
                     {
                         add = 1;
                         shopToPut = choosenShops[0];
-                    }
-                }
-
-
-                int x = -100 + j * 20;
-                int z = 70;
-                int yRotation = 0;
-
-                if (i == 1)
-                {
-                    x *= -1;
-                    z *= -1;
-                    yRotation = 180;
-                }
-
-                j += add;
-
-                shopToPut = Instantiate(shopToPut);
-                shopToPut.transform.position = new Vector3(x, 0, z);
-                shopToPut.transform.Rotate(0, yRotation, 0);
-            }
-        }
-        
-        isShopObstructed = obstructedLocations.Contains(ObstructedLocation.Short);
-        // Short Side
-        for (int i = 0; i < 2; i++)
-        {
-            int j = 0;
-            int add = 0;
-            while(j < shortSide)
-            {
-                if (j == 3 && isShopObstructed)
-                {
-                    add = 1;
-                    shopToPut = noShops[0];
-                }
-                else if ((j == 2 && isShopObstructed) || (j == shortSide - 1))
-                {
-                    add = 1;
-                    shopToPut = choosenShops[0];
-                }
-                else
-                {
-                    if (ProceduralCalculations.GetRandomValue() < wealthLevel)
-                    {
-                        add = 2;
-                        shopToPut = choosenShops[1];
+                        choosenSizeShop = SizeShop.Small;
                     }
                     else
                     {
-                        add = 1;
-                        shopToPut = choosenShops[0];
+                        if (ProceduralCalculations.GetRandomValue() < wealthLevel)
+                        {
+                            add = 2;
+                            shopToPut = choosenShops[1];
+                            choosenSizeShop = SizeShop.Big;
+                        }
+                        else
+                        {
+                            add = 1;
+                            shopToPut = choosenShops[0];
+                            choosenSizeShop = SizeShop.Small;
+                        }
+                    }
+
+
+                    int x = (isLong)? -100 + j * 20 : 100;
+                    int z = (isLong)? 70 : 70 - j * 20;
+                    int yRotation = (isLong)? 0 : 90;
+
+                    if (i == 1)
+                    {
+                        x *= -1;
+                        z *= -1;
+                        yRotation = (isLong)? 180 : 270;
+                    }
+
+                    j += add;
+
+                    shopToPut = Instantiate(shopToPut);
+                    shopToPut.transform.position = new Vector3(x, 0, z);
+                    shopToPut.transform.Rotate(0, yRotation, 0);
+
+                    if (choosenSizeShop != SizeShop.Null)
+                    {
+                        apartment = LoadInsideShop(choosenWealthLevelShop, choosenSizeShop, wealthLevel);
+                        apartment.transform.position = new Vector3(x, 0, z);
+                        apartment.transform.Rotate(0, yRotation, 0);
                     }
                 }
-
-
-                int z = 70 - j * 20;
-                int x = 100;
-                int yRotation = 90;
-
-                if (i == 1)
-                {
-                    x *= -1;
-                    z *= -1;
-                    yRotation = 270;
-                }
-
-                j += add;
-
-                shopToPut = Instantiate(shopToPut);
-                shopToPut.transform.position = new Vector3(x, 0, z);
-                shopToPut.transform.Rotate(0, yRotation, 0);
             }
         }
+    }
+
+    private GameObject LoadInsideShop(WealthLevelShop wealthLevelShop, SizeShop sizeShop, float wealthValue)
+    {
+        GameObject[] apartments;
+        if(wealthLevelShop == WealthLevelShop.Poor)
+        {
+            apartments = (sizeShop == SizeShop.Small) ? poorSmall : poorBig;
+        }
+        else if (wealthLevelShop == WealthLevelShop.Normal)
+        {
+            apartments = (sizeShop == SizeShop.Small) ? normalSmall : normalBig;
+        }
+        else
+        {
+            apartments = (sizeShop == SizeShop.Small) ? richSmall : richBig;
+        }
+
+        var apartmentDict = new Dictionary<GameObject, float>();
         
-        // 10 long 
-        // 7 short
+        foreach (var obj in apartments)
+        {
+            apartmentDict.Add(obj, obj.GetComponent<ProceduralEntity>().wealthValue);
+        }
+
+        return Instantiate(ProceduralCalculations.GetRandomTFromPool(apartmentDict, wealthValue));
     }
 }

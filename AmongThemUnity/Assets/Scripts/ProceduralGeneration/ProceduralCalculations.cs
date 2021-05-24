@@ -7,9 +7,7 @@ using Random = UnityEngine.Random;
 
 public static class ProceduralCalculations
 {
-    
     // Dictionary<int, float> -> <id, wealthValue of the object>
-    
     public static T GetRandomTFromPool<T>(Dictionary<T, float> pool, float wealthLevel)
     {
         float totalProb = 0f;
