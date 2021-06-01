@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 [Serializable]
 public struct CodeButton
@@ -25,10 +26,24 @@ public class CodeMission : MonoBehaviour
     void Start()
     {
         _singleton = this;
+        code = RandomizeCode();
         foreach (var kvButton in buttons)
         {
             kvButton.button.onClick.AddListener(delegate { AddToDisplay(kvButton.number); });
         }
+    }
+
+    public string RandomizeCode()
+    {
+        List<int> temp = new List<int>();
+        for (int i = 0; i < 4; i++)
+        {
+            temp.Add(Random.Range(0,9));
+        }
+
+        string toReturn = String.Join("", temp.ToArray());
+        code = toReturn;
+        return toReturn;
     }
 
     public void AddToDisplay(int number)
@@ -41,13 +56,13 @@ public class CodeMission : MonoBehaviour
 
     public void ConfirmCode(InputField fieldCode)
     {
-        if (fieldCode.text.Equals(code))
+        Debug.Log(code);
+        if (fieldCode.text.Equals(code.Substring(0,4)))
         {
             fieldCode.text = "TRUE";
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             StartCoroutine(EndAnimationTrue(fieldCode));
-            
             return;
         }
         fieldCode.text = "FALSE";
@@ -61,6 +76,12 @@ public class CodeMission : MonoBehaviour
         yield return new WaitForSeconds(1);
         missionCanvas.gameObject.SetActive(false);
         fieldCode.text = "";
+        CloseMissionPanel();
+        if (GameManager.Instance().IsTutorial)
+        {
+            TutorialManager.Instance().NextStep();
+            TutorialManager.Instance().TPinRoom();
+        }
     }
     
     private IEnumerator EndAnimationFalse(InputField fieldCode)
@@ -69,5 +90,23 @@ public class CodeMission : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         fieldCode.text = "";
+    }
+
+    public void OpenMissionPanel()
+    {
+        missionCanvas.gameObject.SetActive(true);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        GameManager.Instance().ChangePlayerCanMove(false);
+        GameManager.Instance().ChangePlayerCanRotate(false);
+    }
+    
+    public void CloseMissionPanel()
+    {
+        missionCanvas.gameObject.SetActive(false);
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        GameManager.Instance().ChangePlayerCanMove(true);
+        GameManager.Instance().ChangePlayerCanRotate(true);
     }
 }

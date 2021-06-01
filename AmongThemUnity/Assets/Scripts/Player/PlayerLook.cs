@@ -29,10 +29,11 @@ public class PlayerLook : MonoBehaviour
     private float yRotation;
     private float xRotation;
 
-    private bool canRotate = true;
+    private GameManager gm;
 
     private void Start()
     {
+        gm = GameManager.Instance();
         if (PlayerPrefs.HasKey("lookSensity"))
         {
             lookSensitivity = PlayerPrefs.GetFloat("lookSensity");
@@ -42,12 +43,16 @@ public class PlayerLook : MonoBehaviour
 
     public void RaycastInteractiveElement()
     {
+        if (!gm.PlayerCanClick)
+        {
+           return; 
+        }
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, 200f))
         {
-            //Debug.Log(hit.transform.gameObject.name);
+            Debug.Log(hit.transform.gameObject.name);
             switch (hit.transform.gameObject.tag)
             {
                 case "ToKillAgent":
@@ -58,28 +63,53 @@ public class PlayerLook : MonoBehaviour
                             
                             if (IsSomeoneWatching())
                             {
-                                Win.SetActive(false);
-                                Lose.SetActive(true);
+                                if (gm.IsTutorial)
+                                {
+                                    gm.ReplacePlayerOnStartPosition();
+                                }
+                                else
+                                {
+                                    Lose.SetActive(true);
+                                }
                             }
                             else
                             {
-                                Win.SetActive(true);
-                                Lose.SetActive(false);
+                                gm.KillTarget();
+                                if (gm.IsTutorial)
+                                {
+                                    TutorialManager.Instance().NextStep();
+                                }
                             }
-                            Time.timeScale = 0f;
-                            Cursor.lockState = CursorLockMode.None;
                         }
-                    }
-                    else
-                    {
-                        // Nothing happen yet
                     }
                     break;
                 case "InteractiveElement":
                     Vector3 origin = hit.transform.position;
                     Destroy(hit.transform.gameObject);
                     break;
- 
+                case "TargetRoomDoor":
+                    CodeMission.Instance().OpenMissionPanel();
+                    break;
+                case "LaptopInfo":
+                    gm.GetNextTargetInformation();
+                    if (gm.IsTutorial)
+                    {
+                        TutorialManager.Instance().TPinHall();
+                        TutorialManager.Instance().NextStep();
+                    }
+                    break;
+                case "ElevatorDoor":
+                    if (gm.IsTutorial)
+                    {
+                        if (TutorialManager.Instance().GetStep() == 6)
+                        {
+                            gm.EndTutorial();
+                            return;
+                        }
+                    }
+                    gm.GoToNextFloor();
+                    break;
+
             }
             
         }
@@ -97,23 +127,13 @@ public class PlayerLook : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (canRotate)
+        if (GameManager.Instance().PlayerCanRotate)
         {
             playerBody.RotateAround(playerBody.position, playerBody.up , yRotation * lookSensitivity * Time.fixedDeltaTime);
             transform.localRotation = Quaternion.Euler(xRotation * lookSensitivity * Time.fixedDeltaTime, 0f, 0f);
             
         }
             
-    }
-
-    public void EnableRotation()
-    {
-        canRotate = true;
-    }
-    
-    public void DisableRotation()
-    {
-        canRotate = false;
     }
 
     public bool IsSomeoneWatching()

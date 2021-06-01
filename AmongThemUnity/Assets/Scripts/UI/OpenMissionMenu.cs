@@ -14,11 +14,11 @@ public class OpenMissionMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.M))
+        /*if (Input.GetKey(KeyCode.M))
         {
             missionCanvas.gameObject.SetActive(true);
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
-        }
+        }*/
     }
 }

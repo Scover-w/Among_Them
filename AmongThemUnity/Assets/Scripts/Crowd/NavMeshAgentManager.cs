@@ -104,4 +104,9 @@ public class NavMeshAgentManager : MonoBehaviour
     {
         return navMeshList;
     }
+
+    public GameObject GetTargetAgent()
+    {
+        return ToKillAgent;
+    }
 }

@@ -27,8 +27,9 @@ public class LanguageManager : MonoBehaviour
         {
             selectedLanguage = defaultLanguage;
         }
-        
-        languages = Initialization("./Assets/Language/lang.xml");
+
+        string path = Application.dataPath;
+        languages = Initialization(path + "/Language/lang.xml");
         Debug.Log(languages[selectedLanguage]["hello"]);
     }
 
@@ -74,7 +75,9 @@ public class LanguageManager : MonoBehaviour
 
     public string GetTextWithReference(string reference)
     {
-        return languages[selectedLanguage][reference];
+        
+        var text = languages[selectedLanguage].ContainsKey(reference)? languages[selectedLanguage][reference] : "Text not found";
+        return text;
     }
 
     public string GetCodeLanguageFromFullName(string lang)

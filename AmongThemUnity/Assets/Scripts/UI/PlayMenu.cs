@@ -7,6 +7,11 @@ public class PlayMenu : MonoBehaviour
 {
     public void Play()
     {
+        if (!PlayerPrefs.HasKey("alradyStart"))
+        {
+            PlayerPrefs.SetInt("alreadyStart",1);
+            SceneManager.LoadScene("CrowdGameplay", LoadSceneMode.Single);
+        }
         SceneManager.LoadScene("CrowdGameplay", LoadSceneMode.Single);
     }
 }
