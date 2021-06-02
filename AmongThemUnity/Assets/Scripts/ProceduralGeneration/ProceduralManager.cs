@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AI;
 
 public enum ObstructedLocation
 {
@@ -15,6 +16,8 @@ public enum ObstructedLocation
 public class ProceduralManager : MonoBehaviour
 {
     public static ProceduralManager instance;
+    
+    public NavMeshSurface NavMeshSurface;
 
     [SerializeField]
     private ProceduralElevator proceduralElevator;
@@ -57,6 +60,15 @@ public class ProceduralManager : MonoBehaviour
     public void Shuffle()
     {
         LoadBuilding(wealthValue);
+        
+        NavMeshSurface.RemoveData();
+        StartCoroutine(BuildNavMesh());
+    }
+
+    IEnumerator BuildNavMesh()
+    {
+        yield return null;
+        NavMeshSurface.BuildNavMesh();
     }
 
     public void LoadBuilding(float wealthLevel)

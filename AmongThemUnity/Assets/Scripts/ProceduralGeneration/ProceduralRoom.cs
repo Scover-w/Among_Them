@@ -205,7 +205,7 @@ public class ProceduralRoom : MonoBehaviour
         }
         else
         {
-            yRot = (position.x > 0) ? 180f :0f;
+            yRot = (position.z > 0) ? 0f : 180f;
         }
 
         room.transform.Rotate(0f, yRot, 0f);
