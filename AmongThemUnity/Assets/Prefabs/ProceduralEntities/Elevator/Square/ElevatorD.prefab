@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 309426961169366793}
   - component: {fileID: 7607829338968411146}
   - component: {fileID: 6191764855732268873}
+  - component: {fileID: 3101759955335960851}
   m_Layer: 0
   m_Name: ElevatorD
   m_TagString: Untagged
@@ -113,6 +114,20 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 3.23, z: 0}
   m_TimeToStationary: 0.5
+--- !u!64 &3101759955335960851
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2255092158426128092}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -9147911616026405018, guid: 2c68c0eeff7b23045b68e61d7ed27e32, type: 3}
 --- !u!1 &2746457828950129287
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6726536198211566915}
   - component: {fileID: 7246513167240931189}
   - component: {fileID: 8030477215246309938}
+  - component: {fileID: -1767957001364423654}
   m_Layer: 0
   m_Name: WallSideShort
   m_TagString: Untagged
@@ -79,3 +80,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &-1767957001364423654
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891696236041681242}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2859601553854547563, guid: 795f4e1fd912b384a9b8d3f272b05b4a, type: 3}

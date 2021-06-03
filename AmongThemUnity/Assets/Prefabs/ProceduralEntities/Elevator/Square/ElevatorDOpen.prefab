@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 3440415502298305285}
   - component: {fileID: 5815393382927287199}
   - component: {fileID: 5520238207169305508}
+  - component: {fileID: -1287781547010398237}
   m_Layer: 0
   m_Name: ElevatorDOpen
   m_TagString: Untagged
@@ -192,6 +193,20 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 3.36, z: 0}
   m_TimeToStationary: 0.5
+--- !u!64 &-1287781547010398237
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3800532155005891280}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7113493160923634905, guid: c62ad0a8be9e6e843b39213bc1bb0f11, type: 3}
 --- !u!1 &9148021753630852548
 GameObject:
   m_ObjectHideFlags: 0

@@ -40,7 +40,12 @@ public class NavMeshAgentManager : MonoBehaviour
         navMeshList = new List<NavMeshAgent>();
         fieldViewMeshColliderList = new List<MeshCollider>();
         fieldViewPositionList = new List<Transform>();
-        
+
+
+    }
+
+    public void InstantiateCrowd()
+    {
         for (int i = 0; i < nombreAgent; i++)
         {
             var agent = Instantiate(prefabAgent);
@@ -57,10 +62,8 @@ public class NavMeshAgentManager : MonoBehaviour
         navMeshAgent2.Warp(GetRandomPositionOnNavMesh());
         navMeshAgent2.SetDestination(GetRandomPositionOnNavMesh());
         navMeshList.Add(navMeshAgent2);
-
-        
     }
-
+    
     public IEnumerator ChangeDestinationAfterEvents(List<NavMeshAgent> agentsAffected, float waitingTime)
     {
         while (true)
@@ -87,10 +90,16 @@ public class NavMeshAgentManager : MonoBehaviour
             randomPosition = new Vector3(Random.Range(-100,100),Random.Range(0,15),Random.Range(70,64));
         else
             randomPosition = new Vector3(Random.Range(-100,100),Random.Range(0,15),Random.Range(-70,70));
+
+        //randomPosition = Random.insideUnitSphere * 250;
+        
+        Debug.Log(randomPosition);
         
         NavMeshHit hit = new NavMeshHit();
 
         NavMesh.SamplePosition(randomPosition, out hit, 16f, NavMesh.AllAreas);
+        
+        Debug.Log(hit.position);
         return hit.position;
     }
 

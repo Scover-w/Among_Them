@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 488874763881073293}
   - component: {fileID: 2390323195310259783}
   - component: {fileID: 3312690155151679403}
+  - component: {fileID: 6470194676329191618}
   m_Layer: 9
   m_Name: SegmentCross
   m_TagString: Untagged
@@ -94,3 +95,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wealthValue: 0.5
   obstructedLocation: 03000000
+--- !u!64 &6470194676329191618
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4191969686020661138}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -3598703870013766545, guid: f52b2180c35c77e41ac1eeca1286d0f6, type: 3}

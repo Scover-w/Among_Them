@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2569512966001821089}
   - component: {fileID: 5711241704613783262}
   - component: {fileID: 4853525634214714270}
+  - component: {fileID: -268728526967154491}
   m_Layer: 9
   m_Name: InnerRoadsQuareSmallHole
   m_TagString: Untagged
@@ -94,3 +95,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wealthValue: 0
   obstructedLocation: 
+--- !u!64 &-268728526967154491
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2123983787498348561}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1525857857221923078, guid: dc9f98b955716f045a967185b47fce04, type: 3}

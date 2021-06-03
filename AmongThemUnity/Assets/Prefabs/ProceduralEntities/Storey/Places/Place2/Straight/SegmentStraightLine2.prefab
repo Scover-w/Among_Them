@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2427434838317944635}
   - component: {fileID: 453469752049384433}
   - component: {fileID: 7922312650746095681}
+  - component: {fileID: 4497200123820844290}
   m_Layer: 9
   m_Name: SegmentStraightLine2
   m_TagString: Untagged
@@ -94,3 +95,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wealthValue: 0.3
   obstructedLocation: 02000000
+--- !u!64 &4497200123820844290
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2111044896518707748}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2688779670951772701, guid: 70aeb91ed891c5f418e7544e812e636a, type: 3}

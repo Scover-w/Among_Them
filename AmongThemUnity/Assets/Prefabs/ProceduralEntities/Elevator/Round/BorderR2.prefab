@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6991461175422475191}
   - component: {fileID: 5107750121474174845}
   - component: {fileID: 8443352453647632960}
+  - component: {fileID: -3058860173626743003}
   m_Layer: 0
   m_Name: BorderR2
   m_TagString: Untagged
@@ -94,3 +95,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wealthValue: 0.5
   obstructedLocation: 
+--- !u!64 &-3058860173626743003
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6765149756915355304}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 6586686356773527824, guid: 5eed329e0f4f51b45bd607cbe5350413, type: 3}

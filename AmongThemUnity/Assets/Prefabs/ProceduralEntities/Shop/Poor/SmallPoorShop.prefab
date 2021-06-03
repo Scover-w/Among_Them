@@ -170,6 +170,7 @@ GameObject:
   - component: {fileID: 4591001607165047462}
   - component: {fileID: 3292016766573929440}
   - component: {fileID: 2730525046594983112}
+  - component: {fileID: 8065940455469424002}
   m_Layer: 9
   m_Name: SmallPoorShop
   m_TagString: Untagged
@@ -254,3 +255,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wealthValue: 0
   obstructedLocation: 
+--- !u!64 &8065940455469424002
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8740563655385010427}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -3548323907634055842, guid: ee826e1de9e235442986d9b7b8c7a3b4, type: 3}

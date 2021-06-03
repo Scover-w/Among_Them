@@ -170,6 +170,7 @@ GameObject:
   - component: {fileID: 7164466834609001734}
   - component: {fileID: 8171190135770372176}
   - component: {fileID: 3730541678863662975}
+  - component: {fileID: 306412590739100075}
   m_Layer: 9
   m_Name: BigPoorShop
   m_TagString: Untagged
@@ -254,3 +255,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wealthValue: 0
   obstructedLocation: 
+--- !u!64 &306412590739100075
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6647569351635455286}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6235020570748084695, guid: 4b9db185328e53a42b2ef88bcb8fd4a5, type: 3}

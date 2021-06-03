@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5806832917529654732}
   - component: {fileID: 5426108679134991585}
   - component: {fileID: 3236397767586035419}
+  - component: {fileID: -5035908582373417794}
   m_Layer: 0
   m_Name: Door2
   m_TagString: Untagged
@@ -94,3 +95,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wealthValue: 0
   obstructedLocation: 
+--- !u!64 &-5035908582373417794
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1035733104766950144}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -878780873799726442, guid: b81b2270ee4b33f4397b4a5d52ba460a, type: 3}

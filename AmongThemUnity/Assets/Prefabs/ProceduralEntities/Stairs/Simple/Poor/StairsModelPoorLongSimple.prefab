@@ -91,6 +91,8 @@ GameObject:
   - component: {fileID: 3232279009712458311}
   - component: {fileID: 810555486554046093}
   - component: {fileID: 2089175766648398347}
+  - component: {fileID: 2454171375634088793}
+  - component: {fileID: 2473616172261015296}
   m_Layer: 9
   m_Name: StairsModelPoorLongSimple
   m_TagString: Untagged
@@ -174,3 +176,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wealthValue: 0
   obstructedLocation: 
+--- !u!64 &2454171375634088793
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170750753793613656}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -3201922867703346420, guid: 94ff8499f48d4194ab01ac46a1fa7175, type: 3}
+--- !u!64 &2473616172261015296
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170750753793613656}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -3201922867703346420, guid: 94ff8499f48d4194ab01ac46a1fa7175, type: 3}

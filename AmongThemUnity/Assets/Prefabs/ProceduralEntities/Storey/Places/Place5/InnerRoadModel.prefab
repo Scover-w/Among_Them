@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7548192738742407456}
   - component: {fileID: 5702795196110759402}
   - component: {fileID: 7073618105810260486}
+  - component: {fileID: 4927408295936941806}
   m_Layer: 9
   m_Name: InnerRoadModel
   m_TagString: Untagged
@@ -94,3 +95,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wealthValue: 0.8
   obstructedLocation: 00000000
+--- !u!64 &4927408295936941806
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6063140821695448127}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4284667073395470668, guid: 4b11e4f15089e8b4c9a07e212dec10e7, type: 3}

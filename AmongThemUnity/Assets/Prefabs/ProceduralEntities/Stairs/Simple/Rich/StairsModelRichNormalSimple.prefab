@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 3561076671833693547}
   - component: {fileID: 1625670910407289249}
   - component: {fileID: 94046407679391015}
+  - component: {fileID: -1939772868848102000}
+  - component: {fileID: 3781055852872167209}
   m_Layer: 9
   m_Name: StairsModelRichNormalSimple
   m_TagString: Untagged
@@ -95,6 +97,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wealthValue: 0
   obstructedLocation: 
+--- !u!64 &-1939772868848102000
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 977130916720445556}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6151523571412346575, guid: 6ac55ff9acc827745845585132452ed4, type: 3}
+--- !u!64 &3781055852872167209
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 977130916720445556}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6151523571412346575, guid: 6ac55ff9acc827745845585132452ed4, type: 3}
 --- !u!1 &8703590011834799681
 GameObject:
   m_ObjectHideFlags: 0

@@ -3093,6 +3093,7 @@ GameObject:
   - component: {fileID: 8468569289438927794}
   - component: {fileID: 6188288613730380072}
   - component: {fileID: 5370981294713997935}
+  - component: {fileID: -2223330341564959439}
   m_Layer: 0
   m_Name: WallsOutside12LO
   m_TagString: Untagged
@@ -3243,6 +3244,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wealthValue: 0.75
   obstructedLocation: 
+--- !u!64 &-2223330341564959439
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5993272089559676482}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6104157371502722058, guid: 2e6e6bdcd6cdfa1498948075331107a6, type: 3}
 --- !u!1 &6202486138175621376
 GameObject:
   m_ObjectHideFlags: 0

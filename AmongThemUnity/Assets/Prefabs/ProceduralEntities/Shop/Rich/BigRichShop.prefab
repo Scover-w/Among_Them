@@ -170,6 +170,7 @@ GameObject:
   - component: {fileID: 8121225084198624378}
   - component: {fileID: 4911132182164440966}
   - component: {fileID: 6455963866499457771}
+  - component: {fileID: 682759442650548612}
   m_Layer: 9
   m_Name: BigRichShop
   m_TagString: Untagged
@@ -254,3 +255,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wealthValue: 0
   obstructedLocation: 
+--- !u!64 &682759442650548612
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5657238098644594508}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -3614921678286377164, guid: a9653edb185b2a84d872979b6c55e91b, type: 3}

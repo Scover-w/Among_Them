@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8112347243192366504}
   - component: {fileID: 6300588241976901986}
   - component: {fileID: 4661711865119497696}
+  - component: {fileID: -5309294829871818007}
   m_Layer: 0
   m_Name: BorderD3
   m_TagString: Untagged
@@ -94,3 +95,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wealthValue: 0.2
   obstructedLocation: 
+--- !u!64 &-5309294829871818007
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5508135371779006647}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5786218150107236086, guid: 45906a5b8708c424ba0fb7a49abd2b72, type: 3}

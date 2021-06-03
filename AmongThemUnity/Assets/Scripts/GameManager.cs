@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour
     {
         targetName.text = $"{surnames[Random.Range(0, surnames.Length - 1)]}  {names[Random.Range(0, names.Length - 1)]}";
         target = NavMeshAgentManager.Instance().GetTargetAgent();
+        Debug.Log(player.transform.position);
     }
 
     private void Update()
@@ -70,7 +71,8 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.L))
         {
-            Debug.Log(LanguageManager.Instance().GetSelectedLanguage());
+            DeleteEverythingExcept.Instance().DestroyObject();
+            DeleteEverythingExcept.Instance().DoNotDestroyObject();
         }
     }
 

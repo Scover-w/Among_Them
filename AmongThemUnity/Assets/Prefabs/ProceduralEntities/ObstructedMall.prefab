@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4217786462103908239}
   - component: {fileID: 2410653178433657024}
   - component: {fileID: 6300941051659286070}
+  - component: {fileID: 2124410579430051726}
   m_Layer: 0
   m_Name: ObstructedMall
   m_TagString: Untagged
@@ -95,6 +96,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wealthValue: 0
   obstructedLocation: 
+--- !u!64 &2124410579430051726
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 731892666046834625}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -8121977575066464793, guid: 148b86da78198f14e9b13f91cfd06d97, type: 3}
 --- !u!1 &3298448724786667139
 GameObject:
   m_ObjectHideFlags: 0
