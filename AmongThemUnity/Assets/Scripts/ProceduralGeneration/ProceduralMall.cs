@@ -17,7 +17,7 @@ public class ProceduralMall : MonoBehaviour
                 mallDict.Add(obj, obj.GetComponent<ProceduralEntity>().wealthValue);
         }
 
-        GameObject temp = Instantiate(ProceduralCalculations.GetRandomTFromPool(mallDict, wealthLevel));
+        GameObject temp = Instantiate(ProceduralCalculations.GetRandomTFromPool(mallDict, wealthLevel), ProceduralManager.ParentMap);
         temp.transform.position = Vector3.zero;
     }
 }

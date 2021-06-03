@@ -95,10 +95,10 @@ public class ProceduralStorey : MonoBehaviour
 
     private void LoadStorey(GameObject pfPlace, GameObject pfRoad)
     {
-        GameObject place = Instantiate(pfPlace);
+        GameObject place = Instantiate(pfPlace, ProceduralManager.ParentMap);
         place.transform.position = new Vector3(0,22.375f,0f);
         
-        GameObject road = Instantiate(pfRoad);
+        GameObject road = Instantiate(pfRoad, ProceduralManager.ParentMap);
         road.transform.position = new Vector3(0,22.375f,0f);
     }
     

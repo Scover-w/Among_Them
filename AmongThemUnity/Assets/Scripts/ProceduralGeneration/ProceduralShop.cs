@@ -141,7 +141,7 @@ public class ProceduralShop : MonoBehaviour
 
                     j += add;
 
-                    shopToPut = Instantiate(shopToPut);
+                    shopToPut = Instantiate(shopToPut, ProceduralManager.ParentMap);
                     shopToPut.transform.position = new Vector3(x, 0, z);
                     shopToPut.transform.Rotate(0, yRotation, 0);
 
@@ -179,6 +179,6 @@ public class ProceduralShop : MonoBehaviour
             apartmentDict.Add(obj, obj.GetComponent<ProceduralEntity>().wealthValue);
         }
 
-        return Instantiate(ProceduralCalculations.GetRandomTFromPool(apartmentDict, wealthValue));
+        return Instantiate(ProceduralCalculations.GetRandomTFromPool(apartmentDict, wealthValue), ProceduralManager.ParentMap);
     }
 }

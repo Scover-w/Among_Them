@@ -58,8 +58,15 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         targetName.text = $"{surnames[Random.Range(0, surnames.Length - 1)]}  {names[Random.Range(0, names.Length - 1)]}";
+        StartCoroutine(BeginGame());
+    }
+
+    IEnumerator BeginGame()
+    {
+        yield return null;
+        yield return null;
         target = NavMeshAgentManager.Instance().GetTargetAgent();
-        Debug.Log(player.transform.position);
+        GenerateNewMap();
     }
 
     private void Update()
@@ -71,9 +78,25 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.L))
         {
-            DeleteEverythingExcept.Instance().DestroyObject();
-            DeleteEverythingExcept.Instance().DoNotDestroyObject();
+            GenerateNewMap();
         }
+    }
+
+    public void GenerateNewMap()
+    {
+        foreach(Transform child in ProceduralManager.ParentMap)
+        {
+            Destroy(child.gameObject);
+        }
+        ProceduralManager.instance.Shuffle();
+        StartCoroutine(InstiateCrowd());
+    }
+
+    IEnumerator InstiateCrowd()
+    {
+        yield return null;
+        yield return null;
+        NavMeshAgentManager.Instance().InstantiateCrowd();
     }
 
 
@@ -88,7 +111,7 @@ public class GameManager : MonoBehaviour
             fpsCanvas.SetActive(true);
             return isGamePaused = false;
         }
-        Time.timeScale = 0;
+        Time.timeScale = 0f;
         pauseMenu.SetActive(true);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;

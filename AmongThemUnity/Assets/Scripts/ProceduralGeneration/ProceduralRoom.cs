@@ -58,12 +58,12 @@ public class ProceduralRoom : MonoBehaviour
 
         for (int i = 0; i < 4; i++)
         {
-            instantiatedWall = Instantiate(wall);
+            instantiatedWall = Instantiate(wall, ProceduralManager.ParentMap);
             instantiatedWall.transform.position = new Vector3(0f,(i + 1) * 7.5f,0f);
             
             foreach(Transform child in instantiatedWall.transform)
             {
-                instantiatedDoor = Instantiate(door);
+                instantiatedDoor = Instantiate(door, ProceduralManager.ParentMap);
                 instantiatedDoor.transform.position = child.position;
                 RotateDoorTowardCenter(instantiatedDoor.transform, child);
                 if (nbInstalledDoor == choosenDoor)
@@ -155,7 +155,7 @@ public class ProceduralRoom : MonoBehaviour
 
     private void LoadRoom(Transform tr, GameObject room)
     {
-        GameObject instantiatedRoom = Instantiate(room);
+        GameObject instantiatedRoom = Instantiate(room, ProceduralManager.ParentMap);
         var position = tr.position;
         instantiatedRoom.transform.position = position;
         RotateRoom(instantiatedRoom.transform, position);
@@ -188,7 +188,7 @@ public class ProceduralRoom : MonoBehaviour
             roomDict.Add(room, room.GetComponent<ProceduralEntity>().wealthValue);
         }
 
-        GameObject temp = Instantiate(ProceduralCalculations.GetRandomTFromPool(roomDict, wealthValue));
+        GameObject temp = Instantiate(ProceduralCalculations.GetRandomTFromPool(roomDict, wealthValue), ProceduralManager.ParentMap);
         temp.transform.position = position;
 
         RotateRoom(temp.transform, position);

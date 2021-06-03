@@ -11,7 +11,7 @@ public class NavMeshAgentManager : MonoBehaviour
     private static NavMeshAgentManager _singleton;
     
     [SerializeField] 
-    private int nombreAgent = 1;
+    private int nombreAgent = 50;
 
     [SerializeField] 
     private GameObject prefabAgent;

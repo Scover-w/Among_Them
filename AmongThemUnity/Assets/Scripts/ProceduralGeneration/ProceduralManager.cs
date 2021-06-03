@@ -51,10 +51,17 @@ public class ProceduralManager : MonoBehaviour
     [SerializeField] [Range(0f,1f)][Header("Step")] 
     private float step = .05f;
 
+    [SerializeField] 
+    private Transform parentMap;
+
+    public static Transform ParentMap;
+    
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
+
+        ParentMap = parentMap;
     }
 
     public void Shuffle()

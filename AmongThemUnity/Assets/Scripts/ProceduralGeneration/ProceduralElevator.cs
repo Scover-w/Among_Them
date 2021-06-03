@@ -189,27 +189,27 @@ public class ProceduralElevator : MonoBehaviour
         switch (profile.Location)
         {
             case ObstructedLocation.Middle:
-                GameObject ceil = Instantiate(MiddleCeiling[ (profile.NbElevator == 1)? 0 : 1 ]);
+                GameObject ceil = Instantiate(MiddleCeiling[ (profile.NbElevator == 1)? 0 : 1 ], ProceduralManager.ParentMap);
                 ceil.transform.position = Vector3.zero;
                 
-                GameObject level = Instantiate(Levels[0]);
+                GameObject level = Instantiate(Levels[0], ProceduralManager.ParentMap);
                 level.transform.position = Vector3.zero;
                 
                 break;
             
             case ObstructedLocation.Long:
-                GameObject ceil2 = Instantiate(ShortCeiling[ (profile.NbElevator == 1)? 0 : 1 ]);
+                GameObject ceil2 = Instantiate(ShortCeiling[ (profile.NbElevator == 1)? 0 : 1 ], ProceduralManager.ParentMap);
                 ceil2.transform.position = Vector3.zero;
                 
-                GameObject level2 = Instantiate(Levels[1]);
+                GameObject level2 = Instantiate(Levels[1], ProceduralManager.ParentMap);
                 level2.transform.position = Vector3.zero;
                 break;
             
             case ObstructedLocation.Short:
-                GameObject ceil3 = Instantiate(LongCeiling[ (profile.NbElevator == 1)? 0 : 1 ]);
+                GameObject ceil3 = Instantiate(LongCeiling[ (profile.NbElevator == 1)? 0 : 1 ], ProceduralManager.ParentMap);
                 ceil3.transform.position = Vector3.zero;
                 
-                GameObject level3 = Instantiate(Levels[2]);
+                GameObject level3 = Instantiate(Levels[2], ProceduralManager.ParentMap);
                 level3.transform.position = Vector3.zero;
                 
                 break;
@@ -327,22 +327,22 @@ public class ProceduralElevator : MonoBehaviour
 
     private void LoadElevator(ElevatorProfile profile, Vector3 position)
     {
-        GameObject elevator = Instantiate(profile.Elevator);
+        GameObject elevator = Instantiate(profile.Elevator, ProceduralManager.ParentMap);
         int rotation = GetRotationElevator(position, profile.Location);
         elevator.transform.position = position;
         elevator.transform.Rotate(0, rotation, 0);
         
-        GameObject border = Instantiate(profile.Border);
+        GameObject border = Instantiate(profile.Border, ProceduralManager.ParentMap);
         border.transform.position = position;
         border.transform.Rotate(0, rotation, 0);
         
-        GameObject bottom = Instantiate(profile.Bottom);
+        GameObject bottom = Instantiate(profile.Bottom, ProceduralManager.ParentMap);
         bottom.transform.position = position;
         bottom.transform.Rotate(0, rotation, 0);
 
         if (profile.Gate != null)
         {
-            GameObject gate = Instantiate(profile.Gate);
+            GameObject gate = Instantiate(profile.Gate, ProceduralManager.ParentMap);
             gate.transform.position = position;
             gate.transform.Rotate(0, rotation, 0);
         }

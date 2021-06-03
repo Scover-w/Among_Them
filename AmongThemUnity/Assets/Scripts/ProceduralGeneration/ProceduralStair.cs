@@ -311,7 +311,7 @@ public class ProceduralStair : MonoBehaviour
     {
         for (int i = 0; i < 4; i++)
         {
-            GameObject duplicatedHub = Instantiate(hub);
+            GameObject duplicatedHub = Instantiate(hub, ProceduralManager.ParentMap);
             duplicatedHub.transform.position = position + new Vector3(0,7.5f * i,0);
             duplicatedHub.transform.Rotate(0, rotation, 0);
         }
