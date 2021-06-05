@@ -46,6 +46,13 @@ public class NavMeshAgentManager : MonoBehaviour
 
     public void InstantiateCrowd()
     {
+        if (navMeshList.Count > 0)
+        {
+            foreach (var agent in navMeshList)
+            {
+                Destroy(agent.gameObject);
+            }
+        }
         for (int i = 0; i < nombreAgent; i++)
         {
             var agent = Instantiate(prefabAgent);
@@ -92,14 +99,11 @@ public class NavMeshAgentManager : MonoBehaviour
             randomPosition = new Vector3(Random.Range(-100,100),Random.Range(0,15),Random.Range(-70,70));
 
         //randomPosition = Random.insideUnitSphere * 250;
-        
-        Debug.Log(randomPosition);
-        
+
         NavMeshHit hit = new NavMeshHit();
 
         NavMesh.SamplePosition(randomPosition, out hit, 16f, NavMesh.AllAreas);
         
-        Debug.Log(hit.position);
         return hit.position;
     }
 

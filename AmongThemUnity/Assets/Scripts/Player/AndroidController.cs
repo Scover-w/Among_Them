@@ -10,6 +10,8 @@ public class AndroidController : MonoBehaviour
     private PlayerMove playerMove;
     [SerializeField] 
     private PlayerLook playerLook;
+
+    [SerializeField] private Button actionButton;
     
     
     private bool touchIntentMove;
@@ -37,6 +39,7 @@ public class AndroidController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        actionButton.gameObject.SetActive(false);
         myTouch = new List<Touch>();
         touchIntentMove = false;
         nbTouch = 0;
@@ -200,5 +203,13 @@ public class AndroidController : MonoBehaviour
             touchLook = Vector3.zero;
             touchOriginLook = Vector3.zero;
         }*/
+    }
+    
+    public void ClickToAction()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            playerLook.RaycastInteractiveElement();
+        }
     }
 }

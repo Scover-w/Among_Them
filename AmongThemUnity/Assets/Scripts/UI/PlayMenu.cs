@@ -12,6 +12,6 @@ public class PlayMenu : MonoBehaviour
             PlayerPrefs.SetInt("alreadyStart",1);
             SceneManager.LoadScene("CrowdGameplay", LoadSceneMode.Single);
         }
-        SceneManager.LoadScene("CrowdGameplay", LoadSceneMode.Single);
+        SceneManager.LoadScene("RandomGamePlay", LoadSceneMode.Single);
     }
 }

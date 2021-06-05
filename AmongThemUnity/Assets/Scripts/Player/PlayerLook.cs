@@ -34,6 +34,7 @@ public class PlayerLook : MonoBehaviour
     private void Start()
     {
         gm = GameManager.Instance();
+        navMeshAgentManager = NavMeshAgentManager.Instance();
         if (PlayerPrefs.HasKey("lookSensity"))
         {
             lookSensitivity = PlayerPrefs.GetFloat("lookSensity");
@@ -88,7 +89,10 @@ public class PlayerLook : MonoBehaviour
                     Destroy(hit.transform.gameObject);
                     break;
                 case "TargetRoomDoor":
-                    CodeMission.Instance().OpenMissionPanel();
+                    if (!gm.TargetIsAlive)
+                    {
+                        CodeMission.Instance().OpenMissionPanel();   
+                    }
                     break;
                 case "LaptopInfo":
                     gm.GetNextTargetInformation();
@@ -99,6 +103,10 @@ public class PlayerLook : MonoBehaviour
                     }
                     break;
                 case "ElevatorDoor":
+                    if (!gm.DataRetrieve)
+                    {
+                        return;
+                    }
                     if (gm.IsTutorial)
                     {
                         if (TutorialManager.Instance().GetStep() == 6)

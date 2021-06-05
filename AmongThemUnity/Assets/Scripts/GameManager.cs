@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     private bool playerCanRotate;
     private bool playerCanClick;
     private bool targetIsAlive;
+    private bool dataRetrieve;
     private bool isTutorial;
     private Vector3 startPosition;
     
@@ -41,6 +42,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject fpsCanvas;
 
+    private int floor;
+
     private void Awake()
     {
         _singleton = this;
@@ -57,6 +60,9 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        floor = 0;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         targetName.text = $"{surnames[Random.Range(0, surnames.Length - 1)]}  {names[Random.Range(0, names.Length - 1)]}";
         StartCoroutine(BeginGame());
     }
@@ -65,14 +71,17 @@ public class GameManager : MonoBehaviour
     {
         yield return null;
         yield return null;
-        target = NavMeshAgentManager.Instance().GetTargetAgent();
-        GenerateNewMap();
+        if (!isTutorial)
+        {
+            GenerateNewMap();
+        }
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            ChangePlayerCanClick(false);
             PauseGame();
         }
 
@@ -89,14 +98,15 @@ public class GameManager : MonoBehaviour
             Destroy(child.gameObject);
         }
         ProceduralManager.instance.Shuffle();
-        StartCoroutine(InstiateCrowd());
+        StartCoroutine(InstantiateCrowd());
     }
 
-    IEnumerator InstiateCrowd()
+    IEnumerator InstantiateCrowd()
     {
         yield return null;
         yield return null;
         NavMeshAgentManager.Instance().InstantiateCrowd();
+        target = NavMeshAgentManager.Instance().GetTargetAgent();
     }
 
 
@@ -123,8 +133,11 @@ public class GameManager : MonoBehaviour
 
     public bool PlayerCanRotate => playerCanRotate;
     public bool PlayerCanClick => playerCanClick;
-
     public bool IsTutorial => isTutorial;
+
+    public bool TargetIsAlive => targetIsAlive;
+
+    public bool DataRetrieve => dataRetrieve;
 
     public void ChangePlayerCanRotate(bool canRotate)
     {
@@ -138,7 +151,7 @@ public class GameManager : MonoBehaviour
     
     public void ChangePlayerCanClick(bool canClick)
     {
-        playerCanRotate = canClick;
+        playerCanClick = canClick;
     }
 
     public void KillTarget()
@@ -152,6 +165,7 @@ public class GameManager : MonoBehaviour
     public void StartTutorial()
     {
         isTutorial = true;
+        NavMeshAgentManager.Instance().InstantiateCrowd();
     }
     
     public void EndTutorial()
@@ -169,11 +183,15 @@ public class GameManager : MonoBehaviour
     
     public void GetNextTargetInformation()
     {
+        dataRetrieve = true;
         targetName.text = $"{surnames[Random.Range(0, surnames.Length - 1)]}  {names[Random.Range(0, names.Length - 1)]}";
     }
 
     public void GoToNextFloor()
     {
-        //
+        dataRetrieve = false;
+        floor++;
+        GenerateNewMap();
+        ReplacePlayerOnStartPosition();
     }
 }

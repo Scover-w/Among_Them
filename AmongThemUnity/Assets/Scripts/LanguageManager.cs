@@ -107,4 +107,17 @@ public class LanguageManager : MonoBehaviour
     {
         return selectedLanguage;
     }
+
+    public int GetPositionSelectedLanguage()
+    {
+        switch (selectedLanguage)
+        {
+            case "fr":
+                return 1;
+            case "en" :
+                return 0;
+            default:
+                return 0;
+        }
+    }
 }

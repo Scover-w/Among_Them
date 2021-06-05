@@ -8,6 +8,7 @@ public class ChangeLanguage : MonoBehaviour
     public Dropdown ddLang;
     void Start()
     {
+        ddLang.value = LanguageManager.Instance().GetPositionSelectedLanguage();
         ddLang.onValueChanged.AddListener(delegate { ChangeGameLanguage(LanguageManager.Instance().GetCodeLanguageFromFullName(ddLang.options[ddLang.value].text)); });
     }
 

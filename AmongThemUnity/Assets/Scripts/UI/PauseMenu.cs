@@ -16,7 +16,7 @@ public class PauseMenu : MonoBehaviour
 
     public void ReturnToGame()
     {
-        Debug.Log("Play");
+        GameManager.Instance().ChangePlayerCanClick(true);
         GameManager.Instance().PauseGame();
     }
     
