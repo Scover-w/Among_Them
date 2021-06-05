@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4783701791824859435}
   - component: {fileID: 5583913727068437260}
   - component: {fileID: 6913097482677698705}
+  - component: {fileID: 658369120863989267}
   m_Layer: 9
   m_Name: Cube.008
   m_TagString: Untagged
@@ -79,6 +80,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &658369120863989267
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5972513452876273764}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8552134717624371188, guid: 19472ec5ec9377f4796da1bb8fdfafd0, type: 3}
 --- !u!1 &6758375532657582562
 GameObject:
   m_ObjectHideFlags: 0
@@ -91,6 +106,7 @@ GameObject:
   - component: {fileID: 7002703265204827389}
   - component: {fileID: 5101011356376662071}
   - component: {fileID: 5840037786156145841}
+  - component: {fileID: -6606726369862743968}
   m_Layer: 9
   m_Name: StairsModelRichNormalDouble
   m_TagString: Untagged
@@ -174,3 +190,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wealthValue: 0
   obstructedLocation: 
+--- !u!64 &-6606726369862743968
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6758375532657582562}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8896540723368062548, guid: 19472ec5ec9377f4796da1bb8fdfafd0, type: 3}

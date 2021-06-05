@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2807965837402391406}
   - component: {fileID: 1275645859846894147}
   - component: {fileID: 4882632138908733996}
+  - component: {fileID: -5721965340859227751}
   m_Layer: 9
   m_Name: Cube.011
   m_TagString: Untagged
@@ -79,6 +80,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &-5721965340859227751
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662587459974976611}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -153830957423991239, guid: bfa0e2b97fa927e4b8cfceb3fc1f67ce, type: 3}
 --- !u!1 &8429308525091085304
 GameObject:
   m_ObjectHideFlags: 0
@@ -91,6 +106,7 @@ GameObject:
   - component: {fileID: 5196837622701788903}
   - component: {fileID: 8068786976567228973}
   - component: {fileID: 8663661934303045291}
+  - component: {fileID: -7686287656719095722}
   m_Layer: 9
   m_Name: StairsModelPoorNormalDouble
   m_TagString: Untagged
@@ -174,3 +190,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wealthValue: 0
   obstructedLocation: 
+--- !u!64 &-7686287656719095722
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8429308525091085304}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4170564628711417809, guid: bfa0e2b97fa927e4b8cfceb3fc1f67ce, type: 3}

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4352206662233204985}
   - component: {fileID: 4926253873381987806}
   - component: {fileID: 2963092193790744860}
+  - component: {fileID: 5288772659228713887}
   m_Layer: 0
   m_Name: PorteD1.012
   m_TagString: Untagged
@@ -58,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5b6d47fb35bc32f43bc72b6003df10b3, type: 2}
+  - {fileID: 2100000, guid: 61b22388b6d7d8d4eaa7404c73be8f07, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -79,6 +80,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &5288772659228713887
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 722444498579192379}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7585055213908249568, guid: a9653edb185b2a84d872979b6c55e91b, type: 3}
 --- !u!1 &859499467366851194
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,6 +105,7 @@ GameObject:
   - component: {fileID: 3246738496688531013}
   - component: {fileID: 1319302885077360890}
   - component: {fileID: 3504640098361992518}
+  - component: {fileID: 3292013774574039850}
   m_Layer: 0
   m_Name: PorteD1.011
   m_TagString: Untagged
@@ -137,7 +153,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5b6d47fb35bc32f43bc72b6003df10b3, type: 2}
+  - {fileID: 2100000, guid: 61b22388b6d7d8d4eaa7404c73be8f07, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -158,6 +174,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &3292013774574039850
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 859499467366851194}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8932306150158706941, guid: a9653edb185b2a84d872979b6c55e91b, type: 3}
 --- !u!1 &5657238098644594508
 GameObject:
   m_ObjectHideFlags: 0
