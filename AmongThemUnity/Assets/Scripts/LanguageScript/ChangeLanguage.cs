@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ChangeLanguage : MonoBehaviour
 {
-    public Dropdown ddLang;
+    public TMP_Dropdown ddLang;
     void Start()
     {
         ddLang.value = LanguageManager.Instance().GetPositionSelectedLanguage();

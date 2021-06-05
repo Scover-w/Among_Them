@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -27,15 +28,22 @@ public class GameManager : MonoBehaviour
     private string[] names = new []{"Sanchez", "Hernandez", "Rodriguez", "Fernandez", "Santiago"};
     private string[] surnames = new []{"Pedro", "Manuel", "Miguel", "Javier", "Angel"};
 
+    [Header("Target and Code")] 
     [SerializeField]
-    private Text targetName;
+    private GameObject parentTarget;
+    [SerializeField]
+    private GameObject parentCode;
+    [SerializeField]
+    private TMP_Text targetName;
+    [SerializeField]
+    private TMP_Text codeText;
+    
     
     private GameObject target;
     [SerializeField]
     private GameObject player;
     
-    [SerializeField]
-    private Text codeText;
+    
     
     [SerializeField]
     private GameObject pauseMenu;
@@ -64,6 +72,8 @@ public class GameManager : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         targetName.text = $"{surnames[Random.Range(0, surnames.Length - 1)]}  {names[Random.Range(0, names.Length - 1)]}";
+        parentTarget.SetActive(true);
+        parentCode.SetActive(false);
         StartCoroutine(BeginGame());
     }
 
@@ -158,6 +168,8 @@ public class GameManager : MonoBehaviour
     {
         var code = CodeMission.Instance().RandomizeCode();
         codeText.text = "Code : " + code;
+        parentTarget.SetActive(false);
+        parentCode.SetActive(true);
         targetIsAlive = false;
         target.SetActive(false);
     }
@@ -185,6 +197,8 @@ public class GameManager : MonoBehaviour
     {
         dataRetrieve = true;
         targetName.text = $"{surnames[Random.Range(0, surnames.Length - 1)]}  {names[Random.Range(0, names.Length - 1)]}";
+        parentTarget.SetActive(true);
+        parentCode.SetActive(false);
     }
 
     public void GoToNextFloor()

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -54,7 +55,7 @@ public class CodeMission : MonoBehaviour
         }
     }
 
-    public void ConfirmCode(InputField fieldCode)
+    public void ConfirmCode(TMP_InputField fieldCode)
     {
         Debug.Log(code);
         if (fieldCode.text.Equals(code.Substring(0,4)))
@@ -71,7 +72,7 @@ public class CodeMission : MonoBehaviour
         StartCoroutine(EndAnimationFalse(fieldCode));
     }
 
-    private IEnumerator EndAnimationTrue(InputField fieldCode)
+    private IEnumerator EndAnimationTrue(TMP_InputField fieldCode)
     {
         yield return new WaitForSeconds(1);
         missionCanvas.gameObject.SetActive(false);
@@ -84,7 +85,7 @@ public class CodeMission : MonoBehaviour
         }
     }
     
-    private IEnumerator EndAnimationFalse(InputField fieldCode)
+    private IEnumerator EndAnimationFalse(TMP_InputField fieldCode)
     {
         yield return new WaitForSeconds(1);
         Cursor.visible = true;

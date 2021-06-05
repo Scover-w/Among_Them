@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 [Serializable]
 public struct ReferenceAndText
 {
     public string reference;
-    public Text text;
+    public TMP_Text text;
 }
 
 public class ChangeText : MonoBehaviour
