@@ -37,6 +37,9 @@ public class ProceduralManager : MonoBehaviour
     [SerializeField]
     private ProceduralStorey proceduralStorey;
 
+    [SerializeField] 
+    private RandomMaterials randomMaterials;
+    
     [SerializeField][Range(0f,1f)]
     private float wealthValue = 0f;
     
@@ -67,7 +70,7 @@ public class ProceduralManager : MonoBehaviour
     public void Shuffle()
     {
         LoadBuilding(wealthValue);
-        
+        randomMaterials.ApplyRandomColors();
         NavMeshSurface.RemoveData();
         StartCoroutine(BuildNavMesh());
     }
