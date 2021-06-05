@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8450134137133249015}
   - component: {fileID: 4992025651317941519}
   - component: {fileID: 6496030158831103673}
-  - component: {fileID: 2880739480404179699}
   m_Layer: 0
   m_Name: Chalet
   m_TagString: Untagged
@@ -80,19 +79,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!208 &2880739480404179699
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8265638291482217004}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 3.176, y: 1.06, z: 2.3630002}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 3.48, z: 0}
-  m_TimeToStationary: 0.5
