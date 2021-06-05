@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4382268381914448719}
   - component: {fileID: 6971271463414874205}
   - component: {fileID: 5930663986042255300}
+  - component: {fileID: 5256334996522601735}
   m_Layer: 0
   m_Name: KnotTie
   m_TagString: Untagged
@@ -79,3 +80,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &5256334996522601735
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7322979359973323923}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 340676682796690946, guid: e38e21ae36d3bfd4187ef34f13a3c806, type: 3}

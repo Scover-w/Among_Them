@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 597794172744495537}
   - component: {fileID: 2687169855101388832}
   - component: {fileID: 3331559086353729881}
+  - component: {fileID: -8613475084064589028}
   m_Layer: 0
   m_Name: Bowling
   m_TagString: Untagged
@@ -79,3 +80,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &-8613475084064589028
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2742719592289448246}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -581195821847472809, guid: c198a4f9f47e7b146b8a49c35b32e457, type: 3}

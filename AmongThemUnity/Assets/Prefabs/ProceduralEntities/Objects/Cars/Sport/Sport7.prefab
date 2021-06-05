@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1735873586522717009}
   - component: {fileID: 4618158333374732695}
   - component: {fileID: 6991371976390465863}
+  - component: {fileID: 472363104539979215}
   m_Layer: 0
   m_Name: Sport7
   m_TagString: Untagged
@@ -79,3 +80,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &472363104539979215
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3000318364785667883}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4313161468522165500, guid: 1c75f709247c9a749a8264f65cd10cb9, type: 3}

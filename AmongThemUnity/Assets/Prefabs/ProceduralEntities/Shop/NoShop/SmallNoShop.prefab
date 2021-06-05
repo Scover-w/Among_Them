@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4269437857133860739}
   - component: {fileID: 2362536261620885891}
   - component: {fileID: 5307325258776662796}
+  - component: {fileID: 1549956202228901666}
   m_Layer: 0
   m_Name: SmallNoShop
   m_TagString: Untagged
@@ -94,3 +95,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wealthValue: 0
   obstructedLocation: 
+--- !u!64 &1549956202228901666
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5271967408399971547}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5983590973099411060, guid: 7b78f5cd6924f1448a40fc1a6d5b4cbf, type: 3}

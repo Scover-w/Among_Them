@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7335974229806776734}
   - component: {fileID: 3456368391658390348}
   - component: {fileID: 4908359945573996337}
+  - component: {fileID: 5119742405717073384}
   m_Layer: 0
   m_Name: Wardrob2S
   m_TagString: Untagged
@@ -79,3 +80,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &5119742405717073384
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3844783200549609623}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3780136165996697091, guid: d2cc7fd3470b7e448af1e310bade3f0c, type: 3}

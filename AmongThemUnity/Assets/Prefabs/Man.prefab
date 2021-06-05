@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2530703405083574116}
   - component: {fileID: 5803997231396234894}
   - component: {fileID: 8329613541564031466}
+  - component: {fileID: 6289835165371089658}
   m_Layer: 0
   m_Name: FieldViewAgent
   m_TagString: FieldViewAgent
@@ -93,6 +94,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1.9889857}
   m_Center: {x: 0, y: 0, z: -0.4944913}
+--- !u!64 &6289835165371089658
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1862488249644925017}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &8982077663351833605
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,6 +121,7 @@ GameObject:
   - component: {fileID: 7468723533227566544}
   - component: {fileID: -2425467396995996235}
   - component: {fileID: 2725053953580169762}
+  - component: {fileID: -1121706671413702116}
   m_Layer: 0
   m_Name: Man
   m_TagString: Untagged
@@ -216,3 +232,17 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!64 &-1121706671413702116
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8982077663351833605}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 6604927694719916108, guid: 9dbde09835a54fa4cb25590821dbe83a, type: 3}

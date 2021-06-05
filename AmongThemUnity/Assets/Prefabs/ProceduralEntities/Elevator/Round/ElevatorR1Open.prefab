@@ -139,6 +139,7 @@ GameObject:
   - component: {fileID: 4953639905015959695}
   - component: {fileID: 3846728203309047768}
   - component: {fileID: 5537830611078252165}
+  - component: {fileID: -3898809619534937242}
   m_Layer: 0
   m_Name: DoorR1.001
   m_TagString: ElevatorDoor
@@ -207,6 +208,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &-3898809619534937242
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8512687376900197155}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5735302359949175948, guid: 7493153174ea29b49b7f29d959fd3581, type: 3}
 --- !u!1 &8969987123238520582
 GameObject:
   m_ObjectHideFlags: 0
@@ -218,6 +233,7 @@ GameObject:
   - component: {fileID: 8947442631512453522}
   - component: {fileID: 8020936357398318411}
   - component: {fileID: 3483356617227010141}
+  - component: {fileID: 75030200808304162}
   m_Layer: 0
   m_Name: DoorR2.001
   m_TagString: ElevatorDoor
@@ -286,3 +302,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &75030200808304162
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8969987123238520582}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -903655271358372061, guid: 7493153174ea29b49b7f29d959fd3581, type: 3}

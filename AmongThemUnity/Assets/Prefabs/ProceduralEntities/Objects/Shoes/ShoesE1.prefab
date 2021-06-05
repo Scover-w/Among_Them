@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5271602220629343900}
   - component: {fileID: 1094944307665058494}
   - component: {fileID: 7054558674251391042}
+  - component: {fileID: -1838030052932001159}
   m_Layer: 0
   m_Name: ShoesE1
   m_TagString: Untagged
@@ -79,3 +80,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &-1838030052932001159
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2618516016355650958}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 1195802693080034160, guid: 65c22943dec501e44b459afe0c589a9a, type: 3}

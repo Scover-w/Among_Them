@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +13,6 @@ public class FPSCount : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        fps.text = (1/Time.deltaTime).ToString();
+        fps.text = Math.Round(1f/Time.deltaTime).ToString();
     }
 }

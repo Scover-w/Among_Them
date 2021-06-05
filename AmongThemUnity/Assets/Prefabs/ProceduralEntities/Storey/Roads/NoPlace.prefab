@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5876876114262727888}
   - component: {fileID: 7772299982957152450}
+  - component: {fileID: -6591716263698427485}
   m_Layer: 0
   m_Name: NoPlace
   m_TagString: Untagged
@@ -45,3 +46,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wealthValue: 0.2
   obstructedLocation: 00000000
+--- !u!64 &-6591716263698427485
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6826015713267603403}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}

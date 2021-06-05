@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 63573048497798288}
   - component: {fileID: 5390777912304107285}
   - component: {fileID: 1431393586765967733}
+  - component: {fileID: 8831973072362648003}
   m_Layer: 0
   m_Name: Man
   m_TagString: Untagged
@@ -94,3 +95,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wealthValue: 0
   obstructedLocation: 
+--- !u!64 &8831973072362648003
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 748050103469339936}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 6604927694719916108, guid: 00e1ee70606bfe14aae64ed9055a8091, type: 3}

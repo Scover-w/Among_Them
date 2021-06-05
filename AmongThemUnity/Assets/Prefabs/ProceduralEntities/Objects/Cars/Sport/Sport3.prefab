@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1601340892648757341}
   - component: {fileID: 869421698633387169}
   - component: {fileID: 7868017959425838446}
+  - component: {fileID: -5844338323868348949}
   m_Layer: 0
   m_Name: Sport3
   m_TagString: Untagged
@@ -79,3 +80,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &-5844338323868348949
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8055718613060901885}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -8406498196770290927, guid: b8efeb40bec18e2419d2d6f980529d10, type: 3}

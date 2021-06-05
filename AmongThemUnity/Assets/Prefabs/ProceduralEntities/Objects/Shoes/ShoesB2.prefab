@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1908467998428997474}
   - component: {fileID: 7088218036023592418}
   - component: {fileID: 6079857168522273983}
+  - component: {fileID: -7428372066892993470}
   m_Layer: 0
   m_Name: ShoesB2
   m_TagString: Untagged
@@ -79,3 +80,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &-7428372066892993470
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9200094453939160656}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3410990613666862150, guid: 21e29c99dcb039345b46d45ce04f0d8a, type: 3}

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 64234514299070072}
   - component: {fileID: 9099625087770055409}
   - component: {fileID: 1199852606649463196}
+  - component: {fileID: -8879984792991071547}
   m_Layer: 0
   m_Name: FoldedTshirt5
   m_TagString: Untagged
@@ -79,3 +80,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &-8879984792991071547
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4746239039438746276}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 7271687792702402111, guid: 54b62086eaec95849a6a20725ace0f8f, type: 3}

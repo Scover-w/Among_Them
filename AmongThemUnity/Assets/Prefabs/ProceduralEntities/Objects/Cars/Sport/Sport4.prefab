@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1050444197419176237}
   - component: {fileID: 7901777150182273978}
   - component: {fileID: 8322874301754310256}
+  - component: {fileID: -4373162386351473402}
   m_Layer: 0
   m_Name: Sport4
   m_TagString: Untagged
@@ -79,3 +80,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &-4373162386351473402
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5343413728803606732}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8448422359791688667, guid: f260d83025517ce4dba7358afd5142b9, type: 3}

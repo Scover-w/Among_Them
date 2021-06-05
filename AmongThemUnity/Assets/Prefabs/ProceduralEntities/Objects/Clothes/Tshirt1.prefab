@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3217438350066324503}
   - component: {fileID: 5573805259849952137}
   - component: {fileID: 6424797266094267532}
+  - component: {fileID: -5535152120466875699}
   m_Layer: 0
   m_Name: Tshirt1
   m_TagString: Untagged
@@ -79,3 +80,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &-5535152120466875699
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4278434649683495024}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8015587061866353609, guid: d08628df9b63b364d89c86e74c1f1838, type: 3}

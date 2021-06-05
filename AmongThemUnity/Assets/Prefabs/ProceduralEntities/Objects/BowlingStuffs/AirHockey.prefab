@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4882122656445310656}
   - component: {fileID: 3739922424567024979}
   - component: {fileID: 1591189936385185781}
+  - component: {fileID: 8908984765688864032}
   m_Layer: 0
   m_Name: AirHockey
   m_TagString: Untagged
@@ -79,3 +80,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &8908984765688864032
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2755441129178079065}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -3360131954415590543, guid: e058fb94a27b0c542babd64656b2ea33, type: 3}

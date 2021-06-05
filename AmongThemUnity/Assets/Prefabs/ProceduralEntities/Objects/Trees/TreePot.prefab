@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8854606149640415108}
   - component: {fileID: 7285136283690039998}
   - component: {fileID: 8951036209655071302}
+  - component: {fileID: -1919472711360258592}
   m_Layer: 9
   m_Name: TreePot
   m_TagString: Untagged
@@ -79,3 +80,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &-1919472711360258592
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1422330980167759856}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4538262372157731880, guid: 44e52bb51d1a2e441b3ce7df47fd39d1, type: 3}

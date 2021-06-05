@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6138045921095083513}
   - component: {fileID: 3111161985866964218}
   - component: {fileID: 1045730413853693377}
+  - component: {fileID: -3294553234202832798}
   m_Layer: 0
   m_Name: Desk2D
   m_TagString: Untagged
@@ -79,3 +80,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &-3294553234202832798
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 114821510459644980}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 329365592282654196, guid: 3f8482e06ca32624bb2fc3877820373f, type: 3}

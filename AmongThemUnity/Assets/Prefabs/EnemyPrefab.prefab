@@ -722,6 +722,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6340490927575768038}
   - component: {fileID: 1648135505991210789}
+  - component: {fileID: 576946864160769694}
   m_Layer: 0
   m_Name: Man
   m_TagString: Untagged
@@ -823,6 +824,20 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.0015735626, y: -0.060278535, z: 0.03753764}
     m_Extent: {x: 1.2867204, y: 0.9825666, z: 0.26429254}
   m_DirtyAABB: 0
+--- !u!64 &576946864160769694
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5799327408214381378}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &5887773491577610831
 GameObject:
   m_ObjectHideFlags: 0
@@ -1306,6 +1321,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4593909370826573873}
+  - component: {fileID: 5558686058699183221}
   m_Layer: 0
   m_Name: mixamorig:Hips
   m_TagString: Untagged
@@ -1330,3 +1346,17 @@ Transform:
   m_Father: {fileID: 8327308504632830117}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &5558686058699183221
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8871865964005364036}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}

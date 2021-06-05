@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5327086125787898933}
   - component: {fileID: 4420768614964221496}
   - component: {fileID: 3751245343100570939}
+  - component: {fileID: -6754475549147959156}
   m_Layer: 0
   m_Name: Moto
   m_TagString: Untagged
@@ -79,3 +80,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &-6754475549147959156
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6832672876033136159}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2431870004596581351, guid: 2508b4b0d38e02d4094486bfc0a16fcb, type: 3}

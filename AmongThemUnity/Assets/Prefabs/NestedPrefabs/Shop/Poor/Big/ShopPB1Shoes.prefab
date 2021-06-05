@@ -1048,6 +1048,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1474133609757037591}
+  - component: {fileID: -3829393415185759841}
   m_Layer: 0
   m_Name: Shelf1Shoes1BisDouble
   m_TagString: Untagged
@@ -1071,6 +1072,20 @@ Transform:
   m_Father: {fileID: 3736643113497962765}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &-3829393415185759841
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 527483492643445087}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &553517905246844221
 GameObject:
   m_ObjectHideFlags: 0
@@ -1317,6 +1332,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2565317832533709448}
+  - component: {fileID: 2028602519588480295}
   m_Layer: 0
   m_Name: Shelf1Shoes1Double
   m_TagString: Untagged
@@ -1340,6 +1356,20 @@ Transform:
   m_Father: {fileID: 3736643113497962765}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &2028602519588480295
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805281293131337836}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &841672871073067868
 GameObject:
   m_ObjectHideFlags: 0
@@ -2066,6 +2096,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2125844762653035060}
+  - component: {fileID: -6499420157194229486}
   m_Layer: 0
   m_Name: Shelf1Shoes1BisDouble
   m_TagString: Untagged
@@ -2089,6 +2120,20 @@ Transform:
   m_Father: {fileID: 3736643113497962765}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &-6499420157194229486
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1055064180792641404}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &1102823843687217597
 GameObject:
   m_ObjectHideFlags: 0
@@ -5289,8 +5334,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3736643113497962765}
   - component: {fileID: 4921398225990360486}
+  - component: {fileID: -72397622686447341}
   m_Layer: 0
-  m_Name: ShopPB1
+  m_Name: ShopPB1Shoes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5337,6 +5383,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wealthValue: 0
   obstructedLocation: 
+--- !u!64 &-72397622686447341
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3754062158143410729}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &3756064397667587067
 GameObject:
   m_ObjectHideFlags: 0
@@ -5747,6 +5807,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2699582205103310466}
+  - component: {fileID: -5494487839395719966}
   m_Layer: 0
   m_Name: Shelf1Shoes1BisDouble
   m_TagString: Untagged
@@ -5770,6 +5831,20 @@ Transform:
   m_Father: {fileID: 3736643113497962765}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &-5494487839395719966
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3914195914948561866}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &4016501732488900130
 GameObject:
   m_ObjectHideFlags: 0
@@ -6508,6 +6583,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2911135958526134633}
+  - component: {fileID: 2583684462828743527}
   m_Layer: 0
   m_Name: Shelf1Shoes1BisDouble
   m_TagString: Untagged
@@ -6531,6 +6607,20 @@ Transform:
   m_Father: {fileID: 3736643113497962765}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &2583684462828743527
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4270183749158454305}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &4296822472552305096
 GameObject:
   m_ObjectHideFlags: 0
@@ -6935,6 +7025,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1606984554792527626}
+  - component: {fileID: 4599137848234498863}
   m_Layer: 0
   m_Name: Shelf1Shoes1Double
   m_TagString: Untagged
@@ -6958,6 +7049,20 @@ Transform:
   m_Father: {fileID: 3736643113497962765}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &4599137848234498863
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4537409729488184814}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &4634505707803487406
 GameObject:
   m_ObjectHideFlags: 0
@@ -7374,6 +7479,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5952279722556539918}
+  - component: {fileID: 5773327034481441965}
   m_Layer: 0
   m_Name: Shelf1Shoes1BisDouble
   m_TagString: Untagged
@@ -7397,6 +7503,20 @@ Transform:
   m_Father: {fileID: 3736643113497962765}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &5773327034481441965
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4737343821448415558}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &4739119786692222584
 GameObject:
   m_ObjectHideFlags: 0
@@ -7807,6 +7927,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7832313449611651693}
+  - component: {fileID: 1506835048186370630}
   m_Layer: 0
   m_Name: Shelf1Shoes1Double
   m_TagString: Untagged
@@ -7830,6 +7951,20 @@ Transform:
   m_Father: {fileID: 3736643113497962765}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &1506835048186370630
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4901269335733184649}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &5075392197782647487
 GameObject:
   m_ObjectHideFlags: 0
@@ -8714,6 +8849,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6884323585746881509}
+  - component: {fileID: -5303140037321164220}
   m_Layer: 0
   m_Name: Shelf1Shoes1BisDouble
   m_TagString: Untagged
@@ -8737,6 +8873,20 @@ Transform:
   m_Father: {fileID: 3736643113497962765}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &-5303140037321164220
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5525586991261157037}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &5532547848431909240
 GameObject:
   m_ObjectHideFlags: 0
@@ -11845,6 +11995,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6441562125722378223}
+  - component: {fileID: -423052081892324740}
   m_Layer: 0
   m_Name: Shelf1Shoes1Double
   m_TagString: Untagged
@@ -11868,6 +12019,20 @@ Transform:
   m_Father: {fileID: 3736643113497962765}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &-423052081892324740
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8201124689749417227}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &8290272585613990700
 GameObject:
   m_ObjectHideFlags: 0
@@ -11879,6 +12044,7 @@ GameObject:
   - component: {fileID: 272261267812387423}
   - component: {fileID: 6963474405916554044}
   - component: {fileID: 608959251624334009}
+  - component: {fileID: -4958366973577918941}
   m_Layer: 0
   m_Name: Cashier1
   m_TagString: Untagged
@@ -11947,6 +12113,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &-4958366973577918941
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8290272585613990700}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5787267259387142951, guid: fe8fd3afead630b4d8364b31604fb2b0, type: 3}
 --- !u!1 &8383599336663878171
 GameObject:
   m_ObjectHideFlags: 0
@@ -11956,6 +12136,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7456928445337978707}
+  - component: {fileID: -8764455811581348393}
   m_Layer: 0
   m_Name: Shelf1Shoes1BisDouble
   m_TagString: Untagged
@@ -11979,6 +12160,20 @@ Transform:
   m_Father: {fileID: 3736643113497962765}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &-8764455811581348393
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8383599336663878171}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &8397313529725397293
 GameObject:
   m_ObjectHideFlags: 0
@@ -13355,6 +13550,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7965175389744470384}
+  - component: {fileID: 6209338571989586818}
   m_Layer: 0
   m_Name: Shelf1Shoes1BisDouble
   m_TagString: Untagged
@@ -13378,6 +13574,20 @@ Transform:
   m_Father: {fileID: 3736643113497962765}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &6209338571989586818
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9055946192508834872}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &9062400675196889717
 GameObject:
   m_ObjectHideFlags: 0
