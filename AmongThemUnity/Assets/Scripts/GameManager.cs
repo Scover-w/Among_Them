@@ -40,6 +40,8 @@ public class GameManager : MonoBehaviour
     
     
     private GameObject target;
+    private GameObject appartmentTargetDoor;
+    [SerializeField] private Material glowingObjectMat;
     [SerializeField]
     private GameObject player;
     
@@ -172,6 +174,7 @@ public class GameManager : MonoBehaviour
         parentCode.SetActive(true);
         targetIsAlive = false;
         target.SetActive(false);
+        appartmentTargetDoor.GetComponent<MeshRenderer>().material = glowingObjectMat;
     }
 
     public void StartTutorial()
@@ -207,5 +210,16 @@ public class GameManager : MonoBehaviour
         floor++;
         GenerateNewMap();
         ReplacePlayerOnStartPosition();
+    }
+
+    public void AppartmentTargetDoor(GameObject appartmentTargetDoor)
+    {
+        this.appartmentTargetDoor = appartmentTargetDoor;
+    }
+
+    public void OpenDoor()
+    {
+        appartmentTargetDoor.SetActive(false);
+        //appartmentTargetDoor.transform.position = appartmentTargetDoor.transform.position + Vector3.left;
     }
 }

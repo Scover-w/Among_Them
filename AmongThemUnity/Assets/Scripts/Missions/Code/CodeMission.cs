@@ -19,7 +19,7 @@ public class CodeMission : MonoBehaviour
 
     
     public CodeButton[] buttons;
-    public InputField codeDisplay;
+    public TMP_InputField codeDisplay;
     
     public Canvas missionCanvas;
 
@@ -82,6 +82,10 @@ public class CodeMission : MonoBehaviour
         {
             TutorialManager.Instance().NextStep();
             TutorialManager.Instance().TPinRoom();
+        }
+        else
+        {
+            GameManager.Instance().OpenDoor();
         }
     }
     
