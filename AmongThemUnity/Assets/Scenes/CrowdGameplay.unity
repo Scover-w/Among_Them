@@ -560,11 +560,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e43bda1af088c734b9bb0b8deb91695f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textButton: {fileID: 1116176913}
+  textButton: {fileID: 0}
   actionKey: Forward
   panelBinding: {fileID: 661532323}
-  description: {fileID: 1636545361}
-  keyBind: {fileID: 1626495889}
+  description: {fileID: 0}
+  keyBind: {fileID: 0}
   saveKeyBind: {fileID: 501123757}
 --- !u!1 &130566917
 GameObject:
@@ -787,7 +787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 179ed9dca9a3dea4d93c52d416d6a546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  codeDisplay: {fileID: 835237837}
+  codeDisplay: {fileID: 0}
 --- !u!1 &143744481
 GameObject:
   m_ObjectHideFlags: 0
@@ -1781,7 +1781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9173fec499b89a143958c9458979f432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ddLang: {fileID: 436675410}
+  ddLang: {fileID: 0}
 --- !u!1 &309783278
 GameObject:
   m_ObjectHideFlags: 0
@@ -1879,9 +1879,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02542f04947ae7548a9a843f4956fa40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetName: {fileID: 1575116196}
+  parentTarget: {fileID: 0}
+  parentCode: {fileID: 0}
+  targetName: {fileID: 0}
+  codeText: {fileID: 0}
+  glowingObjectMat: {fileID: 0}
   player: {fileID: 647744685}
-  codeText: {fileID: 2113173153}
   pauseMenu: {fileID: 1823351611}
   fpsCanvas: {fileID: 875759393}
 --- !u!114 &309783284
@@ -1952,7 +1955,7 @@ MonoBehaviour:
     number: 8
   - button: {fileID: 1956627860}
     number: 9
-  codeDisplay: {fileID: 835237837}
+  codeDisplay: {fileID: 0}
   missionCanvas: {fileID: 349374028}
 --- !u!114 &309783287
 MonoBehaviour:
@@ -1981,27 +1984,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   texts:
   - reference: menu_play_button
-    text: {fileID: 1061093027}
+    text: {fileID: 0}
   - reference: menu_settings_button
-    text: {fileID: 2115702777}
+    text: {fileID: 0}
   - reference: menu_quit_button
-    text: {fileID: 374454610}
+    text: {fileID: 0}
   - reference: look_sensitivity_label
-    text: {fileID: 1002119832}
+    text: {fileID: 0}
   - reference: forward_input_label
-    text: {fileID: 1673680095}
+    text: {fileID: 0}
   - reference: left_input_label
-    text: {fileID: 1856552025}
+    text: {fileID: 0}
   - reference: right_input_label
-    text: {fileID: 1805370973}
+    text: {fileID: 0}
   - reference: backward_input_label
-    text: {fileID: 994569025}
+    text: {fileID: 0}
   - reference: description_binding
-    text: {fileID: 1636545361}
+    text: {fileID: 0}
   - reference: save_binding_button
-    text: {fileID: 1160858596}
+    text: {fileID: 0}
   - reference: language_dropdown_label
-    text: {fileID: 236255132}
+    text: {fileID: 0}
 --- !u!114 &309783289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4093,6 +4096,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMove: {fileID: 647744693}
   playerLook: {fileID: 329386371}
+  actionButton: {fileID: 0}
   testText: {fileID: 152794765}
   testText2: {fileID: 1003633212}
   testText3: {fileID: 130566919}
@@ -5396,7 +5400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e974f9a682773e6409621b35b77fc9ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fps: {fileID: 1499781224}
+  fps: {fileID: 0}
 --- !u!1 &898584900
 GameObject:
   m_ObjectHideFlags: 0
@@ -6672,11 +6676,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e43bda1af088c734b9bb0b8deb91695f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textButton: {fileID: 1125835957}
+  textButton: {fileID: 0}
   actionKey: Backward
   panelBinding: {fileID: 661532323}
-  description: {fileID: 1636545361}
-  keyBind: {fileID: 1626495889}
+  description: {fileID: 0}
+  keyBind: {fileID: 0}
   saveKeyBind: {fileID: 501123757}
 --- !u!1 &1081264733
 GameObject:
@@ -7296,7 +7300,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerLook: {fileID: 329386371}
   sliderLS: {fileID: 1137836596}
-  valueSensitivity: {fileID: 720167438}
+  valueSensitivity: {fileID: 0}
 --- !u!1 &1149107795
 GameObject:
   m_ObjectHideFlags: 0
@@ -8692,7 +8696,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 179ed9dca9a3dea4d93c52d416d6a546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  codeDisplay: {fileID: 835237837}
+  codeDisplay: {fileID: 0}
 --- !u!1001 &1539971844
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8906,11 +8910,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e43bda1af088c734b9bb0b8deb91695f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textButton: {fileID: 1041909349}
+  textButton: {fileID: 0}
   actionKey: Left
   panelBinding: {fileID: 661532323}
-  description: {fileID: 1636545361}
-  keyBind: {fileID: 1626495889}
+  description: {fileID: 0}
+  keyBind: {fileID: 0}
   saveKeyBind: {fileID: 501123757}
 --- !u!1 &1549782260
 GameObject:
@@ -11110,11 +11114,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e43bda1af088c734b9bb0b8deb91695f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textButton: {fileID: 1057425299}
+  textButton: {fileID: 0}
   actionKey: Right
   panelBinding: {fileID: 661532323}
-  description: {fileID: 1636545361}
-  keyBind: {fileID: 1626495889}
+  description: {fileID: 0}
+  keyBind: {fileID: 0}
   saveKeyBind: {fileID: 501123757}
 --- !u!1 &1933680220
 GameObject:

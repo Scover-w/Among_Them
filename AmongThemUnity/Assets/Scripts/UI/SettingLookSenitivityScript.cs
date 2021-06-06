@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,7 +14,7 @@ public class SettingLookSenitivityScript : MonoBehaviour
     private Slider sliderLS;
     
     [SerializeField] 
-    private Text valueSensitivity;
+    private TMP_Text valueSensitivity;
 
     private float sensitivity;
     
