@@ -208,6 +208,10 @@ public class GameManager : MonoBehaviour
     {
         dataRetrieve = false;
         floor++;
+        if (floor == 11)
+        {
+            EndGame();
+        }
         GenerateNewMap();
         ReplacePlayerOnStartPosition();
     }
@@ -221,5 +225,10 @@ public class GameManager : MonoBehaviour
     {
         appartmentTargetDoor.SetActive(false);
         //appartmentTargetDoor.transform.position = appartmentTargetDoor.transform.position + Vector3.left;
+    }
+
+    public void EndGame()
+    {
+        SceneManager.LoadScene("Menu", LoadSceneMode.Single);
     }
 }
