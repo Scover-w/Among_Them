@@ -78,6 +78,8 @@ public class ProceduralShop : MonoBehaviour
         bool isShopObstructed;
         int sideValue;
         int middleObsIdx;
+
+        GameObject shopParent;
         
         for(int h = 0; h < 2; h++)
         {
@@ -93,7 +95,7 @@ public class ProceduralShop : MonoBehaviour
                 int j = 0;
                 int add = 0;
                 SizeShop choosenSizeShop;
-                GameObject apartment;
+                GameObject shop;
 
                 
 
@@ -141,15 +143,20 @@ public class ProceduralShop : MonoBehaviour
 
                     j += add;
 
-                    shopToPut = Instantiate(shopToPut, ProceduralManager.ParentMap);
+                    shopParent = new GameObject();
+                    shopParent.transform.parent = ProceduralManager.ParentMap;
+                    shopParent.name = "Shop";
+                    shopToPut = Instantiate(shopToPut, shopParent.transform);
                     shopToPut.transform.position = new Vector3(x, 0, z);
                     shopToPut.transform.Rotate(0, yRotation, 0);
 
                     if (choosenSizeShop != SizeShop.Null)
                     {
-                        apartment = LoadInsideShop(choosenWealthLevelShop, choosenSizeShop, wealthLevel);
-                        apartment.transform.position = new Vector3(x, 0, z);
-                        apartment.transform.Rotate(0, yRotation, 0);
+                        shop = LoadInsideShop(choosenWealthLevelShop, choosenSizeShop, wealthLevel);
+                        shop.transform.parent = shopParent.transform;
+                        shop.transform.position = new Vector3(x, 0, z);
+                        shop.transform.Rotate(0, yRotation, 0);
+                        shop.SetActive(false);
                     }
                 }
             }
@@ -158,27 +165,27 @@ public class ProceduralShop : MonoBehaviour
 
     private GameObject LoadInsideShop(WealthLevelShop wealthLevelShop, SizeShop sizeShop, float wealthValue)
     {
-        GameObject[] apartments;
+        GameObject[] shops;
         if(wealthLevelShop == WealthLevelShop.Poor)
         {
-            apartments = (sizeShop == SizeShop.Small) ? poorSmall : poorBig;
+            shops = (sizeShop == SizeShop.Small) ? poorSmall : poorBig;
         }
         else if (wealthLevelShop == WealthLevelShop.Normal)
         {
-            apartments = (sizeShop == SizeShop.Small) ? normalSmall : normalBig;
+            shops = (sizeShop == SizeShop.Small) ? normalSmall : normalBig;
         }
         else
         {
-            apartments = (sizeShop == SizeShop.Small) ? richSmall : richBig;
+            shops = (sizeShop == SizeShop.Small) ? richSmall : richBig;
         }
 
-        var apartmentDict = new Dictionary<GameObject, float>();
+        var shopDict = new Dictionary<GameObject, float>();
         
-        foreach (var obj in apartments)
+        foreach (var obj in shops)
         {
-            apartmentDict.Add(obj, obj.GetComponent<ProceduralEntity>().wealthValue);
+            shopDict.Add(obj, obj.GetComponent<ProceduralEntity>().wealthValue);
         }
 
-        return Instantiate(ProceduralCalculations.GetRandomTFromPool(apartmentDict, wealthValue), ProceduralManager.ParentMap);
+        return Instantiate(ProceduralCalculations.GetRandomTFromPool(shopDict, wealthValue));
     }
 }
