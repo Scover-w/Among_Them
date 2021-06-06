@@ -905,9 +905,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &825624819 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3452464657327312799, guid: b4d1fdb058eda7e4e9b563fe2cc65bfd,
+    type: 3}
+  m_PrefabInstance: {fileID: 2018182546}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &859965846 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3452464656840615709, guid: b4d1fdb058eda7e4e9b563fe2cc65bfd,
+    type: 3}
+  m_PrefabInstance: {fileID: 2018182546}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &936814726 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3452464656591871946, guid: b4d1fdb058eda7e4e9b563fe2cc65bfd,
     type: 3}
   m_PrefabInstance: {fileID: 2018182546}
   m_PrefabAsset: {fileID: 0}
@@ -1697,6 +1721,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1944571756 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3452464657606895240, guid: b4d1fdb058eda7e4e9b563fe2cc65bfd,
+    type: 3}
+  m_PrefabInstance: {fileID: 2018182546}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1983526799 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3452464657522600059, guid: b4d1fdb058eda7e4e9b563fe2cc65bfd,
+    type: 3}
+  m_PrefabInstance: {fileID: 2018182546}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2018182546
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1704,6 +1752,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 255105621}
     m_Modifications:
+    - target: {fileID: 3452464655847420871, guid: b4d1fdb058eda7e4e9b563fe2cc65bfd,
+        type: 3}
+      propertyPath: textButton
+      value: 
+      objectReference: {fileID: 1944571756}
     - target: {fileID: 3452464656340660556, guid: b4d1fdb058eda7e4e9b563fe2cc65bfd,
         type: 3}
       propertyPath: m_Name
@@ -1844,6 +1897,21 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3452464657461045317, guid: b4d1fdb058eda7e4e9b563fe2cc65bfd,
+        type: 3}
+      propertyPath: textButton
+      value: 
+      objectReference: {fileID: 1983526799}
+    - target: {fileID: 3452464657630772690, guid: b4d1fdb058eda7e4e9b563fe2cc65bfd,
+        type: 3}
+      propertyPath: textButton
+      value: 
+      objectReference: {fileID: 936814726}
+    - target: {fileID: 3452464657775695729, guid: b4d1fdb058eda7e4e9b563fe2cc65bfd,
+        type: 3}
+      propertyPath: textButton
+      value: 
+      objectReference: {fileID: 825624819}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4d1fdb058eda7e4e9b563fe2cc65bfd, type: 3}
 --- !u!114 &2053928141 stripped

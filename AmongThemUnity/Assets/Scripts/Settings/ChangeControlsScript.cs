@@ -1,23 +1,24 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 public class ChangeControlsScript : MonoBehaviour
 {
 
     private KeyCode inputKey;
 
     [SerializeField]
-    private Text textButton;
+    private TMP_Text textButton;
 
     public string actionKey = "";
 
     public GameObject panelBinding;
 
-    public Text description;
-    public Text keyBind;
+    public TMP_Text description;
+    public TMP_Text keyBind;
     public Button saveKeyBind;
 
     private bool changingBinding;
