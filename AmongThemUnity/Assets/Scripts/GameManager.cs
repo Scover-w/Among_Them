@@ -208,7 +208,7 @@ public class GameManager : MonoBehaviour
     {
         dataRetrieve = false;
         floor++;
-        if (floor == 11)
+        if (floor == 5)
         {
             EndGame();
         }

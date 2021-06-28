@@ -44,6 +44,12 @@ public class PlayerLook : MonoBehaviour
 
     public void RaycastInteractiveElement()
     {
+        
+        int layerMask = 1 << 8;
+
+        
+        layerMask = ~layerMask;
+        
         if (!gm.PlayerCanClick)
         {
            return; 
@@ -51,7 +57,7 @@ public class PlayerLook : MonoBehaviour
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 200f))
+        if (Physics.Raycast(ray, out hit, 200f, layerMask))
         {
             Debug.Log(hit.transform.gameObject.name);
             switch (hit.transform.gameObject.tag)

@@ -14,18 +14,6 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] 
     private float speed = 2.0f;
 
-    [SerializeField] 
-    private CharacterController characterController;
-
-    [SerializeField] 
-    private Transform groundCheck;
-
-    [SerializeField]
-    private float groundDistance = 0.4f;
-    
-    [SerializeField]
-    private LayerMask groundMask;
-
     private Vector3 velocity;
     private bool isGrounded;
     private float gravity = -9.81f;

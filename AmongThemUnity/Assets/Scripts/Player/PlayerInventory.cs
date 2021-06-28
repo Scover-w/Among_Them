@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Player;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,7 +18,7 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField]
     private GameObject inventoryUI;
     [SerializeField]
-    private List<Text> inventorySlots;
+    private List<TMP_Text> inventorySlots;
     
     // Start is called before the first frame update
     void Start()

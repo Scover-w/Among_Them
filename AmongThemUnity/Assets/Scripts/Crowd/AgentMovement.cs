@@ -19,6 +19,7 @@ public class AgentMovement : MonoBehaviour
 
         destination = agentNavMesh.destination;
         hasDestination = true;
+        agentNavMesh.GetComponent<Animator>().SetBool("isWalking", true);
         //StartCoroutine(CheckNavMeshArrived());
     }
 
