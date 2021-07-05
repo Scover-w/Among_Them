@@ -51,8 +51,18 @@ public class GameManager : MonoBehaviour
     private GameObject pauseMenu;
     [SerializeField]
     private GameObject fpsCanvas;
+    [SerializeField]
+    private GameObject UICanvas;
+    [SerializeField]
+    private GameObject gameOverCanvas;
+    
+    [SerializeField]
+    private TMP_Text endTime;
 
     private int floor;
+
+    private float timeStart;
+    private float timeEnd;
 
     private void Awake()
     {
@@ -76,6 +86,7 @@ public class GameManager : MonoBehaviour
         targetName.text = $"{surnames[Random.Range(0, surnames.Length - 1)]}  {names[Random.Range(0, names.Length - 1)]}";
         parentTarget.SetActive(true);
         parentCode.SetActive(false);
+        timeStart = Time.time;
         StartCoroutine(BeginGame());
     }
 
@@ -208,9 +219,10 @@ public class GameManager : MonoBehaviour
     {
         dataRetrieve = false;
         floor++;
-        if (floor == 5)
+        if (floor == 1)
         {
             EndGame();
+            return;
         }
         GenerateNewMap();
         ReplacePlayerOnStartPosition();
@@ -229,6 +241,49 @@ public class GameManager : MonoBehaviour
 
     public void EndGame()
     {
-        SceneManager.LoadScene("Menu", LoadSceneMode.Single);
+        Time.timeScale = 0;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        fpsCanvas.SetActive(false);
+        UICanvas.SetActive(false);
+        gameOverCanvas.SetActive(true);
+        timeEnd = Time.time;
+        endTime.text = ConvertTimeToString(timeEnd - timeStart);
+        Debug.Log(timeEnd - timeStart);
+        //SceneManager.LoadScene("Menu", LoadSceneMode.Single);
+    }
+
+    public string ConvertTimeToString(float time)
+    {
+        int timeTemp = (int)time;
+        int hours = (timeTemp / 3600);
+        timeTemp -= 3600 * hours;
+        
+        int min = timeTemp / 60;
+        timeTemp -= 60 * min;
+
+
+        string hText = hours.ToString();
+        string mText = min.ToString();
+        string sText = timeTemp.ToString();
+        
+        if (hours < 10)
+        {
+            hText = "0" + hours;
+        }
+        
+        if (min < 10)
+        {
+            mText = "0" + min;
+        }
+        
+        if (timeTemp < 10)
+        {
+            sText = "0" + timeTemp;
+        }
+        
+        string timeString = hText + ":" + mText + ":" + sText;
+
+        return timeString;
     }
 }
