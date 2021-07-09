@@ -17,10 +17,22 @@ public class TestConnexion : MonoBehaviour
     public Image statusIndicator;
 
     private bool status = false;
+
+    public bool onMenu;
     
     void Start()
     {
-        //StartCoroutine(Upload());
+        if (PlayerPrefs.HasKey("idUser") && onMenu)
+        {
+            statusText.text = PlayerPrefs.GetString("nameUser");
+            statusIndicator.color = Color.green;
+            login.text = "";
+            password.text = "";
+            login.gameObject.SetActive(false);
+            password.gameObject.SetActive(false);
+            btnLoginText.text = "Log off";
+            status = true;
+        }
     }
 
     void Upload()
@@ -40,7 +52,7 @@ public class TestConnexion : MonoBehaviour
 
     public IEnumerator SendData(string time, int platform)
     {
-        string date = DateTime.Now.ToString("yyyy-MM-dd");
+        string date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         WWWForm form = new WWWForm();
         form.AddField("user_id", PlayerPrefs.GetString("idUser"));
         form.AddField("time", time);
@@ -85,6 +97,7 @@ public class TestConnexion : MonoBehaviour
                 var data = www.downloadHandler.text.Split(';');
                 statusText.text = data[1];
                 PlayerPrefs.SetString("idUser", data[0]);
+                PlayerPrefs.SetString("nameUser", data[1]);
                 statusIndicator.color = Color.green;
                 login.text = "";
                 password.text = "";
@@ -106,6 +119,7 @@ public class TestConnexion : MonoBehaviour
         btnLoginText.text = "Login";
         status = false;
         PlayerPrefs.DeleteKey("idUser");
+        PlayerPrefs.DeleteKey("nameUser");
         Debug.Log(PlayerPrefs.GetString("idUser"));
         yield return null;
     }

@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     }
     private static GameManager _singleton;
 
+    //Boolean
     private bool isGamePaused;
     private bool playerCanMove;
     private bool playerCanRotate;
@@ -25,9 +26,11 @@ public class GameManager : MonoBehaviour
     private bool isTutorial;
     private Vector3 startPosition;
     
+    //Name List
     private string[] names = new []{"Sanchez", "Hernandez", "Rodriguez", "Fernandez", "Santiago"};
     private string[] surnames = new []{"Pedro", "Manuel", "Miguel", "Javier", "Angel"};
 
+    //Text Objectifs
     [Header("Target and Code")] 
     [SerializeField]
     private GameObject parentTarget;
@@ -38,7 +41,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private TMP_Text codeText;
     
-    
+    //GameObject Objectif
     private GameObject target;
     private GameObject appartmentTargetDoor;
     [SerializeField] private Material glowingObjectMat;
@@ -46,7 +49,7 @@ public class GameManager : MonoBehaviour
     private GameObject player;
     
     
-    
+    //Canvas
     [SerializeField]
     private GameObject pauseMenu;
     [SerializeField]
@@ -56,13 +59,19 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject gameOverCanvas;
     
+    //Time
     [SerializeField]
     private TMP_Text endTime;
 
-    private int floor;
-
     private float timeStart;
     private float timeEnd;
+    
+    //Database
+    [SerializeField]
+    private TestConnexion DBConnexion;
+    
+    //Floor
+    private int floor;
 
     private void Awake()
     {
@@ -248,8 +257,9 @@ public class GameManager : MonoBehaviour
         UICanvas.SetActive(false);
         gameOverCanvas.SetActive(true);
         timeEnd = Time.time;
-        endTime.text = ConvertTimeToString(timeEnd - timeStart);
-        Debug.Log(timeEnd - timeStart);
+        string finalTime = ConvertTimeToString(timeEnd - timeStart);
+        endTime.text = finalTime;
+        StartCoroutine(DBConnexion.SendData(finalTime, 1));
         //SceneManager.LoadScene("Menu", LoadSceneMode.Single);
     }
 
