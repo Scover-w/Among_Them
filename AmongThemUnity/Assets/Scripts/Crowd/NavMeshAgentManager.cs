@@ -22,6 +22,9 @@ public class NavMeshAgentManager : MonoBehaviour
     [SerializeField] 
     private GameObject player;
 
+    [SerializeField] 
+    private Transform containerCrowd;
+
     private Vector3 randomPosition;
 
     private List<NavMeshAgent> navMeshList;
@@ -55,7 +58,7 @@ public class NavMeshAgentManager : MonoBehaviour
         }
         for (int i = 0; i < nombreAgent; i++)
         {
-            var agent = Instantiate(prefabAgent);
+            var agent = Instantiate(prefabAgent, containerCrowd);
             NavMeshAgent navMeshAgent = agent.GetComponent<NavMeshAgent>();
             navMeshAgent.Warp(GetRandomPositionOnNavMesh());
             navMeshAgent.SetDestination(GetRandomPositionOnNavMesh());
@@ -64,7 +67,7 @@ public class NavMeshAgentManager : MonoBehaviour
             fieldViewPositionList.Add(agent.transform.GetChild(0));
         }
         
-        ToKillAgent = Instantiate(toKillAgent);
+        ToKillAgent = Instantiate(toKillAgent, containerCrowd);
         NavMeshAgent navMeshAgent2 = ToKillAgent.GetComponent<NavMeshAgent>();
         navMeshAgent2.Warp(GetRandomPositionOnNavMesh());
         navMeshAgent2.SetDestination(GetRandomPositionOnNavMesh());
