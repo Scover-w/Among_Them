@@ -22,6 +22,7 @@ public class CodeMission : MonoBehaviour
     public TMP_InputField codeDisplay;
     
     public Canvas missionCanvas;
+    public GameObject codeCanvas;
 
     private string code = "0000";
     void Start()
@@ -100,6 +101,7 @@ public class CodeMission : MonoBehaviour
     public void OpenMissionPanel()
     {
         missionCanvas.gameObject.SetActive(true);
+        codeCanvas.SetActive(true);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         GameManager.Instance().ChangePlayerCanMove(false);
@@ -109,6 +111,7 @@ public class CodeMission : MonoBehaviour
     public void CloseMissionPanel()
     {
         missionCanvas.gameObject.SetActive(false);
+        codeCanvas.SetActive(false);
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         GameManager.Instance().ChangePlayerCanMove(true);

@@ -17,6 +17,9 @@ public class NavMeshAgentManager : MonoBehaviour
     private GameObject prefabAgent;
     
     [SerializeField] 
+    private GameObject prefabCops;
+    
+    [SerializeField] 
     private GameObject toKillAgent;
     
     [SerializeField] 
@@ -28,6 +31,7 @@ public class NavMeshAgentManager : MonoBehaviour
     private Vector3 randomPosition;
 
     private List<NavMeshAgent> navMeshList;
+    private List<NavMeshAgent> copsList;
     private List<MeshCollider> fieldViewMeshColliderList;
     private List<Transform> fieldViewPositionList;
 
@@ -41,10 +45,16 @@ public class NavMeshAgentManager : MonoBehaviour
         _singleton = this;
         Time.timeScale = 1f;
         navMeshList = new List<NavMeshAgent>();
+        copsList = new List<NavMeshAgent>();
         fieldViewMeshColliderList = new List<MeshCollider>();
         fieldViewPositionList = new List<Transform>();
 
 
+    }
+    
+    private void Update()
+    {
+        GetCaughtByCops();
     }
 
     public void InstantiateCrowd()
@@ -55,7 +65,18 @@ public class NavMeshAgentManager : MonoBehaviour
             {
                 Destroy(agent.gameObject);
             }
+            navMeshList = new List<NavMeshAgent>();
         }
+        
+        if (copsList.Count > 0)
+        {
+            foreach (var agent in copsList)
+            {
+                Destroy(agent.gameObject);
+            }
+            copsList = new List<NavMeshAgent>();
+        }
+        
         for (int i = 0; i < nombreAgent; i++)
         {
             var agent = Instantiate(prefabAgent, containerCrowd);
@@ -72,6 +93,20 @@ public class NavMeshAgentManager : MonoBehaviour
         navMeshAgent2.Warp(GetRandomPositionOnNavMesh());
         navMeshAgent2.SetDestination(GetRandomPositionOnNavMesh());
         navMeshList.Add(navMeshAgent2);
+        
+        var nombreCops = (int) (nombreAgent / 100) > 0 ? (int) (nombreAgent / 100) : 1;
+        
+        for (int i = 0; i < nombreCops; i++)
+        {
+            var cops = Instantiate(prefabCops);
+            NavMeshAgent navMeshAgent = cops.GetComponent<NavMeshAgent>();
+            navMeshAgent.Warp(GetRandomPositionOnNavMesh());
+            navMeshAgent.SetDestination(GetRandomPositionOnNavMesh());
+            navMeshList.Add(navMeshAgent);
+            copsList.Add(navMeshAgent);
+            fieldViewMeshColliderList.Add(cops.GetComponentInChildren<MeshCollider>());
+            fieldViewPositionList.Add(cops.transform.GetChild(0));
+        }
     }
     
     public IEnumerator ChangeDestinationAfterEvents(List<NavMeshAgent> agentsAffected, float waitingTime)
@@ -124,5 +159,28 @@ public class NavMeshAgentManager : MonoBehaviour
     public GameObject GetTargetAgent()
     {
         return ToKillAgent;
+    }
+    
+    public void CopsGoOnCrimeScene()
+    {
+        foreach (var cops in copsList)
+        {
+            cops.SetDestination(ToKillAgent.transform.position);
+            cops.speed *= 2;
+        }
+    }
+    
+    public bool GetCaughtByCops()
+    {
+        if (!GameManager.Instance().TargetIsAlive)
+        {
+            PlayerDetection playerDetection = player.GetComponent<PlayerDetection>();
+            if (playerDetection.CopsWatchingYou())
+            {
+                GameManager.Instance().EndGame(false);
+            }
+        }
+
+        return false;
     }
 }

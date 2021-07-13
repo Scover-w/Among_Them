@@ -76,11 +76,13 @@ public class PlayerLook : MonoBehaviour
                                 }
                                 else
                                 {
-                                    Lose.SetActive(true);
+                                    gm.EndGame(false);
+                                    //Lose.SetActive(true);
                                 }
                             }
                             else
                             {
+                                NavMeshAgentManager.Instance().CopsGoOnCrimeScene();
                                 gm.KillTarget();
                                 if (gm.IsTutorial)
                                 {
@@ -101,12 +103,7 @@ public class PlayerLook : MonoBehaviour
                     }
                     break;
                 case "LaptopInfo":
-                    gm.GetNextTargetInformation();
-                    if (gm.IsTutorial)
-                    {
-                        TutorialManager.Instance().TPinHall();
-                        TutorialManager.Instance().NextStep();
-                    }
+                    PCMission.Instance().OpenMissionPanel();
                     break;
                 case "ElevatorDoor":
                     if (!gm.DataRetrieve)

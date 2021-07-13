@@ -103,7 +103,7 @@ public class TestConnexion : MonoBehaviour
                 password.text = "";
                 login.gameObject.SetActive(false);
                 password.gameObject.SetActive(false);
-                btnLoginText.text = "Log off";
+                btnLoginText.text = LanguageManager.Instance().GetTextWithReference("logoff_button");
                 status = true;
                 Debug.Log(PlayerPrefs.GetString("idUser"));
             }
@@ -116,7 +116,7 @@ public class TestConnexion : MonoBehaviour
         statusIndicator.color = Color.red;
         login.gameObject.SetActive(true);
         password.gameObject.SetActive(true);
-        btnLoginText.text = "Login";
+        btnLoginText.text = LanguageManager.Instance().GetTextWithReference("login_button");
         status = false;
         PlayerPrefs.DeleteKey("idUser");
         PlayerPrefs.DeleteKey("nameUser");

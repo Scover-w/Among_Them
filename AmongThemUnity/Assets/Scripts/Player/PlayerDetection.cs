@@ -9,6 +9,7 @@ public class PlayerDetection : MonoBehaviour
 
     public Image eyeVisionOpen;
     private int isVisible;
+    private int copsVisible;
 
     private void Start()
     {
@@ -24,6 +25,14 @@ public class PlayerDetection : MonoBehaviour
             isVisible++;
             eyeVisionOpen.gameObject.SetActive(true);
         }
+        
+        if (other.tag.Equals("FieldViewCops"))
+        {
+            isVisible++;
+            copsVisible++;
+            eyeVisionOpen.gameObject.SetActive(true);
+            
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -32,6 +41,13 @@ public class PlayerDetection : MonoBehaviour
         {
             isVisible--;
         }
+        
+        if (other.tag.Equals("FieldViewCops"))
+        {
+            isVisible--;
+            copsVisible--;
+        }
+        
 
         if (isVisible == 0)
         {
@@ -42,6 +58,16 @@ public class PlayerDetection : MonoBehaviour
     public bool IsPlayerVisible()
     {
         if (isVisible > 0)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool CopsWatchingYou()
+    {
+        if (copsVisible > 0)
         {
             return true;
         }

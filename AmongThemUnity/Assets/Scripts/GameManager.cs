@@ -59,6 +59,10 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject gameOverCanvas;
     
+    //GO Text
+    [SerializeField]
+    private TMP_Text goText;
+    
     //Time
     [SerializeField]
     private TMP_Text endTime;
@@ -107,6 +111,10 @@ public class GameManager : MonoBehaviour
         {
             GenerateNewMap();
         }
+        else
+        {
+            StartCoroutine(InstantiateCrowd());
+        }
     }
 
     private void Update()
@@ -121,6 +129,7 @@ public class GameManager : MonoBehaviour
         {
             GenerateNewMap();
         }
+        
     }
 
     public void GenerateNewMap()
@@ -194,7 +203,11 @@ public class GameManager : MonoBehaviour
         parentCode.SetActive(true);
         targetIsAlive = false;
         target.SetActive(false);
-        appartmentTargetDoor.GetComponent<MeshRenderer>().material = glowingObjectMat;
+        if (!isTutorial)
+        {
+            appartmentTargetDoor.GetComponent<MeshRenderer>().material = glowingObjectMat;
+        }
+        
     }
 
     public void StartTutorial()
@@ -230,7 +243,7 @@ public class GameManager : MonoBehaviour
         floor++;
         if (floor == 1)
         {
-            EndGame();
+            EndGame(true);
             return;
         }
         GenerateNewMap();
@@ -248,7 +261,7 @@ public class GameManager : MonoBehaviour
         //appartmentTargetDoor.transform.position = appartmentTargetDoor.transform.position + Vector3.left;
     }
 
-    public void EndGame()
+    public void EndGame(bool win)
     {
         Time.timeScale = 0;
         Cursor.visible = true;
@@ -256,10 +269,17 @@ public class GameManager : MonoBehaviour
         fpsCanvas.SetActive(false);
         UICanvas.SetActive(false);
         gameOverCanvas.SetActive(true);
-        timeEnd = Time.time;
-        string finalTime = ConvertTimeToString(timeEnd - timeStart);
-        endTime.text = finalTime;
-        StartCoroutine(DBConnexion.SendData(finalTime, 1));
+        goText.text = "Lose";
+        endTime.text = "-";
+        if (win)
+        {
+            goText.text = "Win";
+            timeEnd = Time.time;
+            string finalTime = ConvertTimeToString(timeEnd - timeStart);
+            endTime.text = finalTime;
+            StartCoroutine(DBConnexion.SendData(finalTime, 1));
+        }
+        
         //SceneManager.LoadScene("Menu", LoadSceneMode.Single);
     }
 
