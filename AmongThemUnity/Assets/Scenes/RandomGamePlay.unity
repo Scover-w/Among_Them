@@ -480,7 +480,12 @@ MonoBehaviour:
   login: {fileID: 0}
   password: {fileID: 0}
   btnLoginText: {fileID: 0}
-  statusText: {fileID: 0}
+  btnLogoffText: {fileID: 0}
+  testBtn: {fileID: 0}
+  loginBtn: {fileID: 0}
+  logoffBtn: {fileID: 0}
+  statusCoText: {fileID: 0}
+  statusDecoText: {fileID: 0}
   statusIndicator: {fileID: 0}
   onMenu: 0
 --- !u!114 &488831352
@@ -1036,6 +1041,7 @@ GameObject:
   - component: {fileID: 1058755870}
   - component: {fileID: 1058755869}
   - component: {fileID: 1058755868}
+  - component: {fileID: 1058755877}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -1196,6 +1202,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!208 &1058755877
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058755867}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 1.5, y: 1, z: 1.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!114 &1099607820 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6990600448194612499, guid: e1a18946f45034143b2a06e58bd558d4,

@@ -12,8 +12,15 @@ public class TestConnexion : MonoBehaviour
     public TMP_InputField login;
     public TMP_InputField password;
     public TMP_Text btnLoginText;
+    public TMP_Text btnLogoffText;
+    
+    
+    public Button testBtn;
+    public Button loginBtn;
+    public Button logoffBtn;
 
-    public TMP_Text statusText;
+    public TMP_Text statusCoText;
+    public TMP_Text statusDecoText;
     public Image statusIndicator;
 
     private bool status = false;
@@ -22,39 +29,84 @@ public class TestConnexion : MonoBehaviour
     
     void Start()
     {
-        if (PlayerPrefs.HasKey("idUser") && onMenu)
+        if (onMenu)
         {
-            statusText.text = PlayerPrefs.GetString("nameUser");
-            statusIndicator.color = Color.green;
-            login.text = "";
-            password.text = "";
-            login.gameObject.SetActive(false);
-            password.gameObject.SetActive(false);
-            btnLoginText.text = "Log off";
-            status = true;
+            btnLogoffText.text = LanguageManager.Instance().GetTextWithReference("logoff_button");
+            
+            if (ConnexionManager.IsConnected)
+            {
+                loginBtn.gameObject.SetActive(false);
+                logoffBtn.gameObject.SetActive(true);
+                statusCoText.gameObject.SetActive(true);
+                statusDecoText.gameObject.SetActive(false);
+                //testBtn.gameObject.SetActive(true);
+            
+                statusCoText.text = ConnexionManager.Username;
+                statusIndicator.color = Color.green;
+            
+                login.text = "";
+                password.text = "";
+                login.gameObject.SetActive(false);
+                password.gameObject.SetActive(false);
+                status = true;
+            }
         }
+        
     }
 
     void Upload()
     {
         
     }
-
-    public void Click()
+    
+    public IEnumerator SendDataTest()
     {
-        if (status)
+        string date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        WWWForm form = new WWWForm();
+        form.AddField("user_id", ConnexionManager.IDUser);
+        form.AddField("time", "00:05:00");
+        form.AddField("platform", "1");
+        form.AddField("date", date);
+
+        using (UnityWebRequest www = UnityWebRequest.Post("http://localhost/Unity/test.php", form))
         {
-            StartCoroutine(LogOff());
-            return;
+            yield return www.SendWebRequest();
+
+            if (www.isNetworkError || www.isHttpError)
+            {
+                Debug.Log(www.error);
+                Debug.Log(www.downloadHandler.text);
+            }
+            else
+            {
+                Debug.Log("Form upload complete! " + www.error);
+            }
         }
+    }
+
+    public void TestClick()
+    {
+        StartCoroutine(SendDataTest());
+    }
+
+    public void ClickLogin()
+    {
+        
         StartCoroutine(GetDataLogin());
+    }
+
+    public void ClickLogOff()
+    {
+       
+        StartCoroutine(LogOff());
+          
     }
 
     public IEnumerator SendData(string time, int platform)
     {
         string date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         WWWForm form = new WWWForm();
-        form.AddField("user_id", PlayerPrefs.GetString("idUser"));
+        form.AddField("user_id", ConnexionManager.IDUser);
         form.AddField("time", time);
         form.AddField("platform", platform);
         form.AddField("date", date);
@@ -95,32 +147,47 @@ public class TestConnexion : MonoBehaviour
                 Debug.Log("Form upload complete! ");
                 Debug.Log(www.downloadHandler.text);
                 var data = www.downloadHandler.text.Split(';');
-                statusText.text = data[1];
-                PlayerPrefs.SetString("idUser", data[0]);
-                PlayerPrefs.SetString("nameUser", data[1]);
+                statusCoText.text = data[1];
+                ConnexionManager.IDUser =data[0];
+                ConnexionManager.Username = data[1];
+                ConnexionManager.IsConnected = true;
                 statusIndicator.color = Color.green;
                 login.text = "";
                 password.text = "";
                 login.gameObject.SetActive(false);
                 password.gameObject.SetActive(false);
-                btnLoginText.text = LanguageManager.Instance().GetTextWithReference("logoff_button");
+                //testBtn.gameObject.SetActive(true);
+                //
+                loginBtn.gameObject.SetActive(false);
+                logoffBtn.gameObject.SetActive(true);
+                statusCoText.gameObject.SetActive(true);
+                statusDecoText.gameObject.SetActive(false);
+                //
+                btnLogoffText.text = LanguageManager.Instance().GetTextWithReference("logoff_button");
                 status = true;
-                Debug.Log(PlayerPrefs.GetString("idUser"));
+                //Debug.Log(ConnexionManager.IDUser);
             }
         }
     }
 
     public IEnumerator LogOff()
     {
-        statusText.text = "Disconneted";
         statusIndicator.color = Color.red;
         login.gameObject.SetActive(true);
         password.gameObject.SetActive(true);
+        //testBtn.gameObject.SetActive(false);
+        //
+        loginBtn.gameObject.SetActive(true);
+        logoffBtn.gameObject.SetActive(false);
+        statusCoText.gameObject.SetActive(false);
+        statusDecoText.gameObject.SetActive(true);
+        //
         btnLoginText.text = LanguageManager.Instance().GetTextWithReference("login_button");
         status = false;
-        PlayerPrefs.DeleteKey("idUser");
-        PlayerPrefs.DeleteKey("nameUser");
-        Debug.Log(PlayerPrefs.GetString("idUser"));
+        ConnexionManager.IDUser = "";
+        ConnexionManager.Username = "";
+        ConnexionManager.IsConnected = false;
+        //Debug.Log(PlayerPrefs.GetString("idUser"));
         yield return null;
     }
 }
