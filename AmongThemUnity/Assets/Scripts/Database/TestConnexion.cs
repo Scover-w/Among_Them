@@ -39,7 +39,7 @@ public class TestConnexion : MonoBehaviour
                 logoffBtn.gameObject.SetActive(true);
                 statusCoText.gameObject.SetActive(true);
                 statusDecoText.gameObject.SetActive(false);
-                //testBtn.gameObject.SetActive(true);
+                testBtn.gameObject.SetActive(true);
             
                 statusCoText.text = ConnexionManager.Username;
                 statusIndicator.color = Color.green;
@@ -62,6 +62,7 @@ public class TestConnexion : MonoBehaviour
     public IEnumerator SendDataTest()
     {
         string date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        
         WWWForm form = new WWWForm();
         form.AddField("user_id", ConnexionManager.IDUser);
         form.AddField("time", "00:05:00");
@@ -80,6 +81,7 @@ public class TestConnexion : MonoBehaviour
             else
             {
                 Debug.Log("Form upload complete! " + www.error);
+                Debug.Log(date);
             }
         }
     }
@@ -105,6 +107,7 @@ public class TestConnexion : MonoBehaviour
     public IEnumerator SendData(string time, int platform)
     {
         string date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        Debug.Log(date);
         WWWForm form = new WWWForm();
         form.AddField("user_id", ConnexionManager.IDUser);
         form.AddField("time", time);
@@ -156,7 +159,7 @@ public class TestConnexion : MonoBehaviour
                 password.text = "";
                 login.gameObject.SetActive(false);
                 password.gameObject.SetActive(false);
-                //testBtn.gameObject.SetActive(true);
+                testBtn.gameObject.SetActive(true);
                 //
                 loginBtn.gameObject.SetActive(false);
                 logoffBtn.gameObject.SetActive(true);
@@ -175,7 +178,7 @@ public class TestConnexion : MonoBehaviour
         statusIndicator.color = Color.red;
         login.gameObject.SetActive(true);
         password.gameObject.SetActive(true);
-        //testBtn.gameObject.SetActive(false);
+        testBtn.gameObject.SetActive(false);
         //
         loginBtn.gameObject.SetActive(true);
         logoffBtn.gameObject.SetActive(false);
