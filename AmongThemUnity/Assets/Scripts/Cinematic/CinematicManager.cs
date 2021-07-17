@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CinematicManager : MonoBehaviour
 {
@@ -9,16 +10,10 @@ public class CinematicManager : MonoBehaviour
     {
         StartCoroutine(nameof(WaitEndVideo));
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
     IEnumerator WaitEndVideo()
     {
-        yield return new WaitForSeconds(113f);
-        Debug.Log("EndVideo");
+        yield return new WaitForSeconds(3f); // 113f
+        SceneManager.LoadScene("RandomGamePlay", LoadSceneMode.Single);
     }
 }

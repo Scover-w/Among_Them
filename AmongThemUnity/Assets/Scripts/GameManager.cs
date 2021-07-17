@@ -102,6 +102,8 @@ public class GameManager : MonoBehaviour
         timeStart = Time.time;
         StartCoroutine(BeginGame());
     }
+    
+    
 
     IEnumerator BeginGame()
     {
@@ -239,6 +241,9 @@ public class GameManager : MonoBehaviour
 
     public void GoToNextFloor()
     {
+        // TO DO : Cinematic and others stuff to handle
+        ProgressionManager.NextLevel();
+
         dataRetrieve = false;
         floor++;
         if (floor == 1)

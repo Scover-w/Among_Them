@@ -40,24 +40,19 @@ public class ProceduralManager : MonoBehaviour
     [SerializeField] 
     private RandomMaterials randomMaterials;
     
-    [SerializeField][Range(0f,1f)]
-    private float wealthValue = 0f;
-    
-    
     [Range(0f,1f)][Header("Threshold and probability default for each value with two random choices")] 
     public float minThresholdValue = 0.1f;
     
     [Range(0f,1f)]
     public float maxTresholdValue = 0.9f;
     
-    
-    [SerializeField] [Range(0f,1f)][Header("Step")] 
-    private float step = .05f;
 
     [SerializeField] 
     private Transform parentMap;
 
     public static Transform ParentMap;
+    
+    private float wealthValue = 0f;
     
     // Start is called before the first frame update
     void Start()
@@ -69,6 +64,8 @@ public class ProceduralManager : MonoBehaviour
 
     public void Shuffle()
     {
+        wealthValue = ProgressionManager.GetWealthValue();
+        
         LoadBuilding(wealthValue);
         randomMaterials.ApplyRandomColors();
         NavMeshSurface.RemoveData();
@@ -94,15 +91,5 @@ public class ProceduralManager : MonoBehaviour
         proceduralMall.LoadMall(obstructedLocation, wealthLevel);
         
         obstructedLocation.Union(proceduralStair.LoadStairs(obstructedLocation, wealthLevel)).ToList();
-    }
-
-    public float GetWealthValue()
-    {
-        return wealthValue;
-    }
-
-    public void NextStep()
-    {
-        
     }
 }
