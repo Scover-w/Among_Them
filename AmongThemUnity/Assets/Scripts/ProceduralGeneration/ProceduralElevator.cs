@@ -296,7 +296,7 @@ public class ProceduralElevator : MonoBehaviour
     {
         int rotationToApply = 0;
 
-        if (obstructedLocation == ObstructedLocation.Long)
+        if (obstructedLocation == ObstructedLocation.Short)
             rotationToApply += 90;
 
 
@@ -311,12 +311,12 @@ public class ProceduralElevator : MonoBehaviour
                     rotationToApply += 180;
                 break;
 
-            case ObstructedLocation.Short:
+            case ObstructedLocation.Long:
                 if (!zAxis)
                     rotationToApply += 180;
                 break;
 
-            case ObstructedLocation.Long:
+            case ObstructedLocation.Short:
                 if (!xAxis)
                     rotationToApply += 180;
                 break;
@@ -329,6 +329,9 @@ public class ProceduralElevator : MonoBehaviour
     {
         GameObject elevator = Instantiate(profile.Elevator, ProceduralManager.ParentMap);
         int rotation = GetRotationElevator(position, profile.Location);
+
+        Debug.Log("Location : " + profile.Location + ", position : " + position.x + "," + position.y + "," + position.z + ", rotation : " + rotation);
+        
         elevator.transform.position = position;
         elevator.transform.Rotate(0, rotation, 0);
         
