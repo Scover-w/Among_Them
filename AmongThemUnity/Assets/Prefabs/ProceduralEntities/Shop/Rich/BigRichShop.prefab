@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 722444498579192379}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.9543304, y: 1.05, z: 0.087249756}
+  m_LocalPosition: {x: 2.95433, y: 1.05, z: 0.087249756}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 354542279610634345}
@@ -121,7 +121,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 859499467366851194}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.9543304, y: 1.05, z: 0.087249756}
+  m_LocalPosition: {x: 3.95433, y: 1.05, z: 0.087249756}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 354542279610634345}
@@ -201,6 +201,7 @@ GameObject:
   - component: {fileID: 4911132182164440966}
   - component: {fileID: 6455963866499457771}
   - component: {fileID: 682759442650548612}
+  - component: {fileID: -7025897732101012004}
   m_Layer: 9
   m_Name: BigRichShop
   m_TagString: Untagged
@@ -299,3 +300,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3614921678286377164, guid: a9653edb185b2a84d872979b6c55e91b, type: 3}
+--- !u!95 &-7025897732101012004
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5657238098644594508}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 87d6ca8a8070b4d47baa5a5ecb3ac136, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

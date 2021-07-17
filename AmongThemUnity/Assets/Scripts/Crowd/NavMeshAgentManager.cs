@@ -98,7 +98,7 @@ public class NavMeshAgentManager : MonoBehaviour
         
         for (int i = 0; i < nombreCops; i++)
         {
-            var cops = Instantiate(prefabCops);
+            var cops = Instantiate(prefabCops, containerCrowd);
             NavMeshAgent navMeshAgent = cops.GetComponent<NavMeshAgent>();
             navMeshAgent.Warp(GetRandomPositionOnNavMesh());
             navMeshAgent.SetDestination(GetRandomPositionOnNavMesh());

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -57,6 +58,9 @@ public class ProceduralShop : MonoBehaviour
     
     [SerializeField][Range(0f,1f)]
     private float tresholdNormalRich;
+
+    [SerializeField] 
+    private AutomaticDoorShopManager doorShopManager;
     
     public void LoadShops(List<ObstructedLocation> obstructedLocations, float wealthLevel)
     {
@@ -143,9 +147,12 @@ public class ProceduralShop : MonoBehaviour
 
                     j += add;
 
+                    
+                    
                     shopParent = new GameObject();
                     shopParent.transform.parent = ProceduralManager.ParentMap;
                     shopParent.name = "Shop";
+                    shopParent.transform.position = new Vector3(x, 0, z);
                     shopToPut = Instantiate(shopToPut, shopParent.transform);
                     shopToPut.transform.position = new Vector3(x, 0, z);
                     shopToPut.transform.Rotate(0, yRotation, 0);
@@ -157,10 +164,23 @@ public class ProceduralShop : MonoBehaviour
                         shop.transform.position = new Vector3(x, 0, z);
                         shop.transform.Rotate(0, yRotation, 0);
                         shop.SetActive(false);
+                        
+                        ShopEntity shopEntity = new ShopEntity();
+                        shopEntity.parentObjects = shop;
+                        shopEntity.animator = shopToPut.GetComponent<Animator>();
+ 
+                        shopEntity.position = GetCenterDoor(shopToPut.transform.GetChild(0).position, shopToPut.transform.GetChild(1).position);
+
+                        shopEntity.isOpen = false;
+                        doorShopManager.Add(shopEntity);
                     }
+
+                    
                 }
             }
         }
+        
+        doorShopManager.EnableDoorShop();
     }
 
     private GameObject LoadInsideShop(WealthLevelShop wealthLevelShop, SizeShop sizeShop, float wealthValue)
@@ -187,5 +207,17 @@ public class ProceduralShop : MonoBehaviour
         }
 
         return Instantiate(ProceduralCalculations.GetRandomTFromPool(shopDict, wealthValue));
+    }
+
+    private Vector2 GetCenterDoor(Vector3 v1, Vector3 v2)
+    {
+        if (Math.Abs(v1.x - v2.x) < 0.01f)
+        {
+            return new Vector2(v1.x, (v1.z + v2.z) / 2f);
+        }
+        else
+        {
+            return new Vector2((v1.x + v2.x) / 2f, v1.z);
+        }
     }
 }

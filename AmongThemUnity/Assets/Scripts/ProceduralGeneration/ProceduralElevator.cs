@@ -329,8 +329,6 @@ public class ProceduralElevator : MonoBehaviour
     {
         GameObject elevator = Instantiate(profile.Elevator, ProceduralManager.ParentMap);
         int rotation = GetRotationElevator(position, profile.Location);
-
-        Debug.Log("Location : " + profile.Location + ", position : " + position.x + "," + position.y + "," + position.z + ", rotation : " + rotation);
         
         elevator.transform.position = position;
         elevator.transform.Rotate(0, rotation, 0);

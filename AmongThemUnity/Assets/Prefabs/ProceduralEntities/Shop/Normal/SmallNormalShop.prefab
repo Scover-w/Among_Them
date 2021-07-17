@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3972910597416849421}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.9543304, y: 1.0499939, z: 0.087249756}
+  m_LocalPosition: {x: 4.96433, y: 1.0499939, z: 0.087249756}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3972429121959399060}
@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 8754946953535834699}
   - component: {fileID: 1213254406733632726}
   - component: {fileID: 1549838598815553400}
+  - component: {fileID: 2492290068867276672}
   m_Layer: 9
   m_Name: SmallNormalShop
   m_TagString: Untagged
@@ -205,6 +206,25 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -7637563952650697232, guid: 214ea067792cdf449854c37f6260790b, type: 3}
+--- !u!95 &2492290068867276672
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5947433467048841338}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b42cc54bc666a2044bc42c59e7fad151, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7565987831008686238
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,7 +252,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7565987831008686238}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.9543304, y: 1.0499939, z: 0.087249756}
+  m_LocalPosition: {x: 1.94433, y: 1.0499939, z: 0.087249756}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3972429121959399060}

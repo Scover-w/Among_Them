@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1816058510956555928}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.9543304, y: 1.0499939, z: 0.087249756}
+  m_LocalPosition: {x: 4.96433, y: 1.0499939, z: 0.087249756}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4527426201700272514}
@@ -121,7 +121,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5609551587665744074}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.9543304, y: 1.0499939, z: 0.087249756}
+  m_LocalPosition: {x: 1.94433, y: 1.0499939, z: 0.087249756}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4527426201700272514}
@@ -201,6 +201,7 @@ GameObject:
   - component: {fileID: 3292016766573929440}
   - component: {fileID: 2730525046594983112}
   - component: {fileID: 8065940455469424002}
+  - component: {fileID: 766237464007804358}
   m_Layer: 9
   m_Name: SmallPoorShop
   m_TagString: Untagged
@@ -299,3 +300,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3548323907634055842, guid: ee826e1de9e235442986d9b7b8c7a3b4, type: 3}
+--- !u!95 &766237464007804358
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8740563655385010427}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f9408397657902742964d16fbca373c5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
