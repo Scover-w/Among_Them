@@ -6,23 +6,25 @@ using UnityEngine;
 public static class GameInputManager
 {
     private static Dictionary<string, KeyCode> mapping;
-    static string[] keyMaps = new string[6]
+    static string[] keyMaps = new string[7]
     {
         "MouseRight",
         "MouseLeft",
         "Forward",
         "Backward",
         "Left",
-        "Right"
+        "Right",
+        "Shift",
     };
-    static KeyCode[] defaults = new KeyCode[6]
+    static KeyCode[] defaults = new KeyCode[7]
     {
         KeyCode.Q,
         KeyCode.E,
         KeyCode.Z,
         KeyCode.S,
         KeyCode.Q,
-        KeyCode.D
+        KeyCode.D,
+        KeyCode.LeftShift
     };
  
     static GameInputManager()

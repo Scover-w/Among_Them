@@ -20,9 +20,21 @@ public class PcController : MonoBehaviour
     private float xMove;
     private float zMove;
     private Vector3 directionMove;
+    
+    // Running
+    private float multiplyRunningValue = 1.60f;
+    private float runningDuration = 3f;
+    private float halfRunningDuration;
+    private bool isRunning;
+    private float runningTimer;
+
+    private float screenRatio;
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        runningTimer = runningDuration;
+        halfRunningDuration = runningDuration / 2f;
+        screenRatio = ((Screen.width / Screen.height - 1) / 2) + 1;
     }
 
     // Update is called once per frame
@@ -38,7 +50,7 @@ public class PcController : MonoBehaviour
     {
         mouseX = Input.GetAxis("Mouse X");
         mouseY = Input.GetAxis("Mouse Y");
-
+        Debug.Log("Mouse -> x : " + mouseX + ", y : " + mouseY);
         playerLook.SetRotationY(mouseX);
 
         xRotation -= mouseY;
@@ -69,8 +81,30 @@ public class PcController : MonoBehaviour
             directionMove -= Vector3.forward;
         }
 
+        if (GameInputManager.GetKey("Shift"))
+        {
+            if (!isRunning && runningTimer < halfRunningDuration)
+            {
+                isRunning = false;
+                runningTimer = Mathf.Clamp(runningTimer + Time.deltaTime * 0.5f, 0f, runningDuration);
+            }
+            else if (runningTimer <= 0f)
+                isRunning = false;
+            else
+            {
+                isRunning = true;
+                runningTimer = Mathf.Clamp(runningTimer - Time.deltaTime, 0f, runningDuration);
+            }
+               
+        }
+        else
+        {
+            isRunning = false;
+            runningTimer = Mathf.Clamp(runningTimer + Time.deltaTime * 0.5f, 0f, runningDuration);
+        }
+
         directionMove = directionMove.normalized;
-        playerMove.SetDirection(directionMove);
+        playerMove.SetDirection(directionMove * (isRunning? multiplyRunningValue : 1f));
     }
     public void ClickToAction()
     {
