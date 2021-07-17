@@ -16,13 +16,7 @@ public class PlayerLook : MonoBehaviour
 
     [SerializeField] 
     private PlayerMove playerMove;
-
-    [SerializeField] 
-    private GameObject Win;
     
-    [SerializeField] 
-    private GameObject Lose;
-
     [SerializeField] 
     private NavMeshAgentManager navMeshAgentManager;
 
@@ -39,6 +33,9 @@ public class PlayerLook : MonoBehaviour
         {
             lookSensitivity = PlayerPrefs.GetFloat("lookSensity");
         }
+
+        yRotation = 0f;
+        xRotation = 0f;
     }
 
 
@@ -129,7 +126,7 @@ public class PlayerLook : MonoBehaviour
     
     public void SetRotationY(float yRot)
     {
-        yRotation = yRot;
+        yRotation += yRot;
     }
     public void SetRotationX(float xRot)
     {
@@ -140,9 +137,9 @@ public class PlayerLook : MonoBehaviour
     {
         if (GameManager.Instance().PlayerCanRotate)
         {
-            playerBody.RotateAround(playerBody.position, playerBody.up , yRotation * lookSensitivity * Time.fixedDeltaTime);
-            transform.localRotation = Quaternion.Euler(xRotation * lookSensitivity * Time.fixedDeltaTime, 0f, 0f);
-            
+            playerBody.RotateAround(playerBody.position, playerBody.up , yRotation * lookSensitivity /** Time.fixedDeltaTime*/);
+            transform.localRotation = Quaternion.Euler(xRotation * lookSensitivity /** Time.fixedDeltaTime*/, 0f, 0f);
+            yRotation = 0f;
         }
             
     }

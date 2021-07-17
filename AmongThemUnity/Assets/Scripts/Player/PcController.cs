@@ -48,9 +48,9 @@ public class PcController : MonoBehaviour
 
     public void SendRotationValues()
     {
-        mouseX = Input.GetAxis("Mouse X");
-        mouseY = Input.GetAxis("Mouse Y");
-        Debug.Log("Mouse -> x : " + mouseX + ", y : " + mouseY);
+        mouseX = Input.GetAxis("Mouse X") * Time.deltaTime;
+        mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime;
+        
         playerLook.SetRotationY(mouseX);
 
         xRotation -= mouseY;

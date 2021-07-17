@@ -765,8 +765,6 @@ MonoBehaviour:
   playerBody: {fileID: 1058755876}
   cam: {fileID: 816321466}
   playerMove: {fileID: 1058755873}
-  Win: {fileID: 0}
-  Lose: {fileID: 0}
   navMeshAgentManager: {fileID: 488831347}
 --- !u!20 &816321466
 Camera:
@@ -3199,17 +3197,17 @@ PrefabInstance:
     - target: {fileID: 8150984887299100150, guid: 10fe5c273d1387143b12618e96edc1fb,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8150984887299100150, guid: 10fe5c273d1387143b12618e96edc1fb,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8150984887299100150, guid: 10fe5c273d1387143b12618e96edc1fb,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8150984887369609420, guid: 10fe5c273d1387143b12618e96edc1fb,
         type: 3}
@@ -3224,17 +3222,17 @@ PrefabInstance:
     - target: {fileID: 8150984887462217580, guid: 10fe5c273d1387143b12618e96edc1fb,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8150984887462217580, guid: 10fe5c273d1387143b12618e96edc1fb,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8150984887462217580, guid: 10fe5c273d1387143b12618e96edc1fb,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8150984887953358246, guid: 10fe5c273d1387143b12618e96edc1fb,
         type: 3}
