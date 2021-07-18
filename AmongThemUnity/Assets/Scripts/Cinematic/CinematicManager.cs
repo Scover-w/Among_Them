@@ -13,7 +13,7 @@ public class CinematicManager : MonoBehaviour
     
     IEnumerator WaitEndVideo()
     {
-        yield return new WaitForSeconds(3f); // 113f
+        yield return new WaitForSeconds(113f); // 113f
         SceneManager.LoadScene("RandomGamePlay", LoadSceneMode.Single);
     }
 }

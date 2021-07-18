@@ -353,7 +353,6 @@ public class ProceduralStair : MonoBehaviour
                 return 19.6f;
         }
         
-        Debug.LogError("Outside the bound : GetLengthStair");
         return 0;
     }
     

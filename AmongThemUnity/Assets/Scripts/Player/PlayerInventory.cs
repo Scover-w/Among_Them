@@ -44,10 +44,7 @@ public class PlayerInventory : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             inventoryUI.SetActive(true);
-            foreach (var item in inventory.Keys)
-            {
-                Debug.Log( item.GetName() + " : " + inventory[item].ToString());
-            }
+  
         }
 
         if (Input.GetKeyUp(KeyCode.Tab))
@@ -91,7 +88,7 @@ public class PlayerInventory : MonoBehaviour
         }
         else
         {
-            Debug.Log("Cette objet n'est pas dans l'inventaire");
+            
         }
         return item;
     }

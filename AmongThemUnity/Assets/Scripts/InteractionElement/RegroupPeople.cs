@@ -25,7 +25,7 @@ namespace InteractionElement
             if (other.gameObject.tag.Equals("Player"))
             {
                 List<NavMeshAgent> agentsAffected = new List<NavMeshAgent>();
-                Debug.Log("hit");
+
                 foreach (var ca in crowdAgentsList)
                 {
                     float distanceSqr = (objectTransform.position - ca.gameObject.transform.position).sqrMagnitude;

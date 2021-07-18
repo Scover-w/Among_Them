@@ -91,12 +91,15 @@ public class GameManager : MonoBehaviour
     
     private Platform platform;
 
-    // Elevator
+    // Elevator cinematic
     [SerializeField] 
     private DoorElevatorManager elevatorManager;
-
     [SerializeField] 
     private CamCinematic camCinematic;
+
+    [SerializeField] 
+    private GameObject prefabPolyPlayer;
+    private GameObject polyPlayer;
     
     // Orb
     [SerializeField] 
@@ -130,8 +133,11 @@ public class GameManager : MonoBehaviour
         timeStart = Time.time;
         StartCoroutine(StartGame());
     }
-    
-    
+
+    public GameObject GetPlayer()
+    {
+        return player;
+    }
 
     IEnumerator StartGame()
     {
@@ -187,7 +193,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator BeginLevelCinematic()
     {
-        yield return new WaitForSeconds(3f); // 10 to put
+        yield return new WaitForSeconds(15f);
         elevatorManager.TeleportPlayer();
         blackScreen.SetActive(false);
         yield return new WaitForSeconds(2f);
@@ -223,11 +229,13 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         elevatorManager.CloseElevatorEndLevel();
         yield return new WaitForSeconds(1f);
+
+
+        
+        player.SetActive(false);
         camCinematic.PlayCinematic();
-        
         yield return new WaitForSeconds(camCinematic.GetCinematicTimer());
-        
-        
+
         if (Math.Abs(ProgressionManager.GetWealthValue() - 1f) < 0.001f)
         {
             EndGame(true);

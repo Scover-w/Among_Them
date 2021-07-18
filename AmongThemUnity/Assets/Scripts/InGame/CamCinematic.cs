@@ -22,7 +22,7 @@ public class CamCinematic : MonoBehaviour
 
     [SerializeField] 
     private DoorElevatorManager elevatorManager;
-    
+
     private CinematicCamBehaviour camBehav;
     
     private float direction = 1f;
@@ -68,8 +68,11 @@ public class CamCinematic : MonoBehaviour
             yield return null;
         }
         
+        
+        
         cinematicCamera.enabled = false;
         mainCamera.enabled = true;
+        GameManager.Instance().GetPlayer().SetActive(true);
     }
 
     private void SelectPosition(Vector3 elevator)

@@ -58,7 +58,6 @@ public class CodeMission : MonoBehaviour
 
     public void ConfirmCode(TMP_InputField fieldCode)
     {
-        Debug.Log(code);
         if (fieldCode.text.Equals(code.Substring(0,4)))
         {
             GameManager.Instance().StopHearthBeat();

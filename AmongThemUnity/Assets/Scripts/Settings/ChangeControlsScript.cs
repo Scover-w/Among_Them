@@ -45,7 +45,6 @@ public class ChangeControlsScript : MonoBehaviour
             Event e = Event.current;
             if (e != null && e.isKey && e.keyCode != KeyCode.None)
             {
-                Debug.Log(e.keyCode);
                 inputKey = e.keyCode;
                 keyBind.text = e.keyCode.ToString();
             }

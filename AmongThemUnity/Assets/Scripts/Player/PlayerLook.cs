@@ -57,7 +57,7 @@ public class PlayerLook : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 200f, layerMask))
         {
-            Debug.Log(hit.transform.gameObject.name);
+  
             switch (hit.transform.gameObject.tag)
             {
                 case "ToKillAgent":

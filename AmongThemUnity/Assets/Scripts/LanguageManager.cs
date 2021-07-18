@@ -30,7 +30,7 @@ public class LanguageManager : MonoBehaviour
 
         string path = Application.dataPath;
         languages = Initialization(path + "/Language/lang.xml");
-        Debug.Log(languages[selectedLanguage]["hello"]);
+ 
     }
 
     void Start()

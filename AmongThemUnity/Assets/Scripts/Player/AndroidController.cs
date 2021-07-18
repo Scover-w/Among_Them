@@ -59,7 +59,6 @@ public class AndroidController : MonoBehaviour
 
             if (inputLook.phase == TouchPhase.Began && Input.mousePosition.x > Camera.main.pixelWidth / 2)
             {
-                Debug.Log("test");
                 nbTouch++;
                 touchOriginLook = new Vector3(inputLook.position.x, inputLook.position.y, 0);
             }

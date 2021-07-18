@@ -36,7 +36,7 @@ public static class ProceduralCalculations
             actualProb += objectProb;
         }
         
-        Debug.LogError("Outside of the bound");
+ 
         return normalizedPool.First().Key;
     }
 

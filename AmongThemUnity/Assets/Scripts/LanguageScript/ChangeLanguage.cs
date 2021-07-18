@@ -23,6 +23,5 @@ public class ChangeLanguage : MonoBehaviour
     {
         SoundManager.Instance.Click();
         LanguageManager.Instance().ChangeSelectedLanguage(lang);
-        Debug.Log(LanguageManager.Instance().GetSelectedLanguage());
     }
 }

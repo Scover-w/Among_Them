@@ -48,8 +48,8 @@ public class PcController : MonoBehaviour
 
     public void SendRotationValues()
     {
-        mouseX = Input.GetAxis("Mouse X") * Time.deltaTime;
-        mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime;
+        mouseX = Input.GetAxis("Mouse X") * Time.fixedDeltaTime;
+        mouseY = Input.GetAxis("Mouse Y") * Time.fixedDeltaTime;
         
         playerLook.SetRotationY(mouseX);
 
@@ -86,21 +86,21 @@ public class PcController : MonoBehaviour
             if (!isRunning && runningTimer < halfRunningDuration)
             {
                 isRunning = false;
-                runningTimer = Mathf.Clamp(runningTimer + Time.deltaTime * 0.5f, 0f, runningDuration);
+                runningTimer = Mathf.Clamp(runningTimer + Time.fixedDeltaTime * 0.5f, 0f, runningDuration);
             }
             else if (runningTimer <= 0f)
                 isRunning = false;
             else
             {
                 isRunning = true;
-                runningTimer = Mathf.Clamp(runningTimer - Time.deltaTime, 0f, runningDuration);
+                runningTimer = Mathf.Clamp(runningTimer - Time.fixedDeltaTime, 0f, runningDuration);
             }
                
         }
         else
         {
             isRunning = false;
-            runningTimer = Mathf.Clamp(runningTimer + Time.deltaTime * 0.5f, 0f, runningDuration);
+            runningTimer = Mathf.Clamp(runningTimer + Time.fixedDeltaTime * 0.5f, 0f, runningDuration);
         }
 
         if (Input.mouseScrollDelta.y != 0f)
