@@ -107,6 +107,8 @@ public class NavMeshAgentManager : MonoBehaviour
         {
             var cops = Instantiate(prefabCops, containerCrowd);
             NavMeshAgent navMeshAgent = cops.GetComponent<NavMeshAgent>();
+            
+            
             navMeshAgent.Warp(GetRandomPositionOnNavMesh());
             navMeshAgent.SetDestination(GetRandomPositionOnNavMesh());
             navMeshList.Add(navMeshAgent);
@@ -145,11 +147,25 @@ public class NavMeshAgentManager : MonoBehaviour
 
         //randomPosition = Random.insideUnitSphere * 250;
 
+        return GetPositionOnNavMesh(randomPosition);
+    }
+
+    public Vector3 GetPositionOnNavMesh(Vector3 position)
+    {
         NavMeshHit hit = new NavMeshHit();
 
-        NavMesh.SamplePosition(randomPosition, out hit, 16f, NavMesh.AllAreas);
+        NavMesh.SamplePosition(position, out hit, 50f, NavMesh.AllAreas);
+
+        try
+        {
+            return hit.position;
+        }
+        catch (Exception e)
+        {
+            // 
+        }
         
-        return hit.position;
+        return Vector3.zero;
     }
 
     public bool IsSomeoneWatching()
@@ -189,5 +205,28 @@ public class NavMeshAgentManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void RegroupAround(Vector3 position)
+    {
+        Vector3 location;
+        foreach (var agent in navMeshList)
+        {
+            float distance = (agent.gameObject.transform.position - position).magnitude;
+            Debug.Log(distance);
+            if (distance < 15f)
+            {
+                location = new Vector3(Random.Range(-5f, 5f), 0f, Random.Range(-5f, 5f)) + position;
+                
+                location = GetPositionOnNavMesh(location);
+                
+                if(location == Vector3.zero)
+                    continue;
+                
+                Debug.Log("Youpi");
+                agent.Warp(location);
+                agent.SetDestination(location);
+            }
+        }
     }
 }

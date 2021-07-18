@@ -32,6 +32,10 @@ public class GameManager : MonoBehaviour
     private string[] names = new []{"Sanchez", "Hernandez", "Rodriguez", "Fernandez", "Santiago"};
     private string[] surnames = new []{"Pedro", "Manuel", "Miguel", "Javier", "Angel"};
 
+    // Main Camera
+    [SerializeField] 
+    private Camera mainCamera;
+    
     //Text Objectifs
     [Header("Target and Code")] 
     [SerializeField]
@@ -81,7 +85,10 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private TestConnexion DBConnexion;
 
+
     [SerializeField] 
+    private Transform containerMap;
+    
     private Platform platform;
 
     // Elevator
@@ -90,8 +97,20 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] 
     private CamCinematic camCinematic;
+    
+    // Orb
+    [SerializeField] 
+    private GameObject orbG;
+
     private void Awake()
     {
+#if UNITY_STANDALONE
+        platform = Platform.PC;
+#else
+        platform = Platform.Android;
+#endif
+        
+        
         _singleton = this;
         isGamePaused = false;
         pauseMenu.SetActive(false);
@@ -119,6 +138,8 @@ public class GameManager : MonoBehaviour
         blackScreen.SetActive(true);
         yield return null;
         yield return null;
+        OrbManager.GetOrbs();
+        
         if (!isTutorial)
         {
             GenerateNewMap();
@@ -407,5 +428,42 @@ public class GameManager : MonoBehaviour
                 SoundManager.Instance.SetVolumeHearth(0f);
             }
         }
+    }
+
+    public void UseOrb(bool isRed)
+    {
+        if (!PlayerCanClick)
+        {
+            return; 
+        }
+
+        if (isRed && OrbManager.GetRedCount() < 1)
+            return;
+        
+        if (!isRed && OrbManager.GetBlueCount() < 1)
+            return;
+
+        Vector3 position = RaycastMesh();
+        if (position == Vector3.zero)
+            return;
+        OrbManager.DecrementOrb(isRed);
+        GameObject orb = Instantiate(orbG, containerMap);
+        orb.transform.position = position + new Vector3(0f, 1f, 0f);
+        orb.GetComponent<OrbBehaviour>().StartTicTac(isRed);
+    }
+
+    public Vector3 RaycastMesh()
+    {
+        int layerMask = 1 << 8;
+        
+        layerMask = ~layerMask;
+        
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 10f, layerMask))
+        {
+            return hit.point;
+        }
+        return Vector3.zero;
     }
 }

@@ -103,6 +103,11 @@ public class PcController : MonoBehaviour
             runningTimer = Mathf.Clamp(runningTimer + Time.deltaTime * 0.5f, 0f, runningDuration);
         }
 
+        if (Input.mouseScrollDelta.y != 0f)
+        {
+            InventoryUI.instance.SelectOrb((int)Math.Abs(Input.mouseScrollDelta.y));
+        }
+
         directionMove = directionMove.normalized;
         playerMove.SetDirection(directionMove * (isRunning? multiplyRunningValue : 1f));
     }
@@ -111,6 +116,11 @@ public class PcController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             playerLook.RaycastInteractiveElement();
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            GameManager.Instance().UseOrb(InventoryUI.instance.GetSelectedOrb());
         }
     }
 }

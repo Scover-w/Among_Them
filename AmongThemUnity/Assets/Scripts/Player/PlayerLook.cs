@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = System.Random;
 
 public class PlayerLook : MonoBehaviour
 {
@@ -89,6 +90,15 @@ public class PlayerLook : MonoBehaviour
                         }
                     }
                     break;
+                case "Orb":
+                    if(hit.transform.parent.CompareTag("Orb"))
+                        Destroy(hit.transform.parent.gameObject);
+                    else
+                        Destroy(hit.transform.gameObject);
+                    
+                    OrbManager.IncrementOrb(UnityEngine.Random.Range(0f, 1f) < .5f);
+                    break;
+                
                 case "InteractiveElement":
                     Vector3 origin = hit.transform.position;
                     Destroy(hit.transform.gameObject);

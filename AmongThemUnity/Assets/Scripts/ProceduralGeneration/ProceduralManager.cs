@@ -38,6 +38,9 @@ public class ProceduralManager : MonoBehaviour
     private ProceduralStorey proceduralStorey;
 
     [SerializeField] 
+    private ProceduralOrb proceduralOrb;
+
+    [SerializeField] 
     private RandomMaterials randomMaterials;
 
     [Range(0f,1f)][Header("Threshold and probability default for each value with two random choices")] 
@@ -69,13 +72,15 @@ public class ProceduralManager : MonoBehaviour
         LoadBuilding(wealthValue);
         randomMaterials.ApplyRandomColors();
         NavMeshSurface.RemoveData();
-        StartCoroutine(BuildNavMesh());
+        StartCoroutine(nameof(BuildNavMesh), wealthValue);
     }
 
-    IEnumerator BuildNavMesh()
+    IEnumerator BuildNavMesh(float wealthLevel)
     {
         yield return null;
         NavMeshSurface.BuildNavMesh();
+        yield return null;
+        proceduralOrb.LoadOrb(wealthLevel);
     }
 
     public void LoadBuilding(float wealthLevel)
@@ -91,5 +96,7 @@ public class ProceduralManager : MonoBehaviour
         proceduralMall.LoadMall(obstructedLocation, wealthLevel);
         
         obstructedLocation.Union(proceduralStair.LoadStairs(obstructedLocation, wealthLevel)).ToList();
+
+        
     }
 }
