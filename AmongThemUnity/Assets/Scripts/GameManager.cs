@@ -7,6 +7,8 @@ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 using TMPro;
 
+public enum Platform {PC, Android}
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance()
@@ -78,6 +80,9 @@ public class GameManager : MonoBehaviour
     //Database
     [SerializeField]
     private TestConnexion DBConnexion;
+
+    [SerializeField] 
+    private Platform platform;
 
     // Elevator
     [SerializeField] 
@@ -174,7 +179,8 @@ public class GameManager : MonoBehaviour
     public void GoToNextFloor(GameObject elevator)
     {
         ProgressionManager.NextLevel();
-        
+
+        targetIsAlive = true;
         playerCanMove = false;
         playerCanRotate = false;
         playerCanClick = false;
@@ -216,8 +222,11 @@ public class GameManager : MonoBehaviour
     {
         if (isGamePaused)
         {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
+            if (platform == Platform.PC)
+            {
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+            }
             Time.timeScale = 1.0f;
             pauseMenu.SetActive(false);
             fpsCanvas.SetActive(true);
