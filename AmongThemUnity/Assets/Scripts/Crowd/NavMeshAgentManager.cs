@@ -111,8 +111,6 @@ public class NavMeshAgentManager : MonoBehaviour
         animators = new List<Animator>();
 
         nombreAgent = (int)(500f * ProgressionManager.GetWealthValue() + 100f);
-        // TO DO : remove it
-        nombreAgent = 600;
 
         Animator animator;
         

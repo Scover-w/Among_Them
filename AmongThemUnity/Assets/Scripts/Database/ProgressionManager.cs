@@ -37,5 +37,11 @@ public static class ProgressionManager
     {
         return wealthValue;
     }
+    
+    public static void SetWealthValueShortCut(float value)
+    {
+        wealthValue = value;
+        PlayerPrefs.SetFloat("wealthValue", wealthValue);
+    }
 
 }

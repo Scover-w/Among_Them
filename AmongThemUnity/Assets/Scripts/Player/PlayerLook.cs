@@ -75,7 +75,6 @@ public class PlayerLook : MonoBehaviour
                                 else
                                 {
                                     gm.EndGame(false);
-                                    //Lose.SetActive(true);
                                 }
                             }
                             else

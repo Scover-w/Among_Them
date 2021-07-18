@@ -70,7 +70,7 @@ public class ProceduralRoom : MonoBehaviour
                 {
                     LoadRoom(child, room);
                     LoadApartment(wealthLevel, child.position, sizeRoom);
-                    // TODO : Set Door interactable
+                    
                     instantiatedDoor.tag = "TargetRoomDoor";
                     instantiatedDoor.isStatic = false;
                     GameManager.Instance().AppartmentTargetDoor(instantiatedDoor);

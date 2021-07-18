@@ -69,6 +69,9 @@ public class GameManager : MonoBehaviour
     private GameObject blackScreen;
     [SerializeField] 
     private GameObject whiteTransition;
+
+    [SerializeField] 
+    private GameObject reloadSceneButton;
     
     //GO Text
     [SerializeField]
@@ -235,8 +238,8 @@ public class GameManager : MonoBehaviour
         player.SetActive(false);
         camCinematic.PlayCinematic();
         yield return new WaitForSeconds(camCinematic.GetCinematicTimer());
-
-        if (Math.Abs(ProgressionManager.GetWealthValue() - 1f) < 0.001f)
+        
+        if (ProgressionManager.GetWealthValue() > 0.99f)
         {
             EndGame(true);
         }
@@ -364,6 +367,8 @@ public class GameManager : MonoBehaviour
         endTime.text = "-";
         if (win)
         {
+            ProgressionManager.SetWealthValueShortCut(0f);
+            reloadSceneButton.SetActive(false);
             goText.text = "Win";
             timeEnd = Time.time;
             string finalTime = ConvertTimeToString(timeEnd - timeStart);
@@ -374,8 +379,11 @@ public class GameManager : MonoBehaviour
         {
             SoundManager.Instance.Play("Lose");
         }
-        
-        //SceneManager.LoadScene("Menu", LoadSceneMode.Single);
+    }
+
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene("RandomGamePlay", LoadSceneMode.Single);
     }
 
     public string ConvertTimeToString(float time)
