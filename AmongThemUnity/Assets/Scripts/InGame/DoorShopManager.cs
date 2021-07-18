@@ -65,6 +65,7 @@ public class DoorShopManager : MonoBehaviour
                             Debug.Log("OpenDoor");
                             shop.ParentObjects.SetActive(true);
                             shop.Animator.SetTrigger("OpenDoor");
+                            SoundManager.Instance.Play("Doors");
                             shop.IsOpen = true;
                             
                             shops[i] = shop;
@@ -74,6 +75,7 @@ public class DoorShopManager : MonoBehaviour
                     {
                         Debug.Log("CloseDoor");
                         shop.Animator.SetTrigger("CloseDoor");
+                        SoundManager.Instance.Play("Doors");
                         shop.IsOpen = false;
                         shops[i] = shop;
 

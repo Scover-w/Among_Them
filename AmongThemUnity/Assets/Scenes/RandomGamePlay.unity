@@ -942,10 +942,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 825149341}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1725049051a6faf41ba39b351e490b18, type: 3}
+  m_Script: {fileID: 11500000, guid: 302a8fdecad5b974ebfde0c7e114a6b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  al: {fileID: 1914483952}
   soundSlider: {fileID: 825149344}
   volumeValue: {fileID: 973784906}
 --- !u!114 &825149344
@@ -3016,6 +3015,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MissionMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 6990600447706564523, guid: e1a18946f45034143b2a06e58bd558d4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e1a18946f45034143b2a06e58bd558d4, type: 3}
 --- !u!223 &1905222186 stripped
@@ -3099,7 +3103,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1914483953}
-  - component: {fileID: 1914483952}
+  - component: {fileID: 1914483954}
   m_Layer: 0
   m_Name: Audio
   m_TagString: Untagged
@@ -3107,102 +3111,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!82 &1914483952
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1914483951}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 20b0a64ca78962c4f89a573481666903, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 1
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!4 &1914483953
 Transform:
   m_ObjectHideFlags: 0
@@ -3217,6 +3125,59 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1914483954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914483951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1725049051a6faf41ba39b351e490b18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - Name: Doors
+    clip: {fileID: 8300000, guid: 5aa99c3db4c1ae74aa3b21f83c77da2b, type: 3}
+    volume: 1
+    source: {fileID: 0}
+  - Name: Kill
+    clip: {fileID: 8300000, guid: 84b70b48365bd894cae0eaa1a955d914, type: 3}
+    volume: 1
+    source: {fileID: 0}
+  - Name: Click
+    clip: {fileID: 8300000, guid: a4c4e4c305871074bbe5f75ce854f0fe, type: 3}
+    volume: 1
+    source: {fileID: 0}
+  - Name: Success
+    clip: {fileID: 8300000, guid: ec1bab970d6b04d418ab15fdad3ec450, type: 3}
+    volume: 1
+    source: {fileID: 0}
+  - Name: Failed
+    clip: {fileID: 8300000, guid: 2002780b9c96e584096418c375badff5, type: 3}
+    volume: 1
+    source: {fileID: 0}
+  - Name: Poi
+    clip: {fileID: 8300000, guid: a994c093961a99f4ead834f4b0211be9, type: 3}
+    volume: 1
+    source: {fileID: 0}
+  - Name: Hearth
+    clip: {fileID: 8300000, guid: 855d5d252c1bf87428c3fd663d78d7a3, type: 3}
+    volume: 0
+    source: {fileID: 0}
+  - Name: Lose
+    clip: {fileID: 8300000, guid: f41d3f3d54bbd7d42bbc9bdcd7370957, type: 3}
+    volume: 1
+    source: {fileID: 0}
+  - Name: NormalMusic
+    clip: {fileID: 8300000, guid: 45179db21ab2cf242abf80c6e7f05d6a, type: 3}
+    volume: 1
+    source: {fileID: 0}
+  - Name: SadMusic
+    clip: {fileID: 8300000, guid: e59fb70dee839d64bb552926bee95a81, type: 3}
+    volume: 1
+    source: {fileID: 0}
 --- !u!1 &1916157736
 GameObject:
   m_ObjectHideFlags: 0

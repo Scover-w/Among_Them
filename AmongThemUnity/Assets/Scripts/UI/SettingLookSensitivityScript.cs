@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SettingLookSenitivityScript : MonoBehaviour
+public class SettingLookSensitivityScript : MonoBehaviour
 {
     [SerializeField] 
     private PlayerLook playerLook;
@@ -37,6 +37,7 @@ public class SettingLookSenitivityScript : MonoBehaviour
 
     void ChangeSensitivity()
     {
+        SoundManager.Instance.Click();
         sensitivity = sliderLS.value;
         if (playerLook)
         {

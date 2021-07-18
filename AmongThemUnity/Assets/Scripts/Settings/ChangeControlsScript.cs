@@ -62,6 +62,7 @@ public class ChangeControlsScript : MonoBehaviour
 
     public void InputKey()
     {
+        SoundManager.Instance.Click();
         changingBinding = true;
         description.text = "Choose a key to bind the action : " + actionKey;
         keyBind.text = GameInputManager.GetKey(actionKey).ToString();

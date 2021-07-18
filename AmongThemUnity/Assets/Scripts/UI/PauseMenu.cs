@@ -22,10 +22,12 @@ public class PauseMenu : MonoBehaviour
     
     public void OpenSettings()
     {
+        SoundManager.Instance.Click();
         panelSettings.SetActive(true);
     }
     public void CloseSettings()
     {
+        SoundManager.Instance.Click();
         panelSettings.SetActive(false);
     }
     

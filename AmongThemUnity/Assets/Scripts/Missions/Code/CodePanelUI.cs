@@ -16,6 +16,10 @@ public class CodePanelUI : MonoBehaviour
         }
     }
 
+    public void ClickButton()
+    {
+        SoundManager.Instance.Click();
+    }
     public void ConfirmCode()
     {
         CodeMission.Instance().ConfirmCode(codeDisplay);

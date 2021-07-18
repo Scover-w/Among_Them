@@ -61,12 +61,17 @@ public class CodeMission : MonoBehaviour
         Debug.Log(code);
         if (fieldCode.text.Equals(code.Substring(0,4)))
         {
+            GameManager.Instance().StopHearthBeat();
+            SoundManager.Instance.StopHearth();
+            SoundManager.Instance.Play("Success");
             fieldCode.text = "TRUE";
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             StartCoroutine(EndAnimationTrue(fieldCode));
             return;
         }
+        
+        SoundManager.Instance.Play("Failed");
         fieldCode.text = "FALSE";
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;

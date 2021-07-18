@@ -38,6 +38,7 @@ public class DoorElevatorManager : MonoBehaviour
         if(activeElevator.GateAnim != null)
             activeElevator.GateAnim.SetTrigger("OpenDoor");
 
+        SoundManager.Instance.Play("Doors");
         StartCoroutine(nameof(WaitCloseElevatorBeginLevel));
     }
 
@@ -69,6 +70,8 @@ public class DoorElevatorManager : MonoBehaviour
         
         if(activeElevator.GateAnim != null)
             activeElevator.GateAnim.SetTrigger("OpenDoor");
+        
+        SoundManager.Instance.Play("Doors");
     }
 
     public void CloseElevatorEndLevel()
@@ -80,6 +83,8 @@ public class DoorElevatorManager : MonoBehaviour
         
         if(activeElevator.GateAnim != null)
             activeElevator.GateAnim.SetTrigger("CloseDoor");
+        
+        SoundManager.Instance.Play("Doors");
     }
     
 
@@ -97,6 +102,8 @@ public class DoorElevatorManager : MonoBehaviour
         
         if(activeElevator.GateAnim != null)
             activeElevator.GateAnim.SetTrigger("CloseDoor");
+
+        SoundManager.Instance.Play("Doors");
     }
     
     private bool IsDistant()

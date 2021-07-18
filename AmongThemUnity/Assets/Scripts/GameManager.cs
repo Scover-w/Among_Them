@@ -258,6 +258,7 @@ public class GameManager : MonoBehaviour
 
     public void KillTarget()
     {
+        SoundManager.Instance.Play("Kill");
         var code = CodeMission.Instance().RandomizeCode();
         codeText.text = "Code : " + code;
         parentTarget.SetActive(false);
@@ -269,6 +270,9 @@ public class GameManager : MonoBehaviour
             appartmentTargetDoor.GetComponent<MeshRenderer>().material = glowingObjectMat;
         }
         
+        SoundManager.Instance.PlayHearth();
+        SoundManager.Instance.PlayMusic("SadMusic");
+        StartCoroutine(nameof(HearthBeat));
     }
 
     public void StartTutorial()
@@ -292,6 +296,7 @@ public class GameManager : MonoBehaviour
     
     public void GetNextTargetInformation()
     {
+        SoundManager.Instance.Play("Poi");
         dataRetrieve = true;
         targetName.text = $"{surnames[Random.Range(0, surnames.Length - 1)]}  {names[Random.Range(0, names.Length - 1)]}";
         parentTarget.SetActive(true);
@@ -326,6 +331,10 @@ public class GameManager : MonoBehaviour
             string finalTime = ConvertTimeToString(timeEnd - timeStart);
             endTime.text = finalTime;
             StartCoroutine(DBConnexion.SendData(finalTime, 1));
+        }
+        else
+        {
+            SoundManager.Instance.Play("Lose");
         }
         
         //SceneManager.LoadScene("Menu", LoadSceneMode.Single);
@@ -363,5 +372,31 @@ public class GameManager : MonoBehaviour
         string timeString = hText + ":" + mText + ":" + sText;
 
         return timeString;
+    }
+
+    public void StopHearthBeat()
+    {
+        SoundManager.Instance.Stop("SadMusic");
+        StopCoroutine(nameof(HearthBeat));
+    }
+    
+    IEnumerator HearthBeat()
+    {
+        WaitForSeconds wait = new WaitForSeconds(0.2f);
+        Vector2 distanceDoor;
+        while (true)
+        {
+            yield return wait;
+            distanceDoor.x = player.transform.position.x - appartmentTargetDoor.transform.position.x;
+            distanceDoor.y = player.transform.position.z - appartmentTargetDoor.transform.position.z;
+            if (distanceDoor.magnitude < 50f)
+            {
+                SoundManager.Instance.SetVolumeHearth(1f - distanceDoor.magnitude / 50f);
+            }
+            else
+            {
+                SoundManager.Instance.SetVolumeHearth(0f);
+            }
+        }
     }
 }

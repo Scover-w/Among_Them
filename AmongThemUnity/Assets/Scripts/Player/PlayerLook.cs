@@ -101,6 +101,7 @@ public class PlayerLook : MonoBehaviour
                     break;
                 case "LaptopInfo":
                     PCMission.Instance().OpenMissionPanel();
+                    
                     break;
                 case "ElevatorDoor":
                     if (!gm.DataRetrieve)
