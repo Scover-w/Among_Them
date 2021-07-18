@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-#if UNITY_STANDALONE
+#if UNITY_STANDALONE || UNITY_EDITOR
         platform = Platform.PC;
 #else
         platform = Platform.Android;
@@ -373,7 +373,7 @@ public class GameManager : MonoBehaviour
             timeEnd = Time.time;
             string finalTime = ConvertTimeToString(timeEnd - timeStart);
             endTime.text = finalTime;
-            StartCoroutine(DBConnexion.SendData(finalTime, 1));
+            StartCoroutine(DBConnexion.SendData(finalTime, platform == Platform.PC ? 1 : 2));
         }
         else
         {

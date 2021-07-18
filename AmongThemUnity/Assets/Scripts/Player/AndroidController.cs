@@ -41,8 +41,17 @@ public class AndroidController : MonoBehaviour
         myTouch = new List<Touch>();
         nbTouch = 0;
         indexTouchLook = -1;
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+        if (enabled)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            variableJoystickLook.gameObject.SetActive(false);
+            variableJoystickMove.gameObject.SetActive(false);
+        }
+        
         actionButton.onClick.AddListener(delegate { playerLook.RaycastInteractiveElement(); });
     }
 

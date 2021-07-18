@@ -8,7 +8,7 @@ public class RemoveIfAndroid : MonoBehaviour
     void Start()
     {
 
-        #if UNITY_STANDALONE
+        #if UNITY_STANDALONE || UNITY_EDITOR
         gameObject.SetActive(false);
         #endif
     }
