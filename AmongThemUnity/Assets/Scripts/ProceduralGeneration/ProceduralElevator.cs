@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -14,6 +15,16 @@ public enum ElevatorOpenness
     Closed,
     Opened
 }
+
+public struct ElevatorEntity
+{
+    public string ParentElevatorName;
+    public GameObject Elevator;
+    public Animator ElevatorAnim;
+    public Animator BorderAnim;
+    public Animator GateAnim;
+}
+
 public class ProceduralElevator : MonoBehaviour
 {
     [SerializeField] private List<GameObject> RoundedElevators;
@@ -50,10 +61,15 @@ public class ProceduralElevator : MonoBehaviour
     [Range(0.0f, 1.0f)] public float ShortValueProb = 0.0f;
 
     [Range(0.0f, 1.0f)] public float LongValueProb = 0.0f;
+
+    [SerializeField] 
+    private DoorElevatorManager elevatorManager;
     
     // Start is called before the first frame update
     public List<ObstructedLocation> LoadElevators(float wealthLevel)
     {
+        elevatorManager.Reset();
+        
         var obstructedLocation = new List<ObstructedLocation>();
         var tempGeoForm = ChooseElevatorForm(wealthLevel);
         var tempOpenness = ChooseElevatorOpenness(wealthLevel);
@@ -327,27 +343,55 @@ public class ProceduralElevator : MonoBehaviour
 
     private void LoadElevator(ElevatorProfile profile, Vector3 position)
     {
-        GameObject elevator = Instantiate(profile.Elevator, ProceduralManager.ParentMap);
+        GameObject parentElevator = new GameObject();
+        parentElevator.transform.parent = ProceduralManager.ParentMap;
+        parentElevator.transform.position = position;
+        parentElevator.name = "ElevatorParent" + parentElevator.GetInstanceID();
+        
+        GameObject elevator = Instantiate(profile.Elevator, parentElevator.transform);
         int rotation = GetRotationElevator(position, profile.Location);
         
         elevator.transform.position = position;
         elevator.transform.Rotate(0, rotation, 0);
         
-        GameObject border = Instantiate(profile.Border, ProceduralManager.ParentMap);
+        GameObject border = Instantiate(profile.Border, parentElevator.transform);
         border.transform.position = position;
         border.transform.Rotate(0, rotation, 0);
         
-        GameObject bottom = Instantiate(profile.Bottom, ProceduralManager.ParentMap);
+        GameObject bottom = Instantiate(profile.Bottom, parentElevator.transform);
         bottom.transform.position = position;
         bottom.transform.Rotate(0, rotation, 0);
 
-        if (profile.Gate != null)
+        ElevatorEntity elevatorEntity = new ElevatorEntity();
+        elevatorEntity.ParentElevatorName = parentElevator.name;
+        elevatorEntity.Elevator = elevator;
+        elevatorEntity.ElevatorAnim = elevator.GetComponent<Animator>();
+        
+        Animator borderAnimator = null;
+
+        try
         {
-            GameObject gate = Instantiate(profile.Gate, ProceduralManager.ParentMap);
-            gate.transform.position = position;
-            gate.transform.Rotate(0, rotation, 0);
+            borderAnimator = border.GetComponent<Animator>();
+        }
+        catch (Exception e)
+        {
+            // Nothing to handle
         }
 
+        elevatorEntity.BorderAnim = borderAnimator;
+        elevatorEntity.GateAnim = null;
+        
+        
+        if (profile.Gate != null)
+        {
+            GameObject gate = Instantiate(profile.Gate, parentElevator.transform);
+            gate.transform.position = position;
+            gate.transform.Rotate(0, rotation, 0);
+
+            elevatorEntity.GateAnim = gate.GetComponent<Animator>();
+        }
+        
+        elevatorManager.Add(elevatorEntity);
         
     }
 }

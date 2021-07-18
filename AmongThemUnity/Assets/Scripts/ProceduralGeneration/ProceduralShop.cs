@@ -60,10 +60,12 @@ public class ProceduralShop : MonoBehaviour
     private float tresholdNormalRich;
 
     [SerializeField] 
-    private AutomaticDoorShopManager doorShopManager;
+    private DoorShopManager doorShopManager;
     
     public void LoadShops(List<ObstructedLocation> obstructedLocations, float wealthLevel)
     {
+        doorShopManager.Reset();
+        
         int longSide = 10;
         int shortSide = 7;
 
@@ -166,12 +168,12 @@ public class ProceduralShop : MonoBehaviour
                         shop.SetActive(false);
                         
                         ShopEntity shopEntity = new ShopEntity();
-                        shopEntity.parentObjects = shop;
-                        shopEntity.animator = shopToPut.GetComponent<Animator>();
+                        shopEntity.ParentObjects = shop;
+                        shopEntity.Animator = shopToPut.GetComponent<Animator>();
  
-                        shopEntity.position = GetCenterDoor(shopToPut.transform.GetChild(0).position, shopToPut.transform.GetChild(1).position);
+                        shopEntity.Position = GetCenterDoor(shopToPut.transform.GetChild(0).position, shopToPut.transform.GetChild(1).position);
 
-                        shopEntity.isOpen = false;
+                        shopEntity.IsOpen = false;
                         doorShopManager.Add(shopEntity);
                     }
 

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1622597859084714976}
   - component: {fileID: 9123908875602377813}
   - component: {fileID: 6469945096976254815}
+  - component: {fileID: 3647266472613475901}
   m_Layer: 0
   m_Name: ElevatorR1Open
   m_TagString: Untagged
@@ -112,7 +113,7 @@ NavMeshObstacle:
   m_MoveThreshold: 0.1
   m_Carve: 0
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 3, z: 0}
+  m_Center: {x: 0, y: 3.2, z: 0}
   m_TimeToStationary: 0.5
 --- !u!64 &6469945096976254815
 MeshCollider:
@@ -128,6 +129,25 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3238063918412731070, guid: 7493153174ea29b49b7f29d959fd3581, type: 3}
+--- !u!95 &3647266472613475901
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2265312641301124292}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6f065f2fdcb155845b9b3d834e3277af, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8512687376900197155
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,7 +174,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8512687376900197155}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.0000000028052687, y: 0, z: -0.008609308}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -248,7 +268,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8969987123238520582}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.0000000028052687, y: 0, z: -0.008609308}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []

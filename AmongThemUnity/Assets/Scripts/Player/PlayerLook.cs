@@ -139,9 +139,9 @@ public class PlayerLook : MonoBehaviour
         {
             playerBody.RotateAround(playerBody.position, playerBody.up , yRotation * lookSensitivity /** Time.fixedDeltaTime*/);
             transform.localRotation = Quaternion.Euler(xRotation * lookSensitivity /** Time.fixedDeltaTime*/, 0f, 0f);
-            yRotation = 0f;
-        }
             
+        }
+        yRotation = 0f;
     }
 
     public bool IsSomeoneWatching()

@@ -5,13 +5,13 @@ using UnityEngine;
 
 public struct ShopEntity
 {
-    public Vector2 position;
-    public Animator animator;
-    public GameObject parentObjects;
-    public bool isOpen;
+    public Vector2 Position;
+    public Animator Animator;
+    public GameObject ParentObjects;
+    public bool IsOpen;
 }
 
-public class AutomaticDoorShopManager : MonoBehaviour
+public class DoorShopManager : MonoBehaviour
 {
     [SerializeField] 
     private Transform positionPlayer;
@@ -41,6 +41,11 @@ public class AutomaticDoorShopManager : MonoBehaviour
         shops.Add(shopEntity);
     }
 
+    public void Reset()
+    {
+        shops = new List<ShopEntity>();
+    }
+
     IEnumerator CheckDoors()
     {
         while (isActive)
@@ -53,23 +58,23 @@ public class AutomaticDoorShopManager : MonoBehaviour
                 for(int i = 0; i < shops.Count; i++)
                 {
                     var shop = shops[i];
-                    if (IsNear(shop.position))
+                    if (IsNear(shop.Position))
                     {
-                        if (!shop.isOpen)
+                        if (!shop.IsOpen)
                         {
                             Debug.Log("OpenDoor");
-                            shop.parentObjects.SetActive(true);
-                            shop.animator.SetTrigger("OpenDoor");
-                            shop.isOpen = true;
+                            shop.ParentObjects.SetActive(true);
+                            shop.Animator.SetTrigger("OpenDoor");
+                            shop.IsOpen = true;
                             
                             shops[i] = shop;
                         }
                     }
-                    else if(shop.isOpen)
+                    else if(shop.IsOpen)
                     {
                         Debug.Log("CloseDoor");
-                        shop.animator.SetTrigger("CloseDoor");
-                        shop.isOpen = false;
+                        shop.Animator.SetTrigger("CloseDoor");
+                        shop.IsOpen = false;
                         shops[i] = shop;
 
                         StartCoroutine(nameof(HideObjects), shop);
@@ -98,7 +103,7 @@ public class AutomaticDoorShopManager : MonoBehaviour
         yield return wait2;
         if (!(Math.Abs(positionPlayer.position.x) > 100.2f || Math.Abs(positionPlayer.position.z) > 70.2f))
         {
-            shopEntity.parentObjects.SetActive(false);
+            shopEntity.ParentObjects.SetActive(false);
         }
     }
 }

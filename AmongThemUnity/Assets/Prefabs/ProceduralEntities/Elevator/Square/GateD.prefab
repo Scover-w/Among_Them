@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1067395997316870402}
   - component: {fileID: 2969227066239485384}
   - component: {fileID: 4910843126606660032}
+  - component: {fileID: 1232738378687841224}
   m_Layer: 0
   m_Name: GateD
   m_TagString: Untagged
@@ -95,6 +96,25 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3148832159175366384, guid: 1efc8b34ddedd8b429e78c1d549d53ac, type: 3}
+--- !u!95 &1232738378687841224
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3617565023104246813}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cb7109682d841af48aa9273cb0fa41e5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8672150314667721422
 GameObject:
   m_ObjectHideFlags: 0

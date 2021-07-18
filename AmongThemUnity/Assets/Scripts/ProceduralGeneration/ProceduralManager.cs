@@ -39,7 +39,7 @@ public class ProceduralManager : MonoBehaviour
 
     [SerializeField] 
     private RandomMaterials randomMaterials;
-    
+
     [Range(0f,1f)][Header("Threshold and probability default for each value with two random choices")] 
     public float minThresholdValue = 0.1f;
     

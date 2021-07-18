@@ -58,6 +58,10 @@ public class GameManager : MonoBehaviour
     private GameObject UICanvas;
     [SerializeField]
     private GameObject gameOverCanvas;
+
+    [SerializeField] 
+    private GameObject blackScreen;
+    
     
     //GO Text
     [SerializeField]
@@ -76,6 +80,10 @@ public class GameManager : MonoBehaviour
     
     //Floor
     private int floor;
+    
+    // Elevator
+    [SerializeField] 
+    private DoorElevatorManager elevatorManager;
 
     private void Awake()
     {
@@ -83,9 +91,6 @@ public class GameManager : MonoBehaviour
         isGamePaused = false;
         pauseMenu.SetActive(false);
         fpsCanvas.SetActive(true);
-        playerCanMove = true;
-        playerCanRotate = true;
-        playerCanClick = true;
         targetIsAlive = true;
         isTutorial = false;
         startPosition = player.transform.position;
@@ -107,6 +112,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator BeginGame()
     {
+        blackScreen.SetActive(true);
         yield return null;
         yield return null;
         if (!isTutorial)
@@ -150,9 +156,22 @@ public class GameManager : MonoBehaviour
         yield return null;
         NavMeshAgentManager.Instance().InstantiateCrowd();
         target = NavMeshAgentManager.Instance().GetTargetAgent();
+
+        StartCoroutine(nameof(WaitCrowdMove));
     }
 
-
+    IEnumerator WaitCrowdMove()
+    {
+        yield return new WaitForSeconds(3f); // 10 to put
+        elevatorManager.TeleportPlayer();
+        blackScreen.SetActive(false);
+        yield return new WaitForSeconds(2f);
+        elevatorManager.OpenElevator();
+        playerCanMove = true;
+        playerCanRotate = true;
+        playerCanClick = true;
+    }
+    
     public bool PauseGame()
     {
         if (isGamePaused)
@@ -252,7 +271,6 @@ public class GameManager : MonoBehaviour
             return;
         }
         GenerateNewMap();
-        ReplacePlayerOnStartPosition();
     }
 
     public void AppartmentTargetDoor(GameObject appartmentTargetDoor)

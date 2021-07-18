@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7607829338968411146}
   - component: {fileID: 6191764855732268873}
   - component: {fileID: 3101759955335960851}
+  - component: {fileID: 7122435755111922212}
   m_Layer: 0
   m_Name: ElevatorD
   m_TagString: Untagged
@@ -128,6 +129,25 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -9147911616026405018, guid: 2c68c0eeff7b23045b68e61d7ed27e32, type: 3}
+--- !u!95 &7122435755111922212
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2255092158426128092}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8d8358ce59a064b4ca42e126065fd556, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2746457828950129287
 GameObject:
   m_ObjectHideFlags: 0
@@ -155,7 +175,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2746457828950129287}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.00000040367635, y: 1.05, z: -1.2388738}
+  m_LocalPosition: {x: 0, y: 1.05, z: -1.2388738}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1441260672891634790}
@@ -249,7 +269,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5994741313220354847}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.00000040367635, y: 1.0499998, z: -1.2388738}
+  m_LocalPosition: {x: 0, y: 1.0499998, z: -1.2388738}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1441260672891634790}
