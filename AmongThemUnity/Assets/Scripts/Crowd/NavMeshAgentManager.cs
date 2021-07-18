@@ -81,7 +81,14 @@ public class NavMeshAgentManager : MonoBehaviour
         {
             var agent = Instantiate(prefabAgent, containerCrowd);
             NavMeshAgent navMeshAgent = agent.GetComponent<NavMeshAgent>();
-            navMeshAgent.Warp(GetRandomPositionOnNavMesh());
+
+            Vector3 position;
+            do
+            {
+                position = GetRandomPositionOnNavMesh();
+            } while (position.y > 2f && position.y < 6.3f);
+            
+            navMeshAgent.Warp(position);
             navMeshAgent.SetDestination(GetRandomPositionOnNavMesh());
             navMeshList.Add(navMeshAgent);
             fieldViewMeshColliderList.Add(agent.GetComponentInChildren<MeshCollider>());
