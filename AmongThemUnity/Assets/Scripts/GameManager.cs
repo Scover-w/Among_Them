@@ -61,7 +61,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] 
     private GameObject blackScreen;
-    
+    [SerializeField] 
+    private GameObject whiteTransition;
     
     //GO Text
     [SerializeField]
@@ -77,14 +78,13 @@ public class GameManager : MonoBehaviour
     //Database
     [SerializeField]
     private TestConnexion DBConnexion;
-    
-    //Floor
-    private int floor;
-    
+
     // Elevator
     [SerializeField] 
     private DoorElevatorManager elevatorManager;
 
+    [SerializeField] 
+    private CamCinematic camCinematic;
     private void Awake()
     {
         _singleton = this;
@@ -98,19 +98,18 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        floor = 0;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         targetName.text = $"{surnames[Random.Range(0, surnames.Length - 1)]}  {names[Random.Range(0, names.Length - 1)]}";
         parentTarget.SetActive(true);
         parentCode.SetActive(false);
         timeStart = Time.time;
-        StartCoroutine(BeginGame());
+        StartCoroutine(StartGame());
     }
     
     
 
-    IEnumerator BeginGame()
+    IEnumerator StartGame()
     {
         blackScreen.SetActive(true);
         yield return null;
@@ -133,10 +132,10 @@ public class GameManager : MonoBehaviour
             PauseGame();
         }
 
-        if (Input.GetKeyDown(KeyCode.L))
+        /*if (Input.GetKeyDown(KeyCode.L))
         {
             GenerateNewMap();
-        }
+        }*/
         
     }
 
@@ -157,19 +156,60 @@ public class GameManager : MonoBehaviour
         NavMeshAgentManager.Instance().InstantiateCrowd();
         target = NavMeshAgentManager.Instance().GetTargetAgent();
 
-        StartCoroutine(nameof(WaitCrowdMove));
+        StartCoroutine(nameof(BeginLevelCinematic));
     }
 
-    IEnumerator WaitCrowdMove()
+    IEnumerator BeginLevelCinematic()
     {
         yield return new WaitForSeconds(3f); // 10 to put
         elevatorManager.TeleportPlayer();
         blackScreen.SetActive(false);
         yield return new WaitForSeconds(2f);
-        elevatorManager.OpenElevator();
+        elevatorManager.OpenElevatorBeginLevel();
         playerCanMove = true;
         playerCanRotate = true;
         playerCanClick = true;
+    }
+
+    public void GoToNextFloor(GameObject elevator)
+    {
+        ProgressionManager.NextLevel();
+        
+        playerCanMove = false;
+        playerCanRotate = false;
+        playerCanClick = false;
+        dataRetrieve = false;
+        StartCoroutine(nameof(EndLevelCinematic), elevator);
+    }
+    
+    IEnumerator EndLevelCinematic(GameObject elevator)
+    {
+        elevatorManager.OpenElevatorEndLevel(elevator);
+        yield return new WaitForSeconds(1f);
+        whiteTransition.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        player.transform.position = elevator.transform.position;
+        player.transform.rotation = elevator.transform.rotation;
+        player.transform.Rotate(Vector3.up, 180f);
+        yield return new WaitForSeconds(0.5f);
+        
+        yield return new WaitForSeconds(2f);
+        elevatorManager.CloseElevatorEndLevel();
+        yield return new WaitForSeconds(1f);
+        camCinematic.PlayCinematic();
+        
+        yield return new WaitForSeconds(camCinematic.GetCinematicTimer());
+        
+        
+        if (Math.Abs(ProgressionManager.GetWealthValue() - 1f) < 0.001f)
+        {
+            EndGame(true);
+        }
+        else
+        {
+            blackScreen.SetActive(true);
+            GenerateNewMap();
+        }
     }
     
     public bool PauseGame()
@@ -256,21 +296,6 @@ public class GameManager : MonoBehaviour
         targetName.text = $"{surnames[Random.Range(0, surnames.Length - 1)]}  {names[Random.Range(0, names.Length - 1)]}";
         parentTarget.SetActive(true);
         parentCode.SetActive(false);
-    }
-
-    public void GoToNextFloor()
-    {
-        // TO DO : Cinematic and others stuff to handle
-        ProgressionManager.NextLevel();
-
-        dataRetrieve = false;
-        floor++;
-        if (floor == 1)
-        {
-            EndGame(true);
-            return;
-        }
-        GenerateNewMap();
     }
 
     public void AppartmentTargetDoor(GameObject appartmentTargetDoor)

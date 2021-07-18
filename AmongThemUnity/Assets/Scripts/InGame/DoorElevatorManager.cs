@@ -23,7 +23,12 @@ public class DoorElevatorManager : MonoBehaviour
         elevators = new List<ElevatorEntity>();
     }
 
-    public void OpenElevator()
+    public GameObject GetElevator()
+    {
+        return activeElevator.Elevator;
+    }
+
+    public void OpenElevatorBeginLevel()
     {
         activeElevator.ElevatorAnim.SetTrigger("OpenDoor");
         
@@ -33,7 +38,7 @@ public class DoorElevatorManager : MonoBehaviour
         if(activeElevator.GateAnim != null)
             activeElevator.GateAnim.SetTrigger("OpenDoor");
 
-        StartCoroutine(nameof(WaitCloseElevator));
+        StartCoroutine(nameof(WaitCloseElevatorBeginLevel));
     }
 
     public void TeleportPlayer()
@@ -44,12 +49,41 @@ public class DoorElevatorManager : MonoBehaviour
         positionPlayer.Rotate(Vector3.up, 180f);
     }
 
-    IEnumerator ExitLevelCo()
+    public void OpenElevatorEndLevel(GameObject door)
     {
-        yield return null;
+        string parentName = door.transform.parent.gameObject.name;
+
+        for (int i = 0; i < elevators.Count; i++)
+        {
+            if (elevators[i].ParentElevatorName == parentName)
+            {
+                activeElevator = elevators[i];
+                break;
+            }
+        }
+        
+        activeElevator.ElevatorAnim.SetTrigger("OpenDoor");
+        
+        if(activeElevator.BorderAnim != null)
+            activeElevator.BorderAnim.SetTrigger("OpenDoor");
+        
+        if(activeElevator.GateAnim != null)
+            activeElevator.GateAnim.SetTrigger("OpenDoor");
     }
 
-    IEnumerator WaitCloseElevator()
+    public void CloseElevatorEndLevel()
+    {
+        activeElevator.ElevatorAnim.SetTrigger("CloseDoor");
+        
+        if(activeElevator.BorderAnim != null)
+            activeElevator.BorderAnim.SetTrigger("CloseDoor");
+        
+        if(activeElevator.GateAnim != null)
+            activeElevator.GateAnim.SetTrigger("CloseDoor");
+    }
+    
+
+    IEnumerator WaitCloseElevatorBeginLevel()
     {
         while (!IsDistant())
         {

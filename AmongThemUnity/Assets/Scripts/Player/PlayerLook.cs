@@ -115,7 +115,7 @@ public class PlayerLook : MonoBehaviour
                             return;
                         }
                     }
-                    gm.GoToNextFloor();
+                    gm.GoToNextFloor(hit.transform.parent.gameObject);
                     break;
 
             }
