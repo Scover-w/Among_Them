@@ -27,6 +27,7 @@ public static class OrbManager
 
     public static void IncrementOrb(bool isRed)
     {
+        SoundManager.Instance.Play("Inventory");
         if (isRed)
         {
             redOrb++;
