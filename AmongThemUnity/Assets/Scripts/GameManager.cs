@@ -201,9 +201,8 @@ public class GameManager : MonoBehaviour
         blackScreen.SetActive(false);
         yield return new WaitForSeconds(2f);
         elevatorManager.OpenElevatorBeginLevel();
-        playerCanMove = true;
-        playerCanRotate = true;
-        playerCanClick = true;
+        yield return new WaitForSeconds(1f);
+        FreezePlayer(false);
     }
 
     public void GoToNextFloor(GameObject elevator)
@@ -211,9 +210,7 @@ public class GameManager : MonoBehaviour
         ProgressionManager.NextLevel();
 
         targetIsAlive = true;
-        playerCanMove = false;
-        playerCanRotate = false;
-        playerCanClick = false;
+        FreezePlayer(true);
         dataRetrieve = false;
         StartCoroutine(nameof(EndLevelCinematic), elevator);
     }
@@ -337,11 +334,14 @@ public class GameManager : MonoBehaviour
     
     public void GetNextTargetInformation()
     {
-        SoundManager.Instance.Play("Poi");
-        dataRetrieve = true;
-        targetName.text = $"{surnames[Random.Range(0, surnames.Length - 1)]}  {names[Random.Range(0, names.Length - 1)]}";
-        parentTarget.SetActive(true);
-        parentCode.SetActive(false);
+        if (!dataRetrieve)
+        {
+            SoundManager.Instance.Play("Poi");
+            dataRetrieve = true;
+            targetName.text = $"{surnames[Random.Range(0, surnames.Length - 1)]}  {names[Random.Range(0, names.Length - 1)]}";
+            parentTarget.SetActive(true);
+            parentCode.SetActive(false);    
+        }
     }
 
     public void AppartmentTargetDoor(GameObject appartmentTargetDoor)
@@ -481,5 +481,26 @@ public class GameManager : MonoBehaviour
             return hit.point;
         }
         return Vector3.zero;
+    }
+
+    private void FreezePlayer(bool freeze)
+    {
+        playerCanMove = !freeze;
+        playerCanRotate = !freeze;
+        playerCanClick = !freeze;
+
+        if (freeze)
+        {
+            PlayerLook.instance.DisableRotation();
+            PlayerLook.instance.DisableClick();
+            PlayerMove.instance.DisableMove();
+        }
+        else
+        {
+            PlayerLook.instance.EnableRotation();
+            PlayerLook.instance.EnableClick();
+            PlayerMove.instance.EnableMove();
+        }
+        
     }
 }

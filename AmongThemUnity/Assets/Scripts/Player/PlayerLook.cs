@@ -6,6 +6,8 @@ using Random = System.Random;
 
 public class PlayerLook : MonoBehaviour
 {
+    public static PlayerLook instance;
+    
     [SerializeField] 
     private float lookSensitivity = 100f;
 
@@ -26,8 +28,12 @@ public class PlayerLook : MonoBehaviour
 
     private GameManager gm;
 
+    private bool canRotate = false;
+    private bool canClick = false;
+
     private void Start()
     {
+        instance = this;
         gm = GameManager.Instance();
         navMeshAgentManager = NavMeshAgentManager.Instance();
         if (PlayerPrefs.HasKey("lookSensity"))
@@ -145,7 +151,7 @@ public class PlayerLook : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (GameManager.Instance().PlayerCanRotate)
+        if (canRotate)
         {
             playerBody.RotateAround(playerBody.position, playerBody.up , yRotation * lookSensitivity /** Time.fixedDeltaTime*/);
             transform.localRotation = Quaternion.Euler(xRotation * lookSensitivity /** Time.fixedDeltaTime*/, 0f, 0f);
@@ -167,5 +173,25 @@ public class PlayerLook : MonoBehaviour
     public void SetSensitivity(float sensitivity)
     {
         lookSensitivity = sensitivity;
+    }
+
+    public void EnableRotation()
+    {
+        canRotate = true;
+    }
+    
+    public void DisableRotation()
+    {
+        canRotate = false;
+    }
+    
+    public void EnableClick()
+    {
+        canClick = true;
+    }
+    
+    public void DisableClick()
+    {
+        canClick = false;
     }
 }

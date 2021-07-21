@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    public static PlayerMove instance;
+    
     [SerializeField] 
     private GameObject reference;
 
@@ -21,8 +23,13 @@ public class PlayerMove : MonoBehaviour
     private Vector3 _direction;
     private Vector3 _relativeDirection;
     
-    private bool canMove = true;
-    
+    private bool canMove = false;
+
+    private void Start()
+    {
+        instance = this;
+    }
+
     public void SetDirection(Vector3 dir)
     {
         _direction = dir;
