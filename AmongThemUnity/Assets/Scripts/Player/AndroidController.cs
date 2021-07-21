@@ -37,6 +37,10 @@ public class AndroidController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        #if UNITY_STANDALONE
+        Destroy(this);
+        #endif
+        
         actionButton.gameObject.SetActive(true);
         myTouch = new List<Touch>();
         nbTouch = 0;

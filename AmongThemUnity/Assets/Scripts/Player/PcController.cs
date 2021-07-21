@@ -31,6 +31,9 @@ public class PcController : MonoBehaviour
     private float screenRatio;
     private void Start()
     {
+#if !UNITY_STANDALONE
+        Destroy(this);
+#endif
         Cursor.lockState = CursorLockMode.Locked;
         runningTimer = runningDuration;
         halfRunningDuration = runningDuration / 2f;
