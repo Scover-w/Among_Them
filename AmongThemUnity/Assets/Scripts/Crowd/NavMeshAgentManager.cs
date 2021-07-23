@@ -16,25 +16,24 @@ public struct NewDestination
 
 public class NavMeshAgentManager : MonoBehaviour
 {
-    public static NavMeshAgentManager Instance() { return _singleton; }
+    public static NavMeshAgentManager Instance()
+    {
+        return _singleton;
+    }
+
     private static NavMeshAgentManager _singleton;
-    
+
     private int nombreAgent;
 
-    [SerializeField] 
-    private GameObject prefabAgent;
-    
-    [SerializeField] 
-    private GameObject prefabCops;
-    
-    [SerializeField] 
-    private GameObject toKillAgent;
-    
-    [SerializeField] 
-    private GameObject player;
+    [SerializeField] private GameObject prefabAgent;
 
-    [SerializeField] 
-    private Transform containerCrowd;
+    [SerializeField] private GameObject prefabCops;
+
+    [SerializeField] private GameObject toKillAgent;
+
+    [SerializeField] private GameObject player;
+
+    [SerializeField] private Transform containerCrowd;
 
     private Vector3 randomPosition;
 
@@ -45,14 +44,14 @@ public class NavMeshAgentManager : MonoBehaviour
     private List<Transform> fieldViewPositionList;
 
     private GameObject ToKillAgent;
-    
+
     int layerMask = ~(1 << 8);
 
     private bool hasBeenDeleted = false;
 
     private Coroutine agentManagerCo;
     private List<Coroutine> newDestinationsCo = new List<Coroutine>();
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -63,10 +62,8 @@ public class NavMeshAgentManager : MonoBehaviour
         copsList = new List<NavMeshAgent>();
         fieldViewMeshColliderList = new List<MeshCollider>();
         fieldViewPositionList = new List<Transform>();
-
-
     }
-    
+
     private void Update()
     {
         GetCaughtByCops();
@@ -74,10 +71,9 @@ public class NavMeshAgentManager : MonoBehaviour
 
     public void InstantiateCrowd()
     {
-
         hasBeenDeleted = true;
-        
-        if(agentManagerCo != null)
+
+        if (agentManagerCo != null)
             StopCoroutine(agentManagerCo);
 
         if (newDestinationsCo.Count > 0)
@@ -87,33 +83,37 @@ public class NavMeshAgentManager : MonoBehaviour
                 StopCoroutine(co);
             }
         }
-        
+
         newDestinationsCo = new List<Coroutine>();
-        
+
         if (navMeshList.Count > 0)
         {
             foreach (var agent in navMeshList)
             {
                 Destroy(agent.gameObject);
             }
+
             navMeshList = new List<NavMeshAgent>();
         }
-        
+
         if (copsList.Count > 0)
         {
             foreach (var agent in copsList)
             {
                 Destroy(agent.gameObject);
             }
+
             copsList = new List<NavMeshAgent>();
         }
-        
+
         animators = new List<Animator>();
 
-        nombreAgent = (int)(500f * ProgressionManager.GetWealthValue() + 100f);
-
+        nombreAgent = (int) (500f * ProgressionManager.GetWealthValue() + 100f);
+        nombreAgent = 1000;
         Animator animator;
-        
+        Vector3 targetPos;
+        NavMeshPath navMeshPath;
+
         for (int i = 0; i < nombreAgent; i++)
         {
             var agent = Instantiate(prefabAgent, containerCrowd);
@@ -126,7 +126,10 @@ public class NavMeshAgentManager : MonoBehaviour
             } while (position.y > 2f && position.y < 6.3f);
 
             navMeshAgent.Warp(position);
-            navMeshAgent.SetDestination(GetRandomPositionOnNavMesh());
+            navMeshPath = new NavMeshPath();
+            targetPos = GetRandomPositionOnNavMesh();
+            navMeshAgent.CalculatePath(targetPos, navMeshPath);
+            navMeshAgent.SetPath(navMeshPath);
             animator = navMeshAgent.gameObject.GetComponent<Animator>();
             animators.Add(animator);
             animator.SetBool("isWalking", true);
@@ -135,39 +138,45 @@ public class NavMeshAgentManager : MonoBehaviour
             fieldViewMeshColliderList.Add(agent.GetComponentInChildren<MeshCollider>());
             fieldViewPositionList.Add(agent.transform.GetChild(0));
         }
-        
+
         ToKillAgent = Instantiate(toKillAgent, containerCrowd);
         NavMeshAgent navMeshAgent2 = ToKillAgent.GetComponent<NavMeshAgent>();
-        
+
         Vector3 position2;
         do
         {
             position2 = GetRandomPositionOnNavMesh();
         } while (position2.y > 2f && position2.y < 6.3f);
+
         navMeshAgent2.Warp(position2);
-        
-        navMeshAgent2.SetDestination(GetRandomPositionOnNavMesh());
+        targetPos = GetRandomPositionOnNavMesh();
+        navMeshPath = new NavMeshPath();
+        navMeshAgent2.CalculatePath(targetPos, navMeshPath);
+        navMeshAgent2.SetPath(navMeshPath);
         navMeshList.Add(navMeshAgent2);
-        
+
         animator = navMeshAgent2.gameObject.GetComponent<Animator>();
         animators.Add(animator);
         animator.SetBool("isWalking", true);
-        
+
         var nombreCops = (int) (nombreAgent / 100) > 0 ? (int) (nombreAgent / 100) : 1;
-        
+
         for (int i = 0; i < nombreCops; i++)
         {
             var cops = Instantiate(prefabCops, containerCrowd);
             NavMeshAgent navMeshAgent = cops.GetComponent<NavMeshAgent>();
-            
+
             Vector3 position;
             do
             {
                 position = GetRandomPositionOnNavMesh();
             } while (position.y > 2f && position.y < 6.3f);
-            
+
             navMeshAgent.Warp(position);
-            navMeshAgent.SetDestination(GetRandomPositionOnNavMesh());
+            targetPos = GetRandomPositionOnNavMesh();
+            navMeshPath = new NavMeshPath();
+            navMeshAgent.CalculatePath(targetPos, navMeshPath);
+            navMeshAgent.SetPath(navMeshPath);
             navMeshList.Add(navMeshAgent);
             animator = navMeshAgent.gameObject.GetComponent<Animator>();
             animators.Add(animator);
@@ -179,7 +188,7 @@ public class NavMeshAgentManager : MonoBehaviour
 
         agentManagerCo = StartCoroutine(nameof(ManageAgents));
     }
-    
+
     public IEnumerator ChangeDestinationAfterEvents(List<NavMeshAgent> agentsAffected, float waitingTime)
     {
         while (true)
@@ -187,7 +196,10 @@ public class NavMeshAgentManager : MonoBehaviour
             yield return new WaitForSeconds(waitingTime);
             foreach (var navMeshAgent in agentsAffected)
             {
-                navMeshAgent.SetDestination(GetRandomPositionOnNavMesh());
+                var targetPos = GetRandomPositionOnNavMesh();
+                NavMeshPath navMeshPath = new NavMeshPath();
+                navMeshAgent.CalculatePath(targetPos, navMeshPath);
+                navMeshAgent.SetPath(navMeshPath);
             }
         }
     }
@@ -195,17 +207,17 @@ public class NavMeshAgentManager : MonoBehaviour
     public Vector3 GetRandomPositionOnNavMesh()
     {
         int areaPosition = Random.Range(0, 100);
-        
-        if(areaPosition < 10)
-            randomPosition = new Vector3(Random.Range(-100,-94),Random.Range(0,15),Random.Range(-70,70));
+
+        if (areaPosition < 10)
+            randomPosition = new Vector3(Random.Range(-100, -94), Random.Range(0, 15), Random.Range(-70, 70));
         else if (areaPosition < 20)
-            randomPosition = new Vector3(Random.Range(100, 94),Random.Range(0,15),Random.Range(-70,70));
+            randomPosition = new Vector3(Random.Range(100, 94), Random.Range(0, 15), Random.Range(-70, 70));
         else if (areaPosition < 30)
-            randomPosition = new Vector3(Random.Range(-100,100),Random.Range(0,15),Random.Range(-70,-64));
+            randomPosition = new Vector3(Random.Range(-100, 100), Random.Range(0, 15), Random.Range(-70, -64));
         else if (areaPosition < 40)
-            randomPosition = new Vector3(Random.Range(-100,100),Random.Range(0,15),Random.Range(70,64));
+            randomPosition = new Vector3(Random.Range(-100, 100), Random.Range(0, 15), Random.Range(70, 64));
         else
-            randomPosition = new Vector3(Random.Range(-100,100),Random.Range(0,15),Random.Range(-70,70));
+            randomPosition = new Vector3(Random.Range(-100, 100), Random.Range(0, 15), Random.Range(-70, 70));
 
         //randomPosition = Random.insideUnitSphere * 250;
 
@@ -218,15 +230,15 @@ public class NavMeshAgentManager : MonoBehaviour
 
         NavMesh.SamplePosition(position, out hit, 50f, NavMesh.AllAreas);
 
-        try
+        // try
         {
             return hit.position;
         }
-        catch (Exception e)
-        {
-            // 
-        }
-        
+        // catch (Exception e)
+        // {
+        //     // 
+        // }
+
         return Vector3.zero;
     }
 
@@ -245,16 +257,18 @@ public class NavMeshAgentManager : MonoBehaviour
     {
         return ToKillAgent;
     }
-    
+
     public void CopsGoOnCrimeScene()
     {
         foreach (var cops in copsList)
         {
-            cops.SetDestination(ToKillAgent.transform.position);
+            NavMeshPath navMeshPath = new NavMeshPath();
+            cops.CalculatePath(ToKillAgent.transform.position, navMeshPath);
+            cops.SetPath(navMeshPath);
             cops.speed *= 2;
         }
     }
-    
+
     public bool GetCaughtByCops()
     {
         if (!GameManager.Instance().TargetIsAlive)
@@ -271,7 +285,6 @@ public class NavMeshAgentManager : MonoBehaviour
 
     public void RegroupAround(Vector3 position)
     {
-        
         foreach (var agent in navMeshList)
         {
             RegroupAround(agent, position);
@@ -287,17 +300,19 @@ public class NavMeshAgentManager : MonoBehaviour
     {
         Vector3 location;
         float distance = (agent.gameObject.transform.position - position).magnitude;
- 
+
         if (distance < 15f)
         {
             location = new Vector3(Random.Range(-5f, 5f), 0f, Random.Range(-5f, 5f)) + position;
-                
+
             location = GetPositionOnNavMesh(location);
 
             if (location == Vector3.zero)
                 return;
-
-            agent.SetDestination(location);
+            
+            NavMeshPath navMeshPath = new NavMeshPath();
+            agent.CalculatePath(location, navMeshPath);
+            agent.SetPath(navMeshPath);
         }
     }
 
@@ -309,12 +324,12 @@ public class NavMeshAgentManager : MonoBehaviour
         {
             yield return wait;
             int i = 0;
-            foreach(var agent in navMeshList) 
+            foreach (var agent in navMeshList)
             {
                 if ((agent.transform.position - agent.destination).magnitude < 0.1f)
                 {
                     animators[i].SetBool("isWalking", false);
-                    float randomFloat = Random.Range(0, 5);
+                    float randomFloat = Random.Range(0f, 7f);
                     NewDestination newDestination = new NewDestination();
                     newDestination.waitingTime = randomFloat;
                     newDestination.agent = agent;
@@ -333,7 +348,10 @@ public class NavMeshAgentManager : MonoBehaviour
         yield return new WaitForSeconds(newDestination.waitingTime);
         if (!hasBeenDeleted)
         {
-            newDestination.agent.SetDestination(GetRandomPositionOnNavMesh());
+            NavMeshPath navMeshPath = new NavMeshPath();
+            var targetPos = GetRandomPositionOnNavMesh();
+            newDestination.agent.CalculatePath(targetPos, navMeshPath);
+            newDestination.agent.SetPath(navMeshPath);
             animators[newDestination.idAnim].SetBool("isWalking", true);
         }
     }
