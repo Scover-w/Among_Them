@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Xml;
 using UnityEngine;
 
@@ -27,9 +28,8 @@ public class LanguageManager : MonoBehaviour
         {
             selectedLanguage = defaultLanguage;
         }
-
-        string path = Application.dataPath;
-        languages = Initialization(path + "/Language/lang.xml");
+        
+        languages = Initialization("Language/lang");
  
     }
 
@@ -41,7 +41,10 @@ public class LanguageManager : MonoBehaviour
 
     Dictionary<String, Dictionary<string, string>> Initialization(string path)
     {
-        XmlReader reader = XmlReader.Create(@path);
+        TextAsset textAsset = Resources.Load(path) as TextAsset;
+
+        XmlTextReader reader = new XmlTextReader(new StringReader(textAsset.text));
+        
         Dictionary<String, Dictionary<string, string>> temp = new Dictionary<string, Dictionary<string, string>>();
         Dictionary<string, string> insideTemp = new Dictionary<string, string>();
         string lang = null;
