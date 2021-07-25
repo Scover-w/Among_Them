@@ -16,4 +16,9 @@ public class CinematicManager : MonoBehaviour
         yield return new WaitForSeconds(113f); // 113f
         SceneManager.LoadScene("RandomGamePlay", LoadSceneMode.Single);
     }
+
+    public void SkipVideo()
+    {
+        SceneManager.LoadScene("RandomGamePlay", LoadSceneMode.Single);
+    }
 }
