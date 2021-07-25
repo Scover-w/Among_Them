@@ -40,6 +40,10 @@ public static class ProgressionManager
     
     public static void SetWealthValueShortCut(float value)
     {
+        if (value < 0f)
+            value = 0f;
+        else if (value > 1f)
+            value = 1f;
         wealthValue = value;
         PlayerPrefs.SetFloat("wealthValue", wealthValue);
     }

@@ -111,22 +111,6 @@ public class PcController : MonoBehaviour
             InventoryUI.instance.SelectOrb((int)Math.Abs(Input.mouseScrollDelta.y));
         }
         
-        // ShortCut
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            ProgressionManager.SetWealthValueShortCut(1f);
-        }
-        
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            ProgressionManager.SetWealthValueShortCut(.5f);
-        }
-        
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            ProgressionManager.SetWealthValueShortCut(.0f);
-        }
-
         directionMove = directionMove.normalized;
         playerMove.SetDirection(directionMove * (isRunning? multiplyRunningValue : 1f));
     }
