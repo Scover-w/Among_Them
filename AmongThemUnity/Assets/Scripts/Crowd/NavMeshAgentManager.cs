@@ -174,7 +174,7 @@ public class NavMeshAgentManager : MonoBehaviour
         do
         {
             position = GetRandomPositionOnNavMesh();
-        } while (position.y > 2f && position.y < 6.3f);
+        } while ((position.y > .5f && position.y < 6.5f) || (position.y > 8f && position.y < 14.5f));
 
         tempNavMeshAgent.Warp(position);
         tempNavMeshPath = new NavMeshPath();

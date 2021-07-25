@@ -35,6 +35,7 @@ public static class ProgressionManager
 
     public static float GetWealthValue()
     {
+        wealthValue = PlayerPrefs.GetFloat("wealthValue");
         return wealthValue;
     }
     

@@ -196,7 +196,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator BeginLevelCinematic()
     {
-        yield return new WaitForSeconds(15f);
+        yield return new WaitForSeconds(2f);
         elevatorManager.TeleportPlayer();
         blackScreen.SetActive(false);
         yield return new WaitForSeconds(2f);
@@ -338,9 +338,17 @@ public class GameManager : MonoBehaviour
         {
             SoundManager.Instance.Play("Poi");
             dataRetrieve = true;
-            targetName.text = $"{surnames[Random.Range(0, surnames.Length - 1)]}  {names[Random.Range(0, names.Length - 1)]}";
-            parentTarget.SetActive(true);
-            parentCode.SetActive(false);    
+            if (Math.Abs(1.0f - ProgressionManager.GetWealthValue()) > 0.0001f)
+            {
+                targetName.text = $"{surnames[Random.Range(0, surnames.Length - 1)]}  {names[Random.Range(0, names.Length - 1)]}";
+                parentTarget.SetActive(true);
+                parentCode.SetActive(false); 
+            }
+            else
+            {
+                parentTarget.SetActive(false);
+                parentCode.SetActive(false); 
+            }
         }
     }
 
