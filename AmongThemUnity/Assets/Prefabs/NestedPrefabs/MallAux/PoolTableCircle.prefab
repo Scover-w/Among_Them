@@ -15,7 +15,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &6861632319731165932
 Transform:
@@ -131,6 +131,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PoolTable
+      objectReference: {fileID: 0}
+    - target: {fileID: 5910280138357583244, guid: 3522d2c81d362154a842c57331a3249a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 7691122744921035163, guid: 3522d2c81d362154a842c57331a3249a,
         type: 3}

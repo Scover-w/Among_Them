@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &962326652860176441
 Transform:
@@ -117,6 +117,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boat
       objectReference: {fileID: 0}
+    - target: {fileID: 6665806770850879234, guid: cadf382011321d54a90c2d4e89e6a934,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 8960779752302495732, guid: cadf382011321d54a90c2d4e89e6a934,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -197,6 +202,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Boat
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665806770850879234, guid: cadf382011321d54a90c2d4e89e6a934,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 8960779752302495732, guid: cadf382011321d54a90c2d4e89e6a934,
         type: 3}
@@ -333,6 +343,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Cashier3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5538175305532904911, guid: 4965af94b257a534cb266b71b2f74aee,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4965af94b257a534cb266b71b2f74aee, type: 3}

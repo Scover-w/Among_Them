@@ -15,7 +15,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &8039233114042434184
 Transform:
@@ -894,6 +894,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Caroussel
       objectReference: {fileID: 0}
+    - target: {fileID: 7320368545873507680, guid: 905fdd72ab10ceb41ba6a850d223577d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 905fdd72ab10ceb41ba6a850d223577d, type: 3}
 --- !u!4 &799851539661448576 stripped
@@ -1643,6 +1648,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Caroussel (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7320368545873507680, guid: 905fdd72ab10ceb41ba6a850d223577d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 905fdd72ab10ceb41ba6a850d223577d, type: 3}
