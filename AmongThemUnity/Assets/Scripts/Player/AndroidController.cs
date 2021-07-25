@@ -112,8 +112,8 @@ public class AndroidController : MonoBehaviour
 
         float rotationX = -variableJoystickLook.Vertical; 
         float rotationY = variableJoystickLook.Horizontal;
-        playerLook.SetRotationX(rotationX);
-        playerLook.SetRotationY(rotationY);
+        playerLook.SetRotationX(rotationX * .25f);
+        playerLook.SetRotationY(rotationY * .25f);
 
         //player.transform.position += direction * speed * Time.fixedDeltaTime;
         

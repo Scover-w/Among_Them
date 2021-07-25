@@ -151,12 +151,22 @@ public class PlayerLook : MonoBehaviour
 
     private void FixedUpdate()
     {
+        #if UNITY_STANDALONE
         if (canRotate)
         {
             playerBody.RotateAround(playerBody.position, playerBody.up , yRotation * lookSensitivity /** Time.fixedDeltaTime*/);
             transform.localRotation = Quaternion.Euler(xRotation * lookSensitivity /** Time.fixedDeltaTime*/, 0f, 0f);
             
         }
+        #else
+        if (canRotate)
+        {
+            playerBody.RotateAround(playerBody.position, playerBody.up , yRotation * lookSensitivity /** Time.fixedDeltaTime*/);
+            transform.localRotation = transform.localRotation * Quaternion.Euler(xRotation * lookSensitivity /** Time.fixedDeltaTime*/, 0f, 0f);
+            
+        }
+        xRotation = 0f;
+#endif
         yRotation = 0f;
     }
 
