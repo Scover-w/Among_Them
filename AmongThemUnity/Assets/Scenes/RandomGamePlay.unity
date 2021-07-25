@@ -552,10 +552,11 @@ MonoBehaviour:
     type: 3}
   prefabCops: {fileID: 8708653653806477855, guid: d8c0a50a862c5f74ba9237155b00deba,
     type: 3}
-  toKillAgent: {fileID: 8708653653806477855, guid: 92c3aad41fdde6c4c811ee89b6aaff8e,
+  prefabTarget: {fileID: 8708653653806477855, guid: 92c3aad41fdde6c4c811ee89b6aaff8e,
     type: 3}
   player: {fileID: 1058755867}
   containerCrowd: {fileID: 1421534307}
+  eyeVisionOpen: {fileID: 0}
 --- !u!114 &488831348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1934,7 +1935,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1058755867}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f17d15dddc2a828428f2e401fab8316d, type: 3}
   m_Name: 

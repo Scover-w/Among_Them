@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 
@@ -12,6 +13,13 @@ public struct NewDestination
     public float waitingTime;
     public NavMeshAgent agent;
     public int idAnim;
+}
+
+enum AgentType
+{
+    Crowd,
+    Cop,
+    Target
 }
 
 public class NavMeshAgentManager : MonoBehaviour
@@ -29,7 +37,7 @@ public class NavMeshAgentManager : MonoBehaviour
 
     [SerializeField] private GameObject prefabCops;
 
-    [SerializeField] private GameObject toKillAgent;
+    [SerializeField] private GameObject prefabTarget;
 
     [SerializeField] private GameObject player;
 
@@ -37,11 +45,9 @@ public class NavMeshAgentManager : MonoBehaviour
 
     private Vector3 randomPosition;
 
-    private List<NavMeshAgent> navMeshList;
+    private List<NavMeshAgent> agentList;
     private List<NavMeshAgent> copsList;
     private List<Animator> animators;
-    private List<MeshCollider> fieldViewMeshColliderList;
-    private List<Transform> fieldViewPositionList;
 
     private GameObject ToKillAgent;
 
@@ -51,17 +57,20 @@ public class NavMeshAgentManager : MonoBehaviour
 
     private Coroutine agentManagerCo;
     private List<Coroutine> newDestinationsCo = new List<Coroutine>();
+    
+    private Animator tempAnimator;
+    private Vector3 tempTargetPos;
+    private NavMeshPath tempNavMeshPath;
+    private NavMeshAgent tempNavMeshAgent;
 
     // Start is called before the first frame update
     void Start()
     {
         _singleton = this;
         Time.timeScale = 1f;
-        navMeshList = new List<NavMeshAgent>();
+        agentList = new List<NavMeshAgent>();
         animators = new List<Animator>();
         copsList = new List<NavMeshAgent>();
-        fieldViewMeshColliderList = new List<MeshCollider>();
-        fieldViewPositionList = new List<Transform>();
     }
 
     private void Update()
@@ -70,6 +79,30 @@ public class NavMeshAgentManager : MonoBehaviour
     }
 
     public void InstantiateCrowd()
+    {
+        ClearCrowd();
+        
+        nombreAgent = (int) (500f * ProgressionManager.GetWealthValue() + 100f);
+        nombreAgent = 100;
+
+        for (int i = 0; i < nombreAgent; i++)
+        {
+            InstantiateAgent(AgentType.Crowd);
+        }
+        
+        var nombreCops = (int) (nombreAgent / 100) > 0 ? (int) (nombreAgent / 100) : 1;
+
+        for (int i = 0; i < nombreCops; i++)
+        {
+            InstantiateAgent(AgentType.Cop);
+        }
+
+        InstantiateAgent(AgentType.Target);
+
+        agentManagerCo = StartCoroutine(nameof(ManageAgents));
+    }
+
+    private void ClearCrowd()
     {
         hasBeenDeleted = true;
 
@@ -86,14 +119,14 @@ public class NavMeshAgentManager : MonoBehaviour
 
         newDestinationsCo = new List<Coroutine>();
 
-        if (navMeshList.Count > 0)
+        if (agentList.Count > 0)
         {
-            foreach (var agent in navMeshList)
+            foreach (var agent in agentList)
             {
                 Destroy(agent.gameObject);
             }
 
-            navMeshList = new List<NavMeshAgent>();
+            agentList = new List<NavMeshAgent>();
         }
 
         if (copsList.Count > 0)
@@ -108,85 +141,52 @@ public class NavMeshAgentManager : MonoBehaviour
 
         animators = new List<Animator>();
 
-        nombreAgent = (int) (500f * ProgressionManager.GetWealthValue() + 100f);
-        nombreAgent = 1000;
-        Animator animator;
-        Vector3 targetPos;
-        NavMeshPath navMeshPath;
+    }
+    
+    private void InstantiateAgent(AgentType type)
+    {
+        GameObject prefabToInst;
 
-        for (int i = 0; i < nombreAgent; i++)
+        switch (type)
         {
-            var agent = Instantiate(prefabAgent, containerCrowd);
-            NavMeshAgent navMeshAgent = agent.GetComponent<NavMeshAgent>();
-
-            Vector3 position;
-            do
-            {
-                position = GetRandomPositionOnNavMesh();
-            } while (position.y > 2f && position.y < 6.3f);
-
-            navMeshAgent.Warp(position);
-            navMeshPath = new NavMeshPath();
-            targetPos = GetRandomPositionOnNavMesh();
-            navMeshAgent.CalculatePath(targetPos, navMeshPath);
-            navMeshAgent.SetPath(navMeshPath);
-            animator = navMeshAgent.gameObject.GetComponent<Animator>();
-            animators.Add(animator);
-            animator.SetBool("isWalking", true);
-            navMeshList.Add(navMeshAgent);
-
-            fieldViewMeshColliderList.Add(agent.GetComponentInChildren<MeshCollider>());
-            fieldViewPositionList.Add(agent.transform.GetChild(0));
+            case AgentType.Crowd:
+                prefabToInst = prefabAgent;
+                break;
+            case AgentType.Cop:
+                prefabToInst = prefabCops;
+                break;
+            case AgentType.Target:
+                prefabToInst = prefabTarget;
+                break;
+            default:
+                prefabToInst = prefabAgent;
+                break;
         }
+        
+        var agent = Instantiate(prefabToInst, containerCrowd);
+        tempNavMeshAgent = agent.GetComponent<NavMeshAgent>();
 
-        ToKillAgent = Instantiate(toKillAgent, containerCrowd);
-        NavMeshAgent navMeshAgent2 = ToKillAgent.GetComponent<NavMeshAgent>();
-
-        Vector3 position2;
+        Vector3 position;
         do
         {
-            position2 = GetRandomPositionOnNavMesh();
-        } while (position2.y > 2f && position2.y < 6.3f);
+            position = GetRandomPositionOnNavMesh();
+        } while (position.y > 2f && position.y < 6.3f);
 
-        navMeshAgent2.Warp(position2);
-        targetPos = GetRandomPositionOnNavMesh();
-        navMeshPath = new NavMeshPath();
-        navMeshAgent2.CalculatePath(targetPos, navMeshPath);
-        navMeshAgent2.SetPath(navMeshPath);
-        navMeshList.Add(navMeshAgent2);
+        tempNavMeshAgent.Warp(position);
+        tempNavMeshPath = new NavMeshPath();
+        tempTargetPos = GetRandomPositionOnNavMesh();
+        tempNavMeshAgent.CalculatePath(tempTargetPos, tempNavMeshPath);
+        tempNavMeshAgent.SetPath(tempNavMeshPath);
+        tempAnimator = tempNavMeshAgent.gameObject.GetComponent<Animator>();
+        animators.Add(tempAnimator);
+        tempAnimator.SetBool("isWalking", true);
+        agentList.Add(tempNavMeshAgent);
+        
+        if(type == AgentType.Cop)
+            copsList.Add(tempNavMeshAgent);
 
-        animator = navMeshAgent2.gameObject.GetComponent<Animator>();
-        animators.Add(animator);
-        animator.SetBool("isWalking", true);
-
-        var nombreCops = (int) (nombreAgent / 100) > 0 ? (int) (nombreAgent / 100) : 1;
-
-        for (int i = 0; i < nombreCops; i++)
-        {
-            var cops = Instantiate(prefabCops, containerCrowd);
-            NavMeshAgent navMeshAgent = cops.GetComponent<NavMeshAgent>();
-
-            Vector3 position;
-            do
-            {
-                position = GetRandomPositionOnNavMesh();
-            } while (position.y > 2f && position.y < 6.3f);
-
-            navMeshAgent.Warp(position);
-            targetPos = GetRandomPositionOnNavMesh();
-            navMeshPath = new NavMeshPath();
-            navMeshAgent.CalculatePath(targetPos, navMeshPath);
-            navMeshAgent.SetPath(navMeshPath);
-            navMeshList.Add(navMeshAgent);
-            animator = navMeshAgent.gameObject.GetComponent<Animator>();
-            animators.Add(animator);
-            animator.SetBool("isWalking", true);
-            copsList.Add(navMeshAgent);
-            fieldViewMeshColliderList.Add(cops.GetComponentInChildren<MeshCollider>());
-            fieldViewPositionList.Add(cops.transform.GetChild(0));
-        }
-
-        agentManagerCo = StartCoroutine(nameof(ManageAgents));
+        if (type == AgentType.Target)
+            ToKillAgent = agent;
     }
 
     public IEnumerator ChangeDestinationAfterEvents(List<NavMeshAgent> agentsAffected, float waitingTime)
@@ -250,7 +250,7 @@ public class NavMeshAgentManager : MonoBehaviour
 
     public List<NavMeshAgent> GetCrowdAgent()
     {
-        return navMeshList;
+        return agentList;
     }
 
     public GameObject GetTargetAgent()
@@ -285,7 +285,7 @@ public class NavMeshAgentManager : MonoBehaviour
 
     public void RegroupAround(Vector3 position)
     {
-        foreach (var agent in navMeshList)
+        foreach (var agent in agentList)
         {
             RegroupAround(agent, position);
         }
@@ -324,7 +324,7 @@ public class NavMeshAgentManager : MonoBehaviour
         {
             yield return wait;
             int i = 0;
-            foreach (var agent in navMeshList)
+            foreach (var agent in agentList)
             {
                 if ((agent.transform.position - agent.destination).magnitude < 0.1f)
                 {
