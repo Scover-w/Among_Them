@@ -282,16 +282,29 @@ public class GameManager : MonoBehaviour
     public void ChangePlayerCanRotate(bool canRotate)
     {
         playerCanRotate = canRotate;
+        if(canRotate)
+            PlayerLook.instance.EnableRotation();
+        else
+            PlayerLook.instance.DisableRotation();
     }
     
     public void ChangePlayerCanMove(bool canMove)
     {
-        playerCanRotate = canMove;
+        playerCanMove = canMove;
+        if(canMove)
+            PlayerMove.instance.EnableMove();
+        else
+            PlayerMove.instance.DisableMove();
     }
     
     public void ChangePlayerCanClick(bool canClick)
     {
         playerCanClick = canClick;
+        if(canClick)
+            PlayerLook.instance.EnableClick();
+        else
+            PlayerLook.instance.DisableClick();
+        
     }
 
     public void KillTarget()
