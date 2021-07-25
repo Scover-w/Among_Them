@@ -43,6 +43,9 @@ public class NavMeshAgentManager : MonoBehaviour
 
     [SerializeField] private Transform containerCrowd;
 
+    [SerializeField]
+    public GameObject eyeVisionOpen;
+    
     private Vector3 randomPosition;
 
     private List<NavMeshAgent> agentList;
@@ -83,7 +86,6 @@ public class NavMeshAgentManager : MonoBehaviour
         ClearCrowd();
         
         nombreAgent = (int) (500f * ProgressionManager.GetWealthValue() + 100f);
-        nombreAgent = 100;
 
         for (int i = 0; i < nombreAgent; i++)
         {
@@ -100,6 +102,8 @@ public class NavMeshAgentManager : MonoBehaviour
         InstantiateAgent(AgentType.Target);
 
         agentManagerCo = StartCoroutine(nameof(ManageAgents));
+
+        //StartCoroutine(nameof(PayerDetection));
     }
 
     private void ClearCrowd()
@@ -353,6 +357,41 @@ public class NavMeshAgentManager : MonoBehaviour
             newDestination.agent.CalculatePath(targetPos, navMeshPath);
             newDestination.agent.SetPath(navMeshPath);
             animators[newDestination.idAnim].SetBool("isWalking", true);
+        }
+    }
+    
+    IEnumerator PayerDetection()
+    {
+        WaitForSeconds wait = new WaitForSeconds(0.2f);
+        Vector3 relativeNormalizedPos;
+        while (true)
+        {
+            bool isSeen = false;
+            foreach (var agent in agentList)
+            {
+                relativeNormalizedPos = -(agent.transform.position - player.transform.position);
+                
+                if(relativeNormalizedPos.magnitude > 10f)
+                    continue;
+
+                relativeNormalizedPos = relativeNormalizedPos.normalized;
+                
+
+                float rad = Mathf.Acos(Vector3.Dot(agent.transform.forward, relativeNormalizedPos) /
+                                       (agent.transform.forward.magnitude * relativeNormalizedPos.magnitude));
+
+                if (rad > -0.523599f && rad < 0.523599f)
+                {
+                    eyeVisionOpen.SetActive(true);
+                    isSeen = true;
+                    break;
+                }
+            }
+
+            if (!isSeen)
+                eyeVisionOpen.SetActive(false);
+            
+            yield return wait;
         }
     }
 }
