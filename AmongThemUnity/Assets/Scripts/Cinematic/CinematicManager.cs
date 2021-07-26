@@ -36,6 +36,15 @@ public class CinematicManager : MonoBehaviour
 
     public void SkipVideo()
     {
+        string language = LanguageManager.Instance().GetSelectedLanguage();
+        if (language == "fr")
+        {
+            soundManager.Stop("FrenchVoice");
+        }
+        else
+        {
+            soundManager.Stop("EnglishVoice");
+        }
         SceneManager.LoadScene("RandomGamePlay", LoadSceneMode.Single);
     }
 }
