@@ -6739,6 +6739,7 @@ GameObject:
   - component: {fileID: 2127442939}
   - component: {fileID: 2127442940}
   - component: {fileID: 2127442941}
+  - component: {fileID: 2127442942}
   m_Layer: 0
   m_Name: Scripts
   m_TagString: Untagged
@@ -6812,3 +6813,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texts: []
+--- !u!114 &2127442942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2127442938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1725049051a6faf41ba39b351e490b18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - Name: Click
+    clip: {fileID: 8300000, guid: a4c4e4c305871074bbe5f75ce854f0fe, type: 3}
+    volume: 0
+    source: {fileID: 0}

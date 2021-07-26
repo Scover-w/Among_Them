@@ -24,10 +24,20 @@ public class LanguageManager : MonoBehaviour
     private void Awake()
     {
         _singleton = this;
-        if (selectedLanguage == null)
+        
+        if (!PlayerPrefs.HasKey("selectedLanguage"))
         {
-            selectedLanguage = defaultLanguage;
+            if(Application.systemLanguage == SystemLanguage.French)
+            {
+                PlayerPrefs.SetString("selectedLanguage", "fr");
+            }
+            else
+            {
+                PlayerPrefs.SetString("selectedLanguage", defaultLanguage);
+            }
         }
+        
+        selectedLanguage = PlayerPrefs.GetString("selectedLanguage");
         
         languages = Initialization("Language/lang");
  
@@ -85,11 +95,15 @@ public class LanguageManager : MonoBehaviour
 
     public string GetCodeLanguageFromFullName(string lang)
     {
+        if (lang.Length == 2)
+            return lang;
         switch (lang.ToLower())
         {
             case "french":
                 return "fr";
             case "france":
+                return "fr";
+            case "français":
                 return "fr";
             case "english" :
                 return "en";
@@ -103,6 +117,9 @@ public class LanguageManager : MonoBehaviour
     public void ChangeSelectedLanguage(string lang)
     {
         selectedLanguage = lang;
+
+        PlayerPrefs.SetString("selectedLanguage", GetCodeLanguageFromFullName(lang));
+        
         ctScript.ChangeTexts();
     }
 
