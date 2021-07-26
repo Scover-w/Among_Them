@@ -172,9 +172,8 @@ public class PlayerLook : MonoBehaviour
         #else
         if (canRotate)
         {
-            playerBody.RotateAround(playerBody.position, playerBody.up , yRotation * lookSensitivity /** Time.fixedDeltaTime*/);
-            transform.localRotation = transform.localRotation * Quaternion.Euler(xRotation * lookSensitivity /** Time.fixedDeltaTime*/, 0f, 0f);
-            
+            playerBody.Rotate(0f, -xRotation , 0f, Space.Self);
+            transform.Rotate(yRotation, 0f, 0f, Space.Self);
         }
         xRotation = 0f;
 #endif

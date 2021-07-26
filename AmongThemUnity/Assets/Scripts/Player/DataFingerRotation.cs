@@ -17,8 +17,8 @@ public class DataFingerRotation : MonoBehaviour
     private float yRotation;
     private float dragX;
     private float dragY;
-    private float lastDragX;
     private float lastDragY;
+    private float lastDragX;
     private int idTouch;
     private bool isTouched = false;
 
@@ -26,10 +26,8 @@ public class DataFingerRotation : MonoBehaviour
     {
         screenWidth = Screen.width;
         screenHeight = Screen.height;
-        Debug.Log("Start DataFinger");
     }
-
-
+    
     void Update()
     {
         if (!isTouched)
@@ -37,8 +35,6 @@ public class DataFingerRotation : MonoBehaviour
             if (Input.touchCount > 0)
             {
                 int i = Input.touchCount;
-                if(i != 0)
-                    Debug.Log("Touch nb : " + i);
                 
                 for (int j = 0; j < i; j++)
                 {
@@ -47,11 +43,10 @@ public class DataFingerRotation : MonoBehaviour
                         dragOrigin = Input.GetTouch(j).position;
                         idTouch = Input.GetTouch(j).fingerId;
                         isTouched = true;
-                        dragX = 0;
-                        dragY = 0;
-                        lastDragX = 0;
-                        lastDragY = 0;
-                        Debug.Log("Right click");
+                        dragX = 0f;
+                        dragY = 0f;
+                        lastDragX = 0f;
+                        lastDragY = 0f;
                         return;
                     }
                 }
@@ -68,20 +63,17 @@ public class DataFingerRotation : MonoBehaviour
             if(Input.GetTouch(k).phase == TouchPhase.Moved)
             {
                 dragFromOrigin = Input.GetTouch(k).position - dragOrigin;
+                dragX = dragFromOrigin.x * 100f / screenWidth;
+                dragY = dragFromOrigin.y * 100f / screenHeight;
 
-                dragOrigin = Input.GetTouch(k).position;
-                
-                dragX = dragFromOrigin.x / 10f;
-                dragY = dragFromOrigin.y / 10f;
+                xRotation = lastDragX - dragX;
+                yRotation = lastDragY - dragY;
 
-                xRotation = (dragX - lastDragX);
-                yRotation = (dragY - lastDragY);
-                
                 lastDragX = dragX;
-                lastDragY = dragX;
-
-                Debug.Log("Rotation : x -> " + xRotation + " , y-> " + yRotation);
-                playerLook.SetRotation(xRotation, -yRotation);
+                lastDragY = dragY;
+                
+                playerLook.SetRotationX(xRotation * 2);
+                playerLook.SetRotationY(yRotation * 2);
             }
             else if(Input.GetTouch(k).phase == TouchPhase.Ended)
             {
