@@ -35,7 +35,6 @@ public class PcController : MonoBehaviour
         Destroy(this);
 #else
         Cursor.lockState = CursorLockMode.Locked;
-        Debug.Log("Locked PcController");
         runningTimer = runningDuration;
         halfRunningDuration = runningDuration / 2f;
         screenRatio = ((Screen.width / Screen.height - 1) / 2) + 1;
@@ -125,7 +124,11 @@ public class PcController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1))
         {
-            GameManager.Instance().UseOrb(InventoryUI.instance.GetSelectedOrb());
+            int selectedOrb = InventoryUI.instance.GetSelectedOrb();
+            if (selectedOrb == 0)
+                return;
+            
+            GameManager.Instance().UseOrb(selectedOrb == 1);
         }
     }
 }

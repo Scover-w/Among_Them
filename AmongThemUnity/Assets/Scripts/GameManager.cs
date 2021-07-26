@@ -133,10 +133,9 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Cursor.visible = false;
-        #if UNITY_STANDALONE
+#if UNITY_STANDALONE
         Cursor.lockState = CursorLockMode.Locked;
-        Debug.Log("Locked CodeMission");
-        #else
+#else
         Cursor.lockState = CursorLockMode.None;
         #endif
         targetName.text = $"{surnames[Random.Range(0, surnames.Length - 1)]}  {names[Random.Range(0, names.Length - 1)]}";
