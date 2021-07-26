@@ -275,7 +275,7 @@ public class NavMeshAgentManager : MonoBehaviour
 
     public bool GetCaughtByCops()
     {
-        if (!GameManager.Instance().TargetIsAlive)
+        if (!GameManager.Instance().IsTargetAlive())
         {
             PlayerDetection playerDetection = player.GetComponent<PlayerDetection>();
             if (playerDetection.CopsWatchingYou())

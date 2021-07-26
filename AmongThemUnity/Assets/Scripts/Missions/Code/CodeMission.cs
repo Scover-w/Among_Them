@@ -66,6 +66,7 @@ public class CodeMission : MonoBehaviour
             fieldCode.text = "TRUE";
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
+ 
             StartCoroutine(EndAnimationTrue(fieldCode));
             return;
         }
@@ -74,6 +75,7 @@ public class CodeMission : MonoBehaviour
         fieldCode.text = "FALSE";
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
         StartCoroutine(EndAnimationFalse(fieldCode));
     }
 
@@ -83,7 +85,8 @@ public class CodeMission : MonoBehaviour
         missionCanvas.gameObject.SetActive(false);
         fieldCode.text = "";
         CloseMissionPanel();
-        if (GameManager.Instance().IsTutorial)
+
+        if (GameManager.Instance().IsTutorial())
         {
             TutorialManager.Instance().NextStep();
             TutorialManager.Instance().TPinRoom();
@@ -117,7 +120,11 @@ public class CodeMission : MonoBehaviour
         missionCanvas.gameObject.SetActive(false);
         codeCanvas.SetActive(false);
         Cursor.visible = false;
+#if UNITY_STANDALONE
         Cursor.lockState = CursorLockMode.Locked;
+#else
+        Cursor.lockState = CursorLockMode.None;
+#endif
         GameManager.Instance().ChangePlayerCanMove(true);
         GameManager.Instance().ChangePlayerCanRotate(true);
     }

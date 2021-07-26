@@ -108,12 +108,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] 
     private GameObject orbG;
 
+
+    private Vector2 middleScreen;
+    
     private void Awake()
     {
 #if UNITY_STANDALONE || UNITY_EDITOR
         platform = Platform.PC;
 #else
         platform = Platform.Android;
+        middleScreen = new Vector2(Screen.width / 2f, Screen.height / 2f);
 #endif
         
         
@@ -129,7 +133,12 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Cursor.visible = false;
+        #if UNITY_STANDALONE
         Cursor.lockState = CursorLockMode.Locked;
+        Debug.Log("Locked CodeMission");
+        #else
+        Cursor.lockState = CursorLockMode.None;
+        #endif
         targetName.text = $"{surnames[Random.Range(0, surnames.Length - 1)]}  {names[Random.Range(0, names.Length - 1)]}";
         parentTarget.SetActive(true);
         parentCode.SetActive(false);
@@ -166,12 +175,6 @@ public class GameManager : MonoBehaviour
             ChangePlayerCanClick(false);
             PauseGame();
         }
-
-        /*if (Input.GetKeyDown(KeyCode.L))
-        {
-            GenerateNewMap();
-        }*/
-        
     }
 
     public void GenerateNewMap()
@@ -259,25 +262,18 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 1.0f;
             pauseMenu.SetActive(false);
             fpsCanvas.SetActive(true);
-            return isGamePaused = false;
+            isGamePaused = false;
+            return isGamePaused;
         }
+        
         Time.timeScale = 0f;
         pauseMenu.SetActive(true);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         fpsCanvas.SetActive(false);
-        return isGamePaused = true;
+        isGamePaused = true;
+        return isGamePaused;
     }
-
-    public bool PlayerCanMove => playerCanMove;
-
-    public bool PlayerCanRotate => playerCanRotate;
-    public bool PlayerCanClick => playerCanClick;
-    public bool IsTutorial => isTutorial;
-
-    public bool TargetIsAlive => targetIsAlive;
-
-    public bool DataRetrieve => dataRetrieve;
 
     public void ChangePlayerCanRotate(bool canRotate)
     {
@@ -469,17 +465,18 @@ public class GameManager : MonoBehaviour
 
     public void UseOrb(bool isRed)
     {
-        if (!PlayerCanClick)
+        if (!playerCanClick)
         {
             return; 
         }
-
+        
         if (isRed && OrbManager.GetRedCount() < 1)
             return;
         
         if (!isRed && OrbManager.GetBlueCount() < 1)
             return;
-
+        
+        
         Vector3 position = RaycastMesh();
         if (position == Vector3.zero)
             return;
@@ -495,7 +492,13 @@ public class GameManager : MonoBehaviour
         
         layerMask = ~layerMask;
         
-        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        Ray ray;
+            
+#if UNITY_STANDALONE
+        ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+#else
+        ray = mainCamera.ScreenPointToRay(middleScreen);
+#endif
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 10f, layerMask))
         {
@@ -523,5 +526,20 @@ public class GameManager : MonoBehaviour
             PlayerMove.instance.EnableMove();
         }
         
+    }
+
+    public bool IsTutorial()
+    {
+        return isTutorial;
+    }
+
+    public bool IsDataRetrieve()
+    {
+        return dataRetrieve;
+    }
+
+    public bool IsTargetAlive()
+    {
+        return targetIsAlive;
     }
 }

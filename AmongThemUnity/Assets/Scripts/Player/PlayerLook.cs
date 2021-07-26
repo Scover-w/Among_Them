@@ -26,7 +26,9 @@ public class PlayerLook : MonoBehaviour
     private float yRotation;
     private float xRotation;
 
-    private GameManager gm;
+    private GameManager gameManager;
+
+    private Vector2 middleScreen;
 
     private bool canRotate = false;
     private bool canClick = false;
@@ -34,12 +36,16 @@ public class PlayerLook : MonoBehaviour
     private void Start()
     {
         instance = this;
-        gm = GameManager.Instance();
+        gameManager = GameManager.Instance();
         navMeshAgentManager = NavMeshAgentManager.Instance();
         if (PlayerPrefs.HasKey("lookSensity"))
         {
             lookSensitivity = PlayerPrefs.GetFloat("lookSensity");
         }
+
+#if !UNITY_STANDALONE
+        middleScreen = new Vector2(Screen.width / 2f, Screen.height / 2f);
+#endif
 
         yRotation = 0f;
         xRotation = 0f;
@@ -54,16 +60,21 @@ public class PlayerLook : MonoBehaviour
         
         layerMask = ~layerMask;
         
-        if (!gm.PlayerCanClick)
+        if (!canClick)
         {
            return; 
         }
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        
+        Ray ray;
+#if UNITY_STANDALONE
+        ray = cam.ScreenPointToRay(Input.mousePosition);
+#else
+        ray = cam.ScreenPointToRay(middleScreen);
+#endif
         RaycastHit hit;
-
+        
         if (Physics.Raycast(ray, out hit, 200f, layerMask))
         {
-  
             switch (hit.transform.gameObject.tag)
             {
                 case "ToKillAgent":
@@ -74,20 +85,20 @@ public class PlayerLook : MonoBehaviour
                             
                             if (IsSomeoneWatching())
                             {
-                                if (gm.IsTutorial)
+                                if (gameManager.IsTutorial())
                                 {
-                                    gm.ReplacePlayerOnStartPosition();
+                                    gameManager.ReplacePlayerOnStartPosition();
                                 }
                                 else
                                 {
-                                    gm.EndGame(false);
+                                    gameManager.EndGame(false);
                                 }
                             }
                             else
                             {
                                 NavMeshAgentManager.Instance().CopsGoOnCrimeScene();
-                                gm.KillTarget();
-                                if (gm.IsTutorial)
+                                gameManager.KillTarget();
+                                if (gameManager.IsTutorial())
                                 {
                                     TutorialManager.Instance().NextStep();
                                 }
@@ -109,7 +120,7 @@ public class PlayerLook : MonoBehaviour
                     Destroy(hit.transform.gameObject);
                     break;
                 case "TargetRoomDoor":
-                    if (!gm.TargetIsAlive)
+                    if (!gameManager.IsTargetAlive())
                     {
                         CodeMission.Instance().OpenMissionPanel();   
                     }
@@ -119,19 +130,19 @@ public class PlayerLook : MonoBehaviour
                     
                     break;
                 case "ElevatorDoor":
-                    if (!gm.DataRetrieve)
+                    if (!gameManager.IsDataRetrieve())
                     {
                         return;
                     }
-                    if (gm.IsTutorial)
+                    if (gameManager.IsTutorial())
                     {
                         if (TutorialManager.Instance().GetStep() == 6)
                         {
-                            gm.EndTutorial();
+                            gameManager.EndTutorial();
                             return;
                         }
                     }
-                    gm.GoToNextFloor(hit.transform.parent.gameObject);
+                    gameManager.GoToNextFloor(hit.transform.parent.gameObject);
                     break;
 
             }

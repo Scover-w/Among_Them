@@ -32,9 +32,17 @@ public class InventoryUI : MonoBehaviour
     private GameObject blueSelect;
 
     private bool isRedSelected = false;
+
+    private bool isAndroid = false;
     private void Start()
     {
         instance = this;
+        
+#if !UNITY_STANDALONE
+        redSelect.SetActive(false);
+        blueSelect.SetActive(false);
+        isAndroid = true;
+#endif
     }
 
     public bool GetSelectedOrb()
@@ -54,17 +62,19 @@ public class InventoryUI : MonoBehaviour
 
         if ((redOrb == 0 && blueOrb != 0) || (redOrb != 0 && blueOrb == 0))
         {
-            if (redOrb == 0)
+            if (!isAndroid)
             {
-                blueSelect.SetActive(true);
-                redSelect.SetActive(false);
+                if (redOrb == 0)
+                {
+                    blueSelect.SetActive(true);
+                    redSelect.SetActive(false);
+                }
+                else
+                {
+                    redSelect.SetActive(true);
+                    blueSelect.SetActive(false);
+                }
             }
-            else
-            {
-                redSelect.SetActive(true);
-                blueSelect.SetActive(false);
-            }
-                
         }
         
         SetRedOrb(redOrb);
@@ -102,7 +112,7 @@ public class InventoryUI : MonoBehaviour
     
     public void UseBlueOrb()
     {
-        GameManager.Instance().UseOrb(true);
+        GameManager.Instance().UseOrb(false);
     }
 
     public void SelectOrb(int scroll)
@@ -112,8 +122,10 @@ public class InventoryUI : MonoBehaviour
 
         isRedSelected = !isRedSelected;
 
-        redSelect.SetActive(isRedSelected);
-        blueSelect.SetActive(!isRedSelected);
-            
+        if (!isAndroid)
+        {
+            redSelect.SetActive(isRedSelected);
+            blueSelect.SetActive(!isRedSelected);
+        }
     }
 }

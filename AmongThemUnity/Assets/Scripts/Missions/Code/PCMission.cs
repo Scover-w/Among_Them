@@ -39,7 +39,7 @@ public class PCMission : MonoBehaviour
     public void GetInfo()
     {
         GameManager.Instance().GetNextTargetInformation();
-        if (GameManager.Instance().IsTutorial)
+        if (GameManager.Instance().IsTutorial())
         {
             CloseMissionPanel();
             TutorialManager.Instance().TPinHall();
@@ -63,7 +63,9 @@ public class PCMission : MonoBehaviour
         pcCanvas.SetActive(false);
         windowCanvas.SetActive(false);
         Cursor.visible = false;
+#if UNITY_STANDALONE
         Cursor.lockState = CursorLockMode.Locked;
+#endif
         GameManager.Instance().ChangePlayerCanMove(true);
         GameManager.Instance().ChangePlayerCanRotate(true);
     }

@@ -16,7 +16,7 @@ public class AndroidController : MonoBehaviour
     [SerializeField] 
     private PlayerLook playerLook;
 
-    [SerializeField] private Button actionButton;
+    [SerializeField] private GameObject actionButton;
 
     private bool touchIntentLook;
     private Vector3 touchOriginLook;
@@ -38,10 +38,10 @@ public class AndroidController : MonoBehaviour
     void Start()
     {
         #if UNITY_STANDALONE
+        Destroy(actionButton);
         Destroy(this);
         #endif
         
-        actionButton.gameObject.SetActive(true);
         myTouch = new List<Touch>();
         nbTouch = 0;
         indexTouchLook = -1;
@@ -55,8 +55,6 @@ public class AndroidController : MonoBehaviour
             variableJoystickLook.gameObject.SetActive(false);
             variableJoystickMove.gameObject.SetActive(false);
         }
-        
-        actionButton.onClick.AddListener(delegate { playerLook.RaycastInteractiveElement(); });
     }
 
     private void Update()
@@ -66,7 +64,7 @@ public class AndroidController : MonoBehaviour
 
     void GetLook()
     {
-        if (Input.touchCount > 0)
+        /*if (Input.touchCount > 0)
         {
             inputLook = Input.GetTouch(nbTouch);
 
@@ -99,7 +97,7 @@ public class AndroidController : MonoBehaviour
                 touchOriginLook = new Vector3(inputLook.position.x, inputLook.position.y, 0);
                 //Debug.Log(touchOriginLook);
             }
-        }
+        }*/
     }
     
 

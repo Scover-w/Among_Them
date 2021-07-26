@@ -33,11 +33,13 @@ public class PcController : MonoBehaviour
     {
 #if !UNITY_STANDALONE
         Destroy(this);
-#endif
+#else
         Cursor.lockState = CursorLockMode.Locked;
+        Debug.Log("Locked PcController");
         runningTimer = runningDuration;
         halfRunningDuration = runningDuration / 2f;
         screenRatio = ((Screen.width / Screen.height - 1) / 2) + 1;
+#endif
     }
 
     // Update is called once per frame
