@@ -265,6 +265,7 @@ GameObject:
   m_Component:
   - component: {fileID: 948858381}
   - component: {fileID: 948858380}
+  - component: {fileID: 948858382}
   m_Layer: 0
   m_Name: Scripts
   m_TagString: Untagged
@@ -284,6 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eae8bc9a9dc43c408bd17dcd7b16e7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundManager: {fileID: 1075883386}
 --- !u!4 &948858381
 Transform:
   m_ObjectHideFlags: 0
@@ -298,6 +300,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &948858382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 948858379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 831e3f1516f4f824d8edf6ba21f60e16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texts: []
 --- !u!1 &1010331065
 GameObject:
   m_ObjectHideFlags: 0
@@ -438,6 +453,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1075883385}
   - component: {fileID: 1075883384}
+  - component: {fileID: 1075883386}
   m_Layer: 0
   m_Name: Video
   m_TagString: Untagged
@@ -453,7 +469,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1075883383}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: d975717892f0835448c60e86c77212fa, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 314cab51cf958f34c8560e561b8059bf, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -493,6 +509,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1075883386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075883383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1725049051a6faf41ba39b351e490b18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - Name: FrenchVoice
+    clip: {fileID: 8300000, guid: eaa3c0d9dc0b53b44b23b4d6590b0686, type: 3}
+    volume: 1
+    source: {fileID: 0}
+  - Name: EnglishVoice
+    clip: {fileID: 8300000, guid: eaaf6a81b9d061d4fb33a20938470515, type: 3}
+    volume: 1
+    source: {fileID: 0}
 --- !u!1 &1213608977
 GameObject:
   m_ObjectHideFlags: 0
@@ -885,7 +922,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
