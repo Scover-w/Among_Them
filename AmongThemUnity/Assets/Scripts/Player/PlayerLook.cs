@@ -96,12 +96,22 @@ public class PlayerLook : MonoBehaviour
                             }
                             else
                             {
-                                NavMeshAgentManager.Instance().CopsGoOnCrimeScene();
-                                gameManager.KillTarget();
-                                if (gameManager.IsTutorial())
+                                if (ProgressionManager.GetWealthValue() > 0.99f)
                                 {
-                                    TutorialManager.Instance().NextStep();
+                                    gameManager.CinematicWinGame();
                                 }
+                                else
+                                {
+                                    NavMeshAgentManager.Instance().CopsGoOnCrimeScene();
+                                    gameManager.KillTarget();
+                                    if (gameManager.IsTutorial())
+                                    {
+                                        TutorialManager.Instance().NextStep();
+                                    }
+                                }
+                                
+                                
+                                
                             }
                         }
                     }

@@ -68,7 +68,7 @@ public class TestConnexion : MonoBehaviour
         form.AddField("platform", "1");
         form.AddField("date", date);
 
-        using (UnityWebRequest www = UnityWebRequest.Post("http://localhost/Unity/test.php", form))
+        using (UnityWebRequest www = UnityWebRequest.Post("https://www.scover.me/AmongThem/test.php", form))
         {
             yield return www.SendWebRequest();
 
@@ -113,7 +113,7 @@ public class TestConnexion : MonoBehaviour
         form.AddField("platform", platform);
         form.AddField("date", date);
 
-        using (UnityWebRequest www = UnityWebRequest.Post("http://localhost/Unity/test.php", form))
+        using (UnityWebRequest www = UnityWebRequest.Post("https://www.scover.me/AmongThem/test.php", form))
         {
             yield return www.SendWebRequest();
 
@@ -135,7 +135,7 @@ public class TestConnexion : MonoBehaviour
         form.AddField("name", login.text);
         form.AddField("pwd", password.text);
 
-        using (UnityWebRequest www = UnityWebRequest.Post("http://localhost/Unity/test_login.php", form))
+        using (UnityWebRequest www = UnityWebRequest.Post("https://www.scover.me/AmongThem/test_login.php", form))
         {
             yield return www.SendWebRequest();
 

@@ -47,6 +47,11 @@ public class CamCinematic : MonoBehaviour
         StartCoroutine(nameof(PlayDeathCinematicCo), playerPosition);
     }
 
+    public void PlayWinCinematic(Vector3 playerPosition)
+    {
+        StartCoroutine(nameof(PlayWinCinematicCo), playerPosition);
+    }
+
     public float GetCinematicTimer()
     {
         return timerCinematic;
@@ -89,6 +94,24 @@ public class CamCinematic : MonoBehaviour
         while (timer < 4f)
         {
             cinematicCamera.transform.position = new Vector3(Mathf.Sin(timer) + playerPosition.x, playerPosition.y + 4f, Mathf.Sin(timer) + playerPosition.z);
+            cinematicCamera.transform.rotation = Quaternion.LookRotation(playerPosition - cinematicCamera.transform.position);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        
+        cinematicCamera.enabled = false;
+        mainCamera.enabled = true;
+    }
+
+    IEnumerator PlayWinCinematicCo(Vector3 playerPosition)
+    {
+        cinematicCamera.enabled = true;
+        mainCamera.enabled = false;
+        
+        float timer = 0f;
+        while (timer < 8.1f)
+        {
+            cinematicCamera.transform.position = new Vector3(Mathf.Sin(timer) * 2 + playerPosition.x, playerPosition.y + 1f, Mathf.Cos(timer) * 2 + playerPosition.z);
             cinematicCamera.transform.rotation = Quaternion.LookRotation(playerPosition - cinematicCamera.transform.position);
             timer += Time.deltaTime;
             yield return null;

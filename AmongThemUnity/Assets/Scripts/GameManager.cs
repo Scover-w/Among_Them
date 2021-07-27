@@ -239,15 +239,8 @@ public class GameManager : MonoBehaviour
         camCinematic.PlayElevatorCinematic();
         yield return new WaitForSeconds(camCinematic.GetCinematicTimer());
         
-        if (ProgressionManager.GetWealthValue() > 0.99f)
-        {
-            EndGame(true);
-        }
-        else
-        {
-            blackScreen.SetActive(true);
-            GenerateNewMap();
-        }
+        blackScreen.SetActive(true);
+        GenerateNewMap();
     }
     
     public bool PauseGame()
@@ -427,8 +420,36 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(3.9f);
         EndGame(false);
         player.SetActive(true);
+        Destroy(cinematicPlayer);
+    }
 
+    public void CinematicWinGame()
+    {
         
+        StartCoroutine(nameof(CinematicWinGameCo));
+    }
+
+    IEnumerator CinematicWinGameCo()
+    {
+        // Target animation
+        FreezePlayer(true);
+        SoundManager.Instance.Play("Kill");
+        target.GetComponent<Animator>().SetBool("isDie", true);
+        target.GetComponent<NavMeshAgent>().isStopped = true;
+        yield return new WaitForSeconds(3.17f);
+        target.SetActive(false);
+        
+        
+        // Player animation
+        SoundManager.Instance.Play("Win");
+        InstantiatePlayerCinematic();
+        cinematicPlayer.GetComponent<Animator>().SetBool("isDance",true);
+        player.SetActive(false);
+        camCinematic.PlayWinCinematic(player.transform.position);
+        yield return new WaitForSeconds(8f);
+        EndGame(true);
+        player.SetActive(true);
+        Destroy(cinematicPlayer);
     }
 
     public void ReloadScene()

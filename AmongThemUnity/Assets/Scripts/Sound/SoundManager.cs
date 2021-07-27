@@ -74,11 +74,13 @@ public class SoundManager : MonoBehaviour
     
     public void StopHearth()
     {
-        hearthSound.source.Stop();
+        if(hearthSound != null)
+            hearthSound.source.Stop();
     }
 
     public void SetVolumeHearth(float volume)
     {
-        hearthSound.source.volume = volume * globalVolume;
+        if(hearthSound != null)
+            hearthSound.source.volume = volume * globalVolume;
     }
 }
