@@ -37,9 +37,14 @@ public class CamCinematic : MonoBehaviour
     private float timerCinematic = 10f;
     private float distanceToTravelCam = 30f;
 
-    public void PlayCinematic()
+    public void PlayElevatorCinematic()
     {
-        StartCoroutine(nameof(PlayCinematicCo), elevatorManager.GetElevator());
+        StartCoroutine(nameof(PlayElevatorCinematicCo), elevatorManager.GetElevator());
+    }
+
+    public void PlayDeathCinematic(Vector3 playerPosition)
+    {
+        StartCoroutine(nameof(PlayDeathCinematicCo), playerPosition);
     }
 
     public float GetCinematicTimer()
@@ -47,7 +52,7 @@ public class CamCinematic : MonoBehaviour
         return timerCinematic;
     }
     
-    IEnumerator PlayCinematicCo(GameObject elevator)
+    IEnumerator PlayElevatorCinematicCo(GameObject elevator)
     {
         SelectPosition(elevator.transform.position);
 
@@ -75,6 +80,24 @@ public class CamCinematic : MonoBehaviour
         GameManager.Instance().GetPlayer().SetActive(true);
     }
 
+    IEnumerator PlayDeathCinematicCo(Vector3 playerPosition)
+    {
+        cinematicCamera.enabled = true;
+        mainCamera.enabled = false;
+
+        float timer = 0f;
+        while (timer < 4f)
+        {
+            cinematicCamera.transform.position = new Vector3(Mathf.Sin(timer) + playerPosition.x, playerPosition.y + 4f, Mathf.Sin(timer) + playerPosition.z);
+            cinematicCamera.transform.rotation = Quaternion.LookRotation(playerPosition - cinematicCamera.transform.position);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        
+        cinematicCamera.enabled = false;
+        mainCamera.enabled = true;
+    }
+    
     private void SelectPosition(Vector3 elevator)
     {
         if (Math.Abs(elevator.x) > 90f)

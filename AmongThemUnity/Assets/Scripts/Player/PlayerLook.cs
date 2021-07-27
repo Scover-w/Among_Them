@@ -91,7 +91,7 @@ public class PlayerLook : MonoBehaviour
                                 }
                                 else
                                 {
-                                    gameManager.EndGame(false);
+                                    gameManager.CinematicPlayerDie();
                                 }
                             }
                             else

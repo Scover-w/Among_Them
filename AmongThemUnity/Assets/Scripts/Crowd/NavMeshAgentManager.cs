@@ -280,7 +280,7 @@ public class NavMeshAgentManager : MonoBehaviour
             PlayerDetection playerDetection = player.GetComponent<PlayerDetection>();
             if (playerDetection.CopsWatchingYou())
             {
-                GameManager.Instance().EndGame(false);
+                GameManager.Instance().CinematicPlayerDie();
             }
         }
 

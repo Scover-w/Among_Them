@@ -102,8 +102,8 @@ public class GameManager : MonoBehaviour
     private CamCinematic camCinematic;
 
     [SerializeField] 
-    private GameObject prefabPolyPlayer;
-    private GameObject polyPlayer;
+    private GameObject prefabCinematicPlayer;
+    private GameObject cinematicPlayer;
     
     // Orb
     [SerializeField] 
@@ -236,7 +236,7 @@ public class GameManager : MonoBehaviour
 
         
         player.SetActive(false);
-        camCinematic.PlayCinematic();
+        camCinematic.PlayElevatorCinematic();
         yield return new WaitForSeconds(camCinematic.GetCinematicTimer());
         
         if (ProgressionManager.GetWealthValue() > 0.99f)
@@ -384,6 +384,8 @@ public class GameManager : MonoBehaviour
 
     public void EndGame(bool win)
     {
+        SoundManager.Instance.StopHearth();
+        SoundManager.Instance.Stop("SadMusic");
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -406,6 +408,27 @@ public class GameManager : MonoBehaviour
         {
             SoundManager.Instance.Play("Lose");
         }
+    }
+
+    public void CinematicPlayerDie()
+    {
+        targetIsAlive = true;
+        StartCoroutine(nameof(CinematicPlayerDieCo));
+    }
+    
+    IEnumerator CinematicPlayerDieCo()
+    {
+        FreezePlayer(true);
+        SoundManager.Instance.Play("Kill");
+        InstantiatePlayerCinematic();
+        cinematicPlayer.GetComponent<Animator>().SetBool("isDie",true);
+        player.SetActive(false);
+        camCinematic.PlayDeathCinematic(player.transform.position);
+        yield return new WaitForSeconds(3.9f);
+        EndGame(false);
+        player.SetActive(true);
+
+        
     }
 
     public void ReloadScene()
@@ -536,6 +559,13 @@ public class GameManager : MonoBehaviour
             PlayerMove.instance.EnableMove();
         }
         
+    }
+
+    private void InstantiatePlayerCinematic()
+    {
+        cinematicPlayer = Instantiate(prefabCinematicPlayer);
+        cinematicPlayer.transform.position = new Vector3(player.transform.position.x, player.transform.position.y - 0.9f, player.transform.position.z);
+        cinematicPlayer.transform.rotation = player.transform.rotation;
     }
 
     public bool IsTutorial()

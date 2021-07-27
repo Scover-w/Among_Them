@@ -651,7 +651,8 @@ MonoBehaviour:
   containerMap: {fileID: 1249519050}
   elevatorManager: {fileID: 488831354}
   camCinematic: {fileID: 488831355}
-  prefabPolyPlayer: {fileID: 0}
+  prefabCinematicPlayer: {fileID: 8792726324233081714, guid: 5aad493368e9d654f9203f4113a9c0a3,
+    type: 3}
   orbG: {fileID: 2614888114241662779, guid: 7a636d981cfec854d9565f44ad44c149, type: 3}
 --- !u!114 &488831347
 MonoBehaviour:
@@ -1085,7 +1086,6 @@ GameObject:
   m_Component:
   - component: {fileID: 816321468}
   - component: {fileID: 816321466}
-  - component: {fileID: 816321467}
   - component: {fileID: 816321465}
   m_Layer: 0
   m_Name: Main Camera
@@ -1154,14 +1154,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &816321467
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 816321464}
-  m_Enabled: 1
 --- !u!4 &816321468
 Transform:
   m_ObjectHideFlags: 0
@@ -4307,6 +4299,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1914483953}
   - component: {fileID: 1914483954}
+  - component: {fileID: 1914483952}
   m_Layer: 0
   m_Name: Audio
   m_TagString: Untagged
@@ -4314,6 +4307,14 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!81 &1914483952
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914483951}
+  m_Enabled: 1
 --- !u!4 &1914483953
 Transform:
   m_ObjectHideFlags: 0
@@ -4778,7 +4779,7 @@ PrefabInstance:
     - target: {fileID: 8150984887299100150, guid: 10fe5c273d1387143b12618e96edc1fb,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 20
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8150984887299100150, guid: 10fe5c273d1387143b12618e96edc1fb,
         type: 3}
@@ -4803,7 +4804,7 @@ PrefabInstance:
     - target: {fileID: 8150984887462217580, guid: 10fe5c273d1387143b12618e96edc1fb,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 20
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8150984887462217580, guid: 10fe5c273d1387143b12618e96edc1fb,
         type: 3}
