@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 using TMPro;
+using UnityEngine.AI;
 
 public enum Platform {PC, Android}
 
@@ -310,6 +311,16 @@ public class GameManager : MonoBehaviour
         parentTarget.SetActive(false);
         parentCode.SetActive(true);
         targetIsAlive = false;
+
+
+        StartCoroutine(nameof(KillTargetCo));
+    }
+
+    IEnumerator KillTargetCo()
+    {
+        target.GetComponent<Animator>().SetBool("isDie", true);
+        target.GetComponent<NavMeshAgent>().isStopped = true;
+        yield return new WaitForSeconds(3.17f);
         target.SetActive(false);
         if (!isTutorial)
         {
