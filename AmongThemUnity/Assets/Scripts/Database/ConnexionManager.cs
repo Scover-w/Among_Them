@@ -6,6 +6,7 @@ public static class ConnexionManager
 {
     public static string idUser = "";
     public static string username = "";
+    public static string password = "";
     private static bool isConnected = false;
 
     public static string IDUser
@@ -18,6 +19,12 @@ public static class ConnexionManager
     {
         get => username;
         set => username = value;
+    }
+    
+    public static string Password
+    {
+        get => password;
+        set => password = value;
     }
 
     public static bool IsConnected

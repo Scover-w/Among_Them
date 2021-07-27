@@ -38,7 +38,7 @@ public class TestConnexion : MonoBehaviour
                 logoffBtn.gameObject.SetActive(true);
                 statusCoText.gameObject.SetActive(true);
                 statusDecoText.gameObject.SetActive(false);
-                testBtn.gameObject.SetActive(true);
+                //testBtn.gameObject.SetActive(true);
             
                 statusCoText.text = ConnexionManager.Username;
                 statusIndicator.color = Color.green;
@@ -50,7 +50,6 @@ public class TestConnexion : MonoBehaviour
                 status = true;
             }
         }
-        
     }
 
     void Upload()
@@ -105,28 +104,34 @@ public class TestConnexion : MonoBehaviour
 
     public IEnumerator SendData(string time, int platform)
     {
-        string date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-        Debug.Log(date);
-        WWWForm form = new WWWForm();
-        form.AddField("user_id", ConnexionManager.IDUser);
-        form.AddField("time", time);
-        form.AddField("platform", platform);
-        form.AddField("date", date);
-
-        using (UnityWebRequest www = UnityWebRequest.Post("https://www.scover.me/AmongThem/test.php", form))
+        if (ConnexionManager.IsConnected)
         {
-            yield return www.SendWebRequest();
+            string date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            Debug.Log(date);
+            WWWForm form = new WWWForm();
+            form.AddField("user_id", ConnexionManager.IDUser);
+            form.AddField("password", ConnexionManager.Password);
+            form.AddField("time", time);
+            form.AddField("platform", platform);
+            form.AddField("date", date);
 
-            if (www.isNetworkError || www.isHttpError)
+            using (UnityWebRequest www = UnityWebRequest.Post("https://www.scover.me/AmongThem/test.php", form))
             {
-                Debug.Log(www.error);
-                Debug.Log(www.downloadHandler.text);
-            }
-            else
-            {
-                Debug.Log("Form upload complete! " + www.error);
+                yield return www.SendWebRequest();
+
+                if (www.isNetworkError || www.isHttpError)
+                {
+                    Debug.Log(www.error);
+                    Debug.Log(www.downloadHandler.text);
+                }
+                else
+                {
+                    Debug.Log("Form upload complete! " + www.error);
+                }
             }
         }
+
+        yield return null;
     }
     
     public IEnumerator GetDataLogin()
@@ -148,17 +153,19 @@ public class TestConnexion : MonoBehaviour
             {
                 Debug.Log("Form upload complete! ");
                 Debug.Log(www.downloadHandler.text);
-                var data = www.downloadHandler.text.Split(';');
-                statusCoText.text = data[1];
-                ConnexionManager.IDUser =data[0];
-                ConnexionManager.Username = data[1];
+                var userId = www.downloadHandler.text;
+                statusCoText.text = login.text;
+
+                ConnexionManager.IDUser = userId;
+                ConnexionManager.Password = password.text;
+                ConnexionManager.Username = login.text;
                 ConnexionManager.IsConnected = true;
                 statusIndicator.color = Color.green;
                 login.text = "";
                 password.text = "";
                 login.gameObject.SetActive(false);
                 password.gameObject.SetActive(false);
-                testBtn.gameObject.SetActive(true);
+                //testBtn.gameObject.SetActive(true);
                 //
                 loginBtn.gameObject.SetActive(false);
                 logoffBtn.gameObject.SetActive(true);
@@ -177,7 +184,7 @@ public class TestConnexion : MonoBehaviour
         statusIndicator.color = Color.red;
         login.gameObject.SetActive(true);
         password.gameObject.SetActive(true);
-        testBtn.gameObject.SetActive(false);
+        //testBtn.gameObject.SetActive(false);
         //
         loginBtn.gameObject.SetActive(true);
         logoffBtn.gameObject.SetActive(false);

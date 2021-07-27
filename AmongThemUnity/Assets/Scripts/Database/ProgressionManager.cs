@@ -7,6 +7,8 @@ public static class ProgressionManager
 {
     private static float wealthValue = 0f;
     
+    private static float timeInPlay = 0f;
+    
     
     public static void EnterGame()
     {
@@ -47,6 +49,28 @@ public static class ProgressionManager
             value = 1f;
         wealthValue = value;
         PlayerPrefs.SetFloat("wealthValue", wealthValue);
+    }
+
+    public static void AddTimeToTimer(float time)
+    {
+        if (!PlayerPrefs.HasKey("timeInPlay"))
+        {
+            PlayerPrefs.SetFloat("timeInPlay", 0f);
+        }
+        
+        timeInPlay = PlayerPrefs.GetFloat("timeInPlay") + time;
+        
+        PlayerPrefs.SetFloat("timeInPlay", timeInPlay);
+    }
+
+    public static float GetTime()
+    {
+        if (!PlayerPrefs.HasKey("timeInPlay"))
+        {
+            PlayerPrefs.SetFloat("timeInPlay", 0f);
+        }
+
+        return PlayerPrefs.GetFloat("timeInPlay");
     }
 
 }

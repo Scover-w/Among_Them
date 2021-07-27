@@ -83,8 +83,7 @@ public class GameManager : MonoBehaviour
     private TMP_Text endTime;
 
     private float timeStart;
-    private float timeEnd;
-    
+
     //Database
     [SerializeField]
     private TestConnexion DBConnexion;
@@ -142,7 +141,6 @@ public class GameManager : MonoBehaviour
         targetName.text = $"{surnames[Random.Range(0, surnames.Length - 1)]}  {names[Random.Range(0, names.Length - 1)]}";
         parentTarget.SetActive(true);
         parentCode.SetActive(false);
-        timeStart = Time.time;
         StartCoroutine(StartGame());
     }
 
@@ -206,11 +204,13 @@ public class GameManager : MonoBehaviour
         elevatorManager.OpenElevatorBeginLevel();
         yield return new WaitForSeconds(1f);
         FreezePlayer(false);
+        timeStart = Time.time;
     }
 
     public void GoToNextFloor(GameObject elevator)
     {
         ProgressionManager.NextLevel();
+        ProgressionManager.AddTimeToTimer(Time.time - timeStart);
 
         targetIsAlive = true;
         FreezePlayer(true);
@@ -392,8 +392,7 @@ public class GameManager : MonoBehaviour
             ProgressionManager.SetWealthValueShortCut(0f);
             reloadSceneButton.SetActive(false);
             goText.text = "Win";
-            timeEnd = Time.time;
-            string finalTime = ConvertTimeToString(timeEnd - timeStart);
+            string finalTime = ConvertTimeToString(ProgressionManager.GetTime());
             endTime.text = finalTime;
             StartCoroutine(DBConnexion.SendData(finalTime, platform == Platform.PC ? 1 : 2));
         }
@@ -411,6 +410,7 @@ public class GameManager : MonoBehaviour
     
     IEnumerator CinematicPlayerDieCo()
     {
+        ProgressionManager.AddTimeToTimer(Time.time - timeStart);
         FreezePlayer(true);
         SoundManager.Instance.Play("Kill");
         InstantiatePlayerCinematic();
@@ -431,6 +431,8 @@ public class GameManager : MonoBehaviour
 
     IEnumerator CinematicWinGameCo()
     {
+        ProgressionManager.AddTimeToTimer(Time.time - timeStart);
+        
         // Target animation
         FreezePlayer(true);
         SoundManager.Instance.Play("Kill");
