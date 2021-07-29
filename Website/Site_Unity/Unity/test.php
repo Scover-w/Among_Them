@@ -5,7 +5,7 @@ $user = isset($_POST['user_id'])? $_POST['user_id']: null;
 $time = isset($_POST['time'])? $_POST['time']: null;
 $platform = isset($_POST['platform'])? $_POST['platform']: null;
 $date = isset($_POST['date'])? $_POST['date']: null;
-
+echo 'Enter';
 
 $suc1 = "UPDATE `succes_by_user` SET `advancement`= advancement + 1 WHERE advancement < (SELECT success.objectif_success FROM success WHERE success.id_success = succes_by_user.id_success AND success.id_success = 1) AND id_user = ?";
 
@@ -19,7 +19,7 @@ $req_prep = $bdd->prepare($req);
 
 if ($req_prep->execute(array($user, $bdd->quote($time), $platform, $bdd->quote($date))))
 {
-
+    echo 'First req';
 
     $sql_rank_check = "SELECT * FROM ranking WHERE user = ".$user;
     $req_rank_check = $bdd->query($sql_rank_check);
@@ -33,6 +33,7 @@ if ($req_prep->execute(array($user, $bdd->quote($time), $platform, $bdd->quote($
 
 
         if ($time1->diff($time3)->format("%R") == "-"){
+            echo '2nd req';
             $suc2 = "UPDATE `succes_by_user` SET `advancement`= advancement + 1 WHERE advancement < (SELECT success.objectif_success FROM success WHERE success.id_success = succes_by_user.id_success AND success.id_success = 3) AND id_user = ?";
 
 
@@ -46,6 +47,7 @@ if ($req_prep->execute(array($user, $bdd->quote($time), $platform, $bdd->quote($
 
         if ($time1->diff($time2)->format("%R") == "-")
         {
+            echo '3rd req';
             $sql_rank_update = "UPDATE `ranking` SET `time`= ? WHERE user = ?";
 
             $req_rank_update = $bdd->prepare($sql_rank_update);
@@ -60,6 +62,7 @@ if ($req_prep->execute(array($user, $bdd->quote($time), $platform, $bdd->quote($
         }
     }else
     {
+        echo '4th req';
         $sql_rank_insert = "INSERT INTO `ranking`(`id_rank`, `user`, `time`, `platform`) VALUES (null,?,?,?)";
 
         $req_rank_insert = $bdd->prepare($sql_rank_insert);
@@ -74,6 +77,6 @@ if ($req_prep->execute(array($user, $bdd->quote($time), $platform, $bdd->quote($
     }
 
 }else{
-    echo "merde alors";
+    echo '5th req';
     http_response_code(404);
 }
