@@ -22,7 +22,7 @@
             <div class="w-auto bg-header-div border-header-div py-2 px-3">
                 PUBLICITE
             </div>
-            <img style="margin: 0 12.5% 0 12.5% " src="Images/pub_at.png">
+            <img class="w-100" src="Images/pub_at.png">
 
         </div>
 
