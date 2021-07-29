@@ -63,7 +63,8 @@ public class TestConnexion : MonoBehaviour
         
         WWWForm form = new WWWForm();
         form.AddField("user_id", ConnexionManager.IDUser);
-        form.AddField("time", "00:05:00");
+        //form.AddField("password", ConnexionManager.Password);
+        form.AddField("time", "00:08:56");
         form.AddField("platform", "1");
         form.AddField("date", date);
 
@@ -91,7 +92,6 @@ public class TestConnexion : MonoBehaviour
 
     public void ClickLogin()
     {
-        
         StartCoroutine(GetDataLogin());
     }
 
@@ -107,7 +107,7 @@ public class TestConnexion : MonoBehaviour
         if (ConnexionManager.IsConnected)
         {
             string date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            Debug.Log(date);
+            Debug.Log($"{ConnexionManager.IDUser} - {time} - {platform} - {date}");
             WWWForm form = new WWWForm();
             form.AddField("user_id", ConnexionManager.IDUser);
             form.AddField("password", ConnexionManager.Password);
@@ -134,49 +134,78 @@ public class TestConnexion : MonoBehaviour
         yield return null;
     }
     
+    public static IEnumerator SendDataDie()
+    {
+        if (ConnexionManager.IsConnected)
+        {
+            string date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            Debug.Log(date);
+            WWWForm form = new WWWForm();
+            form.AddField("user_id", ConnexionManager.IDUser);
+            form.AddField("password", ConnexionManager.Password);
+
+            using (UnityWebRequest www = UnityWebRequest.Post("https://www.scover.me/AmongThem/success2.php", form))
+            {
+                yield return www.SendWebRequest();
+
+                if (www.isNetworkError || www.isHttpError)
+                {
+                    Debug.Log(www.error);
+                    Debug.Log(www.downloadHandler.text);
+                }
+                else
+                {
+                    Debug.Log("Form upload complete! " + www.error);
+                }
+            }
+        }
+
+        yield return null;
+    }
+    
     public IEnumerator GetDataLogin()
     {
         WWWForm form = new WWWForm();
         form.AddField("name", login.text);
         form.AddField("pwd", password.text);
 
-        using (UnityWebRequest www = UnityWebRequest.Post("https://www.scover.me/AmongThem/test_login.php", form))
+        UnityWebRequest www = UnityWebRequest.Post("https://www.scover.me/AmongThem/test_login.php", form);
+        
+        yield return www.SendWebRequest();
+
+        if (www.isNetworkError || www.isHttpError)
         {
-            yield return www.SendWebRequest();
-
-            if (www.isNetworkError || www.isHttpError)
-            {
-                Debug.Log(www.error);
-                Debug.Log(www.downloadHandler.text);
-            }
-            else
-            {
-                Debug.Log("Form upload complete! ");
-                Debug.Log(www.downloadHandler.text);
-                var userId = www.downloadHandler.text;
-                statusCoText.text = login.text;
-
-                ConnexionManager.IDUser = userId;
-                ConnexionManager.Password = password.text;
-                ConnexionManager.Username = login.text;
-                ConnexionManager.IsConnected = true;
-                statusIndicator.color = Color.green;
-                login.text = "";
-                password.text = "";
-                login.gameObject.SetActive(false);
-                password.gameObject.SetActive(false);
-                //testBtn.gameObject.SetActive(true);
-                //
-                loginBtn.gameObject.SetActive(false);
-                logoffBtn.gameObject.SetActive(true);
-                statusCoText.gameObject.SetActive(true);
-                statusDecoText.gameObject.SetActive(false);
-                //
-                btnLogoffText.text = LanguageManager.Instance().GetTextWithReference("logoff_button");
-                status = true;
-                //Debug.Log(ConnexionManager.IDUser);
-            }
+            Debug.Log(www.error);
+            Debug.Log(www.downloadHandler.text);
         }
+        else
+        {
+            Debug.Log("Form upload complete! ");
+            Debug.Log(www.downloadHandler.text);
+            var userId = www.downloadHandler.text;
+            statusCoText.text = login.text;
+
+            ConnexionManager.IDUser = userId;
+            ConnexionManager.Password = password.text;
+            ConnexionManager.Username = login.text;
+            ConnexionManager.IsConnected = true;
+            statusIndicator.color = Color.green;
+            login.text = "";
+            password.text = "";
+            login.gameObject.SetActive(false);
+            password.gameObject.SetActive(false);
+            //testBtn.gameObject.SetActive(true);
+            //
+            loginBtn.gameObject.SetActive(false);
+            logoffBtn.gameObject.SetActive(true);
+            statusCoText.gameObject.SetActive(true);
+            statusDecoText.gameObject.SetActive(false);
+            //
+            btnLogoffText.text = LanguageManager.Instance().GetTextWithReference("logoff_button");
+            status = true;
+            //Debug.Log(ConnexionManager.IDUser);
+        }
+
     }
 
     public IEnumerator LogOff()

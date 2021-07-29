@@ -399,6 +399,7 @@ public class GameManager : MonoBehaviour
         else
         {
             SoundManager.Instance.Play("Lose");
+            StartCoroutine(TestConnexion.SendDataDie());
         }
     }
 
