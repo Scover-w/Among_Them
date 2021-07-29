@@ -1,27 +1,11 @@
 <?php
 include "connexionBDD.php";
-include_once "tools.php";
 
-$user = clean(isset($_POST['user_id'])? $_POST['user_id']: null);
-$password = clean(isset($_POST['password'])? $_POST['password']: null);
-$time = clean(isset($_POST['time'])? $_POST['time']: null);
-$platform = clean(isset($_POST['platform'])? $_POST['platform']: null);
-$date = clean(isset($_POST['date'])? $_POST['date']: null);
+$user = isset($_POST['user_id'])? $_POST['user_id']: null;
+$time = isset($_POST['time'])? $_POST['time']: null;
+$platform = isset($_POST['platform'])? $_POST['platform']: null;
+$date = isset($_POST['date'])? $_POST['date']: null;
 
-
-$pwd = hash("md5",$password);
-$req = "SELECT * FROM user WHERE name = ? AND password = ?;";
-
-$req_prep = $bdd->prepare($req);
-
-if ($req_prep->execute(array($user,$pwd)))
-{
-    if ($req_prep->rowCount() != 1)
-    {
-        http_response_code(410);
-        return; 
-    }
-}
 
 $suc1 = "UPDATE `succes_by_user` SET `advancement`= advancement + 1 WHERE advancement < (SELECT success.objectif_success FROM success WHERE success.id_success = succes_by_user.id_success AND success.id_success = 1) AND id_user = ?";
 
@@ -33,7 +17,7 @@ $req = "INSERT INTO `run_history` (`run_id`, `user_id`, `time`, `platform`, `dat
 
 $req_prep = $bdd->prepare($req);
 
-if ($req_prep->execute(array($user, $time, $platform, $date)))
+if ($req_prep->execute(array($user, $bdd->quote($time), $platform, $bdd->quote($date))))
 {
 
 
@@ -58,7 +42,6 @@ if ($req_prep->execute(array($user, $time, $platform, $date)))
 
         }
 
-        
         echo $time1->diff($time2)->format("%R");
 
         if ($time1->diff($time2)->format("%R") == "-")
@@ -91,6 +74,6 @@ if ($req_prep->execute(array($user, $time, $platform, $date)))
     }
 
 }else{
+    echo "merde alors";
     http_response_code(404);
-    echo "$date";
 }
