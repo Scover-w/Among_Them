@@ -32,10 +32,9 @@ if ($req_prep->execute(array($user,$time, $platform, $date)))
         $time3 = DateTime::createFromFormat("H:i:s","00:09:58");
 
 
-        if ($time1->diff($time3)->format("%R") == "-"){
+        if ($time1->diff($time3)->format("%R") == "+"){
             echo '2nd req';
             $suc2 = "UPDATE `succes_by_user` SET `advancement`= advancement + 1 WHERE advancement < (SELECT success.objectif_success FROM success WHERE success.id_success = succes_by_user.id_success AND success.id_success = 3) AND id_user = ?";
-
 
             $req_suc2 = $bdd->prepare($suc2);
 

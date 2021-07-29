@@ -8,7 +8,7 @@ $password = clean(isset($_POST['password'])? $_POST['password']: null);
 
 $pwd = hash("md5",$password);
 
-$req = "SELECT * FROM user WHERE name = ? AND password = ?;";
+$req = "SELECT * FROM user WHERE id_user = ? AND password = ?;";
 
 $req_prep = $bdd->prepare($req);
 
