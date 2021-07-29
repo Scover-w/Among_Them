@@ -64,7 +64,7 @@ public class TestConnexion : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("user_id", ConnexionManager.IDUser);
         //form.AddField("password", ConnexionManager.Password);
-        form.AddField("time", "00:08:56");
+        form.AddField("time", "00:08:32");
         form.AddField("platform", "1");
         form.AddField("date", date);
 
