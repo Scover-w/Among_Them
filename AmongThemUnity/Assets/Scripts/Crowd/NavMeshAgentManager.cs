@@ -232,18 +232,18 @@ public class NavMeshAgentManager : MonoBehaviour
     {
         NavMeshHit hit = new NavMeshHit();
 
-        NavMesh.SamplePosition(position, out hit, 50f, NavMesh.AllAreas);
-
-        // try
+        int i = 0;
+        while (i < 5)
         {
-            return hit.position;
-        }
-        // catch (Exception e)
-        // {
-        //     // 
-        // }
+            if (NavMesh.SamplePosition(position, out hit, 50f, NavMesh.AllAreas))
+            {
+                return hit.position;
+            }
 
-        return Vector3.zero;
+            i++;
+        }
+
+        return new Vector3(20f,0f, 20f);
     }
 
     public bool IsSomeoneWatching()
