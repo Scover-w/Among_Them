@@ -591,6 +591,20 @@ public class GameManager : MonoBehaviour
         cinematicPlayer.transform.rotation = player.transform.rotation;
     }
 
+    public void TeleportPlayerToGoal()
+    {
+        if (targetIsAlive) // Tp to target
+        {
+            Vector3 tpPosition = NavMeshAgentManager.Instance().GetPositionOnNavMesh(target.transform.position);
+            player.transform.position = new Vector3(tpPosition.x, tpPosition.y + 3f, tpPosition.z);
+        }
+        else // Tp to door
+        {
+            Vector3 tpPosition = NavMeshAgentManager.Instance().GetPositionOnNavMesh(appartmentTargetDoor.transform.position);
+            player.transform.position = new Vector3(tpPosition.x + (tpPosition.x > 0? -1f : 1f), tpPosition.y + 1f, tpPosition.z + (tpPosition.z > 0? -1f : 1f));
+        }
+    }
+
     public bool IsTutorial()
     {
         return isTutorial;
