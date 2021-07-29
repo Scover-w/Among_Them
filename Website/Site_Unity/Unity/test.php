@@ -1,11 +1,11 @@
 <?php
 include "connexionBDD.php";
-
+echo 'Enter';
 $user = isset($_POST['user_id'])? $_POST['user_id']: null;
 $time = isset($_POST['time'])? $_POST['time']: null;
 $platform = isset($_POST['platform'])? $_POST['platform']: null;
 $date = isset($_POST['date'])? $_POST['date']: null;
-echo 'Enter';
+
 
 $suc1 = "UPDATE `succes_by_user` SET `advancement`= advancement + 1 WHERE advancement < (SELECT success.objectif_success FROM success WHERE success.id_success = succes_by_user.id_success AND success.id_success = 1) AND id_user = ?";
 
