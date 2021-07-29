@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class DoorElevatorManager : MonoBehaviour
 {
+    public static DoorElevatorManager Instance()
+    {
+        return _singleton;
+    }
+
+    private static DoorElevatorManager _singleton;
+    
     [SerializeField] 
     private Transform positionPlayer;
     
@@ -12,6 +19,12 @@ public class DoorElevatorManager : MonoBehaviour
     private ElevatorEntity activeElevator;
     
     private WaitForSeconds wait = new WaitForSeconds(0.2f);
+
+
+    void Start()
+    {
+        _singleton = this;
+    }
 
     public void Add(ElevatorEntity elevatorEntity)
     {

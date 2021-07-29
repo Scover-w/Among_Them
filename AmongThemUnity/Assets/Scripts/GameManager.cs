@@ -236,9 +236,12 @@ public class GameManager : MonoBehaviour
 
         
         player.SetActive(false);
+        InstantiatePlayerCinematic();
+        cinematicPlayer.transform.parent = DoorElevatorManager.Instance().GetElevator().transform;
         camCinematic.PlayElevatorCinematic();
         yield return new WaitForSeconds(camCinematic.GetCinematicTimer());
-        
+        player.SetActive(true);
+        Destroy(camCinematic);
         blackScreen.SetActive(true);
         GenerateNewMap();
     }
