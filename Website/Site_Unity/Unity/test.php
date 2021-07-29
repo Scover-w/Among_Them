@@ -17,7 +17,7 @@ $req = "INSERT INTO `run_history` (`run_id`, `user_id`, `time`, `platform`, `dat
 
 $req_prep = $bdd->prepare($req);
 
-if ($req_prep->execute(array($user, $bdd->quote($time), $platform, $bdd->quote($date))))
+if ($req_prep->execute(array($user,$time, $platform, $date)))
 {
     echo 'First req';
 
